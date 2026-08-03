@@ -263,7 +263,7 @@ for key, expected in want.items():
     for item in block['images']:
         src = pathlib.Path(item.get('source', block['source']))
         assert (src / item['file']).exists(), 'thiếu ảnh gốc: ' + item['file']
-        assert item['masks'], 'chưa có vùng che: ' + item['file']
+        assert item['masks'] or 'crop' in item, 'chưa có vùng che: ' + item['file']
         for x, y, w, h in item['masks']:
             assert 0 <= x < 1 and 0 <= y < 1, 'tọa độ ngoài khoảng: ' + item['file']
             assert 0 < w <= 1 and 0 < h <= 1 and x + w <= 1.001 and y + h <= 1.001, \

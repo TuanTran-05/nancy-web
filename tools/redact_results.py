@@ -15,6 +15,13 @@ from pathlib import Path
 
 from PIL import Image, ImageDraw
 
+# Console Windows mặc định dùng cp1252, không mã hoá được tiếng Việt có dấu.
+# Không ép UTF-8 thì script chết giữa chừng ở dòng print đầu tiên, sau khi đã
+# ghi được một phần ảnh - trạng thái nửa vời khó nhận ra.
+for _stream in (sys.stdout, sys.stderr):
+    if hasattr(_stream, "reconfigure"):
+        _stream.reconfigure(encoding="utf-8", errors="replace")
+
 ROOT = Path(__file__).resolve().parent.parent
 MAP_PATH = ROOT / "tools" / "redact-map.json"
 OUT_ROOT = ROOT / "images" / "results"

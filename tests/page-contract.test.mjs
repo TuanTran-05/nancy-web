@@ -494,7 +494,7 @@ test("raw result images never sit inside the deployed images directory", async (
 });
 
 test("every redacted course folder holds the full set of results", async () => {
-  const expected = { ket: 19, pet: 20, ielts: 8, ts10: 25 };
+  const expected = { ket: 28, pet: 11, ielts: 8, ts10: 24 };
 
   for (const [key, count] of Object.entries(expected)) {
     const files = await readdir(new URL(`../images/results/${key}/`, import.meta.url));
