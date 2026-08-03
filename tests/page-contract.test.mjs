@@ -21,11 +21,11 @@ const sectionMarkup = (id, nextId) => {
 const cardMarkup = (slug) => {
   const match = html.match(
     new RegExp(
-      `<article class="course-card" data-course="${slug}">([\\s\\S]*?)<\\/article>`,
+      `<article class="course-card" data-course="${slug}"[^>]*>([\\s\\S]*?)<\\/article>`,
     ),
   );
   assert.ok(match, `missing course card: ${slug}`);
-  return match[1];
+  return match[0];
 };
 
 function relativeLuminance(hex) {
@@ -261,7 +261,7 @@ test("Courses present the current learning path and specialty rows", async () =>
   assert.equal((courses.match(/data-course-controls/g) ?? []).length, 2);
 
   const slugs = [
-    ...courses.matchAll(/<article class="course-card" data-course="([^"]+)">/g),
+    ...courses.matchAll(/<article class="course-card" data-course="([^"]+)"[^>]*>/g),
   ].map((match) => match[1]);
   assert.deepEqual(slugs, [
     "happy-kids",
@@ -415,4 +415,52 @@ test("visible page copy uses regular hyphens and the clock icon path is numeric"
   assert.ok(clockPath);
   assert.match(clockPath, /M11\.99 2C6\.47 2 2 6\.48 2 12/);
   assert.match(clockPath, /\.5-13H11v6l5\.2 3\.2/);
+});
+
+test("only courses with real results advertise an achievements view", () => {
+  const withResults = [
+    ["ket", "ket"],
+    ["pet", "pet"],
+    ["ielts", "ielts"],
+    ["tuyen-sinh-10", "ts10"],
+  ];
+
+  for (const [slug, key] of withResults) {
+    const card = cardMarkup(slug);
+    assert.match(card, new RegExp(`data-results="${key}"`), `${slug} thiếu data-results`);
+    assert.match(card, /class="course-card__proof"/, `${slug} thiếu huy hiệu`);
+    assert.match(card, /Xem thành tích/, `${slug} thiếu nút mở`);
+  }
+
+  const withoutResults = [
+    "happy-kids", "starter", "movers", "flyers",
+    "tang-cuong", "dai-hoc", "chuan-bo-gd",
+  ];
+
+  for (const slug of withoutResults) {
+    if (html.includes(`data-course="${slug}"`)) {
+      const card = cardMarkup(slug);
+      assert.equal(card.includes("data-results"), false, `${slug} không được có data-results`);
+      assert.equal(card.includes("Xem thành tích"), false, `${slug} không được mời bấm`);
+    }
+  }
+
+  assert.equal((html.match(/data-results="/g) || []).length, 4);
+});
+
+test("the results modal shell is present and hidden by default", () => {
+  assert.match(html, /id="results-modal"/);
+  assert.match(html, /<div\s+id="results-modal"[^>]*role="dialog"/s);
+  assert.match(html, /<div\s+id="results-modal"[^>]*aria-modal="true"/s);
+  assert.match(html, /<div\s+id="results-modal"[^>]*aria-hidden="true"/s);
+});
+
+test("results scripts load before the script that consumes them", () => {
+  const dataAt = html.indexOf('src="results-data.js');
+  const modalAt = html.indexOf('src="results-modal.js');
+  const mainAt = html.indexOf('src="script.js');
+  assert.ok(dataAt > -1, "thiếu results-data.js");
+  assert.ok(modalAt > -1, "thiếu results-modal.js");
+  assert.ok(dataAt < mainAt, "results-data.js phải nạp trước script.js");
+  assert.ok(modalAt < mainAt, "results-modal.js phải nạp trước script.js");
 });

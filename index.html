@@ -624,8 +624,9 @@
                 </div>
               </article>
 
-              <article class="course-card" data-course="ket">
+              <article class="course-card" data-course="ket" data-results="ket">
                 <div class="course-card__media">
+                  <span class="course-card__proof">19 kết quả</span>
                   <img
                     src="https://i.postimg.cc/Y2WstSzY/749330288-1553232106814655-737978265121435385-n.jpg"
                     alt="Học viên khóa KET tại Nancy English Center"
@@ -641,11 +642,15 @@
                     <span class="course-card__grade">Lớp 6-7</span>
                   </div>
                   <p>Rèn năng lực tiếng Anh trình độ A2 và kỹ năng làm bài.</p>
+                  <button class="course-card__cta" type="button">
+                    Xem thành tích
+                  </button>
                 </div>
               </article>
 
-              <article class="course-card" data-course="pet">
+              <article class="course-card" data-course="pet" data-results="pet">
                 <div class="course-card__media">
+                  <span class="course-card__proof">20 kết quả</span>
                   <img
                     src="https://i.postimg.cc/cL9mRqcs/748678512-1553231826814683-3540834307928845811-n.jpg"
                     alt="Học viên khóa PET tại Nancy English Center"
@@ -663,11 +668,15 @@
                   <p>
                     Phát triển tiếng Anh trình độ B1 cho học tập và giao tiếp.
                   </p>
+                  <button class="course-card__cta" type="button">
+                    Xem thành tích
+                  </button>
                 </div>
               </article>
 
-              <article class="course-card" data-course="ielts">
+              <article class="course-card" data-course="ielts" data-results="ielts">
                 <div class="course-card__media">
+                  <span class="course-card__proof">8 kết quả</span>
                   <img
                     src="https://i.postimg.cc/ZRrpDX67/748741212-1553232193481313-2232384107086123280-n.jpg"
                     alt="Học viên khóa IELTS tại Nancy English Center"
@@ -685,6 +694,9 @@
                   <p>
                     Xây dựng tư duy học thuật và chiến lược cho bốn kỹ năng.
                   </p>
+                  <button class="course-card__cta" type="button">
+                    Xem thành tích
+                  </button>
                 </div>
               </article>
             </div>
@@ -786,8 +798,9 @@
                 </div>
               </article>
 
-              <article class="course-card" data-course="tuyen-sinh-10">
+              <article class="course-card" data-course="tuyen-sinh-10" data-results="ts10">
                 <div class="course-card__media">
+                  <span class="course-card__proof">25 kết quả</span>
                   <img
                     src="images/course-pet.jpg"
                     alt="Nhóm học viên trung học cơ sở trao đổi bài trong giờ luyện đề"
@@ -806,6 +819,9 @@
                     Hệ thống kiến thức trọng tâm và luyện đề bám sát kỳ thi vào
                     lớp 10.
                   </p>
+                  <button class="course-card__cta" type="button">
+                    Xem thành tích
+                  </button>
                 </div>
               </article>
 
@@ -1560,6 +1576,18 @@
       <div class="lightbox-caption"></div>
     </div>
 
+    <!-- Nội dung do results-modal.js dựng khi người xem bấm một thẻ khóa học -->
+    <div
+      id="results-modal"
+      class="results-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-hidden="true"
+      aria-label="Thành tích học viên"
+    ></div>
+
+    <script src="results-data.js?v=20260803"></script>
+    <script src="results-modal.js?v=20260803"></script>
     <script src="script.js?v=20260725-b" defer></script>
   </body>
 </html>
