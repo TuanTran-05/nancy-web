@@ -7,3 +7,4 @@ _private/
 
 # Tạm
 *.zip
+__pycache__/

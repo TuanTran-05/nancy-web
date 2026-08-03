@@ -575,7 +575,12 @@ done
 du -sh images/results
 ```
 
-Kết quả mong đợi: `ket: 28`, `pet: 11`, `ielts: 8`, `ts10: 24`, tổng dung lượng dưới 2,5 MB.
+Kết quả mong đợi: `ket: 28`, `pet: 11`, `ielts: 8`, `ts10: 24`. Dung lượng thực tế
+khoảng 5,8 MB cho 71 ảnh (~82 KB/ảnh ở canvas 848x1200, chất lượng JPEG 82) -
+cao hơn ước tính ban đầu 2,5 MB vì số ảnh thật (71, phân bổ lệch nhiều về
+`ket` với 28 ảnh) khác với ước tính lúc viết kế hoạch. Ảnh chỉ tải khi mở đúng
+hộp thoại khóa đó (`loading="lazy"`), nên chi phí mỗi lần mở tối đa khoảng 3 MB
+(khóa `ket`) - chấp nhận được, không cần nén thêm.
 
 - [ ] **Step 3: Đọc lại toàn bộ 71 ảnh đã che**
 
