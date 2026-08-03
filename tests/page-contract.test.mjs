@@ -493,6 +493,36 @@ test("raw result images never sit inside the deployed images directory", async (
   );
 });
 
+// Chốt chặn theo thư mục ở trên không bắt được ảnh gốc nằm lẻ ngay trong
+// images/. Đã từng lọt hai tệp như vậy: một đoạn chat Zalo riêng tư và một ảnh
+// chụp bảy phiếu IELTS còn nguyên họ tên, Candidate ID, ngày sinh và ảnh chân
+// dung. Chúng không được trang nào trỏ tới nên không test nào thấy, nhưng vẫn
+// nằm trong thư mục triển khai và truy cập thẳng bằng URL được.
+//
+// Ảnh máy ảnh đặt tên tự động thì nhìn tên không biết nội dung là gì, nên chốt
+// bằng danh sách trắng: thêm tệp mới buộc phải sửa test này, tức là buộc phải
+// mở ảnh ra xem đã che chưa.
+test("no camera-named photo reaches the deploy directory unreviewed", () => {
+  const reviewed = [
+    "IMG_20260803_164921.jpg", // ảnh lớp học, không có thông tin cá nhân
+    "IMG_20260803_164932.jpg", // ảnh lớp học, không có thông tin cá nhân
+    "IMG_20260803_171902.jpg", // ảnh mẫu bìa chứng chỉ Nancy, không phải phiếu điểm
+  ];
+
+  const found = imageEntries
+    .filter((entry) => entry.isFile())
+    .map((entry) => entry.name)
+    .filter((name) => /^IMG[-_]\d+[-_]\d+\.(jpe?g|png)$/i.test(name))
+    .sort();
+
+  assert.deepEqual(
+    found,
+    [...reviewed].sort(),
+    "ảnh đặt tên theo máy ảnh trong images/ chưa được soát: mở từng ảnh xem có " +
+      "họ tên, số báo danh, ngày sinh hay khung chat không, che xong rồi mới thêm vào danh sách",
+  );
+});
+
 test("every redacted course folder holds the full set of results", async () => {
   const expected = { ket: 28, pet: 11, ielts: 8, ts10: 24 };
 
