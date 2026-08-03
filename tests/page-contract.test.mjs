@@ -272,9 +272,9 @@ test("Courses present the current learning path and specialty rows", async () =>
     "pet",
     "ielts",
     "tang-cuong",
+    "tao-nguon-anh-6",
     "tuyen-sinh-10",
     "dai-hoc",
-    "chuan-bo-gd",
   ]);
 
   const expectedCards = new Map([
@@ -288,7 +288,6 @@ test("Courses present the current learning path and specialty rows", async () =>
     ["tang-cuong", ["Tiếng Anh tăng cường", "Theo cấp lớp", "images/course-ket.jpg"]],
     ["tuyen-sinh-10", ["Luyện thi tuyển sinh 10", "Lớp 9", "images/course-pet.jpg"]],
     ["dai-hoc", ["Luyện thi đại học", "Lớp 12", "images/course-ielts.jpg"]],
-    ["chuan-bo-gd", ["Chương trình chuẩn Bộ Giáo dục", "Mọi cấp lớp", "images/course-flyers.jpg"]],
   ]);
   for (const [slug, [title, grade, image]] of expectedCards) {
     const card = cardMarkup(slug);
@@ -296,6 +295,27 @@ test("Courses present the current learning path and specialty rows", async () =>
     assert.match(card, new RegExp(`<span class="course-card__grade">${grade}<\\/span>`));
     assert.ok(card.includes(`src="${image}"`));
   }
+
+  const sourcePrepCard = cardMarkup("tao-nguon-anh-6");
+  assert.match(sourcePrepCard, /<h4>Luyện thi tạo nguồn tiếng Anh 6<\/h4>/);
+  assert.ok(sourcePrepCard.includes('src="images/course-flyers.jpg"'));
+  assert.match(
+    sourcePrepCard,
+    /alt="Học viên luyện thi tạo nguồn tiếng Anh lớp 6 tại Nancy English Center"/,
+  );
+  assert.match(
+    sourcePrepCard,
+    /Củng cố từ vựng, ngữ pháp và kỹ năng làm bài để chuẩn bị kỳ\s+thi tạo nguồn tiếng Anh lớp 6\./,
+  );
+  assert.doesNotMatch(sourcePrepCard, /course-card__grade/);
+  assert.match(
+    html,
+    /Ngoài ra trung tâm có các khóa bổ trợ và luyện thi: tiếng Anh tăng cường, luyện thi tạo nguồn tiếng Anh 6, luyện thi tuyển sinh lớp 10 và luyện thi đại học\./,
+  );
+  assert.doesNotMatch(
+    html,
+    /chương trình tiếng Anh chuẩn Bộ Giáo dục|Chương trình chuẩn Bộ Giáo dục/,
+  );
 
   const sharedCoursePhoto = "images/IMG_20260803_171902.jpg";
   await access(new URL(`../${sharedCoursePhoto}`, import.meta.url));
