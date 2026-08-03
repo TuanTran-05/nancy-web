@@ -464,3 +464,14 @@ test("results scripts load before the script that consumes them", () => {
   assert.ok(dataAt < mainAt, "results-data.js phải nạp trước script.js");
   assert.ok(modalAt < mainAt, "results-modal.js phải nạp trước script.js");
 });
+
+test("results grid uses a narrower column count for landscape documents", () => {
+  assert.match(css, /\.results-grid\[data-shape="portrait"\]/);
+  assert.match(css, /\.results-grid\[data-shape="landscape"\]/);
+});
+
+test("results modal respects reduced motion and stays hidden until opened", () => {
+  assert.match(css, /\.results-modal\s*\{[^}]*display:\s*none/s);
+  assert.match(css, /\.results-modal\.open\s*\{[^}]*display:\s*flex/s);
+  assert.match(css, /prefers-reduced-motion:\s*reduce[^}]*\}[\s\S]{0,400}\.results-modal/);
+});
