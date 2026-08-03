@@ -1,6 +1,10 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { access, readFile } from "node:fs/promises";
+import { access, readFile, readdir } from "node:fs/promises";
+
+const imagesDir = new URL("../images/", import.meta.url);
+const imageEntries = await readdir(imagesDir, { withFileTypes: true });
+const gitignore = await readFile(new URL("../.gitignore", import.meta.url), "utf8");
 
 const [html, css, js] = await Promise.all([
   readFile(new URL("../index.html", import.meta.url), "utf8"),
@@ -474,4 +478,36 @@ test("results modal respects reduced motion and stays hidden until opened", () =
   assert.match(css, /\.results-modal\s*\{[^}]*display:\s*none/s);
   assert.match(css, /\.results-modal\.open\s*\{[^}]*display:\s*flex/s);
   assert.match(css, /prefers-reduced-motion:\s*reduce[^}]*\}[\s\S]{0,400}\.results-modal/);
+});
+
+test("raw result images never sit inside the deployed images directory", async () => {
+  const leaked = imageEntries
+    .filter((entry) => entry.isDirectory())
+    .map((entry) => entry.name)
+    .filter((name) => /result/i.test(name) && name !== "results");
+
+  assert.deepEqual(
+    leaked,
+    [],
+    `thư mục ảnh gốc còn trong images/: ${leaked.join(", ")}`,
+  );
+});
+
+test("every redacted course folder holds the full set of results", async () => {
+  const expected = { ket: 19, pet: 20, ielts: 8, ts10: 25 };
+
+  for (const [key, count] of Object.entries(expected)) {
+    const files = await readdir(new URL(`../images/results/${key}/`, import.meta.url));
+    const jpgs = files.filter((name) => name.endsWith(".jpg"));
+    assert.equal(jpgs.length, count, `${key}: ${jpgs.length} ảnh, cần ${count}`);
+  }
+});
+
+test("the private original folder stays out of version control", () => {
+  assert.match(gitignore, /^_private\/$/m);
+});
+
+test("no page markup points at an unredacted result image", () => {
+  assert.equal(/images\/(ielts|ket|pet)result\//.test(html), false);
+  assert.equal(/images\/result10\//.test(html), false);
 });
