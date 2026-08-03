@@ -524,4 +524,35 @@
         });
     });
   }
+
+  // ----------------------------------------------------------
+  // 8. Course results modal
+  // Chỉ những thẻ mang data-results mới mở được. Bảy khóa còn lại
+  // chưa có ảnh kết quả nên cố tình không phản ứng khi bấm: mời bấm
+  // rồi không có gì để xem còn tệ hơn là không mời.
+  // ----------------------------------------------------------
+  var resultsRoot = document.getElementById("results-modal");
+  var resultsData = window.NANCY_RESULTS;
+  var resultsApi = window.NancyResults;
+
+  if (resultsRoot && resultsData && resultsApi) {
+    var resultsModal = resultsApi.createResultsModal(resultsRoot, resultsData);
+
+    document.querySelectorAll("[data-results]").forEach(function (card) {
+      var key = card.getAttribute("data-results");
+
+      card.addEventListener("click", function () {
+        resultsModal.open(key, card);
+      });
+
+      // Thẻ là <article>, không tự nhận bàn phím. Nút "Xem thành tích"
+      // bên trong mới là điểm vào chính thức, và nó nổi sự kiện click lên
+      // đây. Nhánh này lo trường hợp người dùng focus thẳng vào thẻ.
+      card.addEventListener("keydown", function (e) {
+        if (e.key !== "Enter" && e.key !== " ") return;
+        e.preventDefault();
+        resultsModal.open(key, card);
+      });
+    });
+  }
 })();

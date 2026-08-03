@@ -1923,6 +1923,11 @@ summary:focus-visible,
   html {
     scroll-behavior: auto;
   }
+  .results-modal,
+  .results-panel,
+  .results-detail {
+    animation: none;
+  }
   *,
   *::before,
   *::after {
@@ -1938,7 +1943,8 @@ summary:focus-visible,
   .gal:hover,
   .course-card:hover,
   .contact-card:hover,
-  .map-open:hover {
+  .map-open:hover,
+  .results-tile:hover {
     transform: none;
   }
 }
@@ -1952,5 +1958,322 @@ summary:focus-visible,
   .lightbox {
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
+  }
+}
+
+/* ============================================================
+   THÀNH TÍCH HỌC VIÊN
+   Hộp thoại mở khi bấm thẻ khóa học có dữ liệu kết quả.
+   Nội dung bên trong do results-modal.js dựng.
+   ============================================================ */
+
+/* --- huy hiệu và nút trên thẻ khóa học --- */
+.course-card__proof {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 1;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 5px 10px;
+  border-radius: var(--r-pill);
+  box-shadow: var(--sh-1);
+}
+
+.course-card__media {
+  position: relative;
+}
+
+.course-card__cta {
+  margin-top: 10px;
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--brand-ink);
+  cursor: pointer;
+}
+
+.course-card__cta::after {
+  content: " \2192";
+  transition: transform 0.2s var(--ease);
+  display: inline-block;
+}
+
+.course-card[data-results] {
+  cursor: pointer;
+}
+
+.course-card[data-results]:hover .course-card__cta::after {
+  transform: translateX(3px);
+}
+
+/* --- khung hộp thoại --- */
+.results-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background: rgba(10, 36, 69, 0.86);
+  padding: clamp(12px, 3vw, 32px);
+  overflow-y: auto;
+}
+
+.results-modal.open {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.results-panel,
+.results-detail {
+  background: var(--surface);
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh-3);
+  width: min(1100px, 100%);
+  margin: auto;
+  animation: results-in 0.28s var(--ease);
+}
+
+@keyframes results-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+/* --- đầu hộp thoại --- */
+.results-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--line);
+}
+
+.results-badge {
+  background: var(--brand-tint);
+  color: var(--brand-ink);
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 6px 10px;
+  border-radius: var(--r-pill);
+  white-space: nowrap;
+}
+
+.results-head h3 {
+  font-family: "Baloo 2", system-ui, sans-serif;
+  font-size: var(--fs-h3);
+  color: var(--text);
+  margin: 0;
+}
+
+.results-head p {
+  font-size: 0.82rem;
+  color: var(--text-3);
+  margin: 2px 0 0;
+}
+
+.results-close,
+.results-detail__back {
+  margin-left: auto;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  color: var(--text-2);
+  border-radius: var(--r-pill);
+  padding: 8px 14px;
+  font: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.results-close {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border-radius: 50%;
+}
+
+/* --- dải số liệu --- */
+.results-stats {
+  display: flex;
+  gap: 10px;
+  padding: 14px 20px;
+  background: var(--brand-wash);
+  border-bottom: 1px solid var(--line);
+  flex-wrap: wrap;
+}
+
+.results-stat {
+  flex: 1;
+  min-width: 110px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  padding: 10px 14px;
+}
+
+.results-stat b {
+  display: block;
+  font-family: "Baloo 2", system-ui, sans-serif;
+  font-size: 1.3rem;
+  color: var(--brand-ink);
+}
+
+.results-stat span {
+  display: block;
+  font-size: 0.72rem;
+  color: var(--text-3);
+  margin-top: 2px;
+}
+
+/* --- lưới ảnh --- */
+.results-grid {
+  display: grid;
+  gap: 12px;
+  padding: 16px 20px 22px;
+}
+
+.results-grid[data-shape="portrait"] {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.results-grid[data-shape="landscape"] {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.results-tile {
+  position: relative;
+  display: block;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  overflow: hidden;
+  background: var(--surface);
+  cursor: pointer;
+  transition:
+    transform 0.2s var(--ease),
+    box-shadow 0.2s var(--ease);
+}
+
+.results-tile:hover,
+.results-tile:focus-visible {
+  transform: translateY(-3px);
+  box-shadow: var(--sh-2);
+}
+
+.results-tile img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.results-tile__cap {
+  position: absolute;
+  inset: auto 0 0;
+  background: linear-gradient(transparent, rgba(10, 36, 69, 0.92));
+  color: #fff;
+  font-size: 0.76rem;
+  font-weight: 600;
+  text-align: left;
+  padding: 22px 10px 8px;
+}
+
+.results-tile__cap em {
+  display: block;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 0.7rem;
+  opacity: 0.85;
+}
+
+/* --- ảnh phóng to --- */
+.results-detail {
+  padding: 16px 20px 22px;
+}
+
+.results-detail__stage {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: center;
+  background: var(--surface-2);
+  border-radius: var(--r-md);
+  padding: 14px;
+  margin-top: 12px;
+}
+
+.results-detail__stage img {
+  max-width: min(620px, 100%);
+  max-height: 72vh;
+  width: auto;
+  height: auto;
+  border-radius: 6px;
+  box-shadow: var(--sh-1);
+}
+
+.results-nav {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 1px solid var(--line-2);
+  color: var(--brand-ink);
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.results-detail__cap {
+  text-align: center;
+  font-weight: 700;
+  color: var(--text);
+  margin: 12px 0 0;
+}
+
+.results-detail__cap em {
+  font-style: normal;
+  font-weight: 400;
+  color: var(--text-3);
+}
+
+.results-detail__count {
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--text-3);
+  margin: 6px 0 0;
+}
+
+@media (max-width: 720px) {
+  .results-grid[data-shape="portrait"] {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .results-grid[data-shape="landscape"] {
+    grid-template-columns: 1fr;
+  }
+
+  .results-head {
+    flex-wrap: wrap;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .results-panel,
+  .results-detail {
+    animation: none;
+  }
+
+  .results-tile {
+    transition: none;
+  }
+
+  .results-tile:hover,
+  .results-tile:focus-visible {
+    transform: none;
   }
 }

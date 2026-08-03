@@ -192,6 +192,12 @@ function createPageFixture({ withCarousel = true, reduceMotion = false } = {}) {
   const lightboxCaption = new FakeElement(document);
   const lightboxClose = new FakeElement(document);
 
+  const resultsModal = new FakeElement(document);
+  const openCalls = [];
+  const resultCard = new FakeElement(document);
+  resultCard.setAttribute("data-results", "ket");
+  const plainCard = new FakeElement(document);
+
   const makeCarousel = ({ scrollWidth }) => {
     const carousel = new FakeElement(document);
     const track = new FakeElement(document);
@@ -232,13 +238,29 @@ function createPageFixture({ withCarousel = true, reduceMotion = false } = {}) {
     if (selector === "[data-course-carousel]") {
       return withCarousel ? [first.carousel, second.carousel] : [];
     }
+    if (selector === "[data-results]") return [resultCard];
     return [];
   };
-  document.getElementById = (id) => (id === "lightbox" ? lightbox : null);
+  document.getElementById = (id) => {
+    if (id === "lightbox") return lightbox;
+    if (id === "results-modal") return resultsModal;
+    return null;
+  };
+
+  const windowStub = Object.assign(window, {
+    NANCY_RESULTS: { ket: { label: "KET", items: [] } },
+    NancyResults: {
+      createResultsModal: (root, data) => ({
+        open: (key, trigger) => openCalls.push([key, trigger, root, data]),
+        close: () => {},
+        isOpen: () => false,
+      }),
+    },
+  });
 
   vm.runInNewContext(scriptSource, {
     document,
-    window,
+    window: windowStub,
     requestAnimationFrame,
   });
 
@@ -254,6 +276,10 @@ function createPageFixture({ withCarousel = true, reduceMotion = false } = {}) {
     lightboxClose,
     first,
     second,
+    resultsModal,
+    resultCard,
+    plainCard,
+    openCalls,
   };
 }
 
@@ -501,4 +527,25 @@ test("registration honeypot silently accepts bots without sending data", () => {
 
   assert.equal(fixture.fetchCalls.length, 0);
   assert.equal(fixture.status.getAttribute("data-tone"), "success");
+});
+
+test("clicking a course card with results opens the modal for that course", () => {
+  const fixture = createPageFixture();
+  fixture.resultCard.dispatch("click");
+  assert.equal(fixture.openCalls.length, 1);
+  assert.equal(fixture.openCalls[0][0], "ket");
+  assert.equal(fixture.openCalls[0][1], fixture.resultCard);
+});
+
+test("keyboard activation on a results card opens the modal", () => {
+  const fixture = createPageFixture();
+  fixture.resultCard.dispatch("keydown", createEvent({ key: "Enter" }));
+  assert.equal(fixture.openCalls.length, 1);
+});
+
+test("the page still initializes when the results modal is absent", () => {
+  const fixture = createPageFixture();
+  assert.equal(fixture.nav.classList.contains("open"), false);
+  fixture.toggle.dispatch("click");
+  assert.equal(fixture.nav.classList.contains("open"), true);
 });
