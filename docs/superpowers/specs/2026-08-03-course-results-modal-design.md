@@ -8,6 +8,36 @@ phản hồi nào.
 
 Bốn khóa có dữ liệu: KET, PET, IELTS, Luyện thi tuyển sinh 10.
 
+## Cập nhật sau khi đọc toàn bộ 72 ảnh gốc (Task 2)
+
+Hai phát hiện sau đây được ghi nhận khi thực thi Task 2 - đọc từng ảnh để lập
+bản đồ che - và làm thay đổi số liệu cùng phạm vi kỹ thuật so với bản thiết kế
+ban đầu ở trên. Phần thân spec giữ nguyên để thấy rõ giả định gốc; số liệu đúng
+nằm ở đây.
+
+**Thư mục không khớp loại chứng chỉ thật.** Thư mục `petresult` (20 ảnh) là hỗn
+hợp: chỉ 11 ảnh thật sự là PET, 9 ảnh còn lại là chứng chỉ KET (toàn học viên
+đạt Grade A, có lẽ bị tách lưu nhầm album). Số liệu đúng lấy theo nội dung ảnh,
+không theo tên thư mục: **KET = 28** (19 từ `ketresult` + 9 lẫn trong
+`petresult`), **PET = 11**.
+
+**`result10` có ảnh nguồn từ tin nhắn riêng tư, không chỉ ảnh cổng tra điểm.**
+Trong 25 ảnh, khoảng 8 ảnh là ảnh chụp màn hình Zalo hoặc Messenger - hiển thị
+tên liên hệ đầy đủ ở thanh tiêu đề, nội dung tin nhắn cá nhân, và một trường
+hợp còn nhắc tên kèm điểm của một học sinh khác. Một số ảnh cổng tra điểm còn
+lộ thêm số định danh cá nhân, ngày sinh, địa chỉ phường/xã - không chỉ họ tên,
+lớp, ngày đăng ký như dòng dưới đây từng ghi.
+
+Quyết định xử lý (do người quản lý trung tâm chọn): với các ảnh nguồn từ
+Zalo/Messenger, **cắt bỏ toàn bộ khung chat** (thanh tiêu đề, bong bóng tin
+nhắn, avatar), chỉ giữ lại đúng khung "Kết Quả". Pipeline vì vậy cần thêm bước
+cắt (crop) tùy chọn trước bước che, xem mục Pipeline bên dưới.
+
+Một trong 25 ảnh `result10` (đoạn chat Zalo nhắc điểm số bằng văn bản thuần,
+không có khung "Kết Quả" nào được chia sẻ) không còn gì hợp lệ để giữ lại sau
+khi áp quyết định trên - ảnh này bị loại khỏi bản đồ che, không xử lý. Số liệu
+đúng: **ts10 = 24**, tổng toàn bộ **71 ảnh** (không phải 72).
+
 ## Ràng buộc về dữ liệu cá nhân
 
 Toàn bộ 72 ảnh là giấy tờ gốc chứa thông tin định danh học sinh:
@@ -16,7 +46,7 @@ Toàn bộ 72 ảnh là giấy tờ gốc chứa thông tin định danh học s
 | --- | --- |
 | IELTS | Họ tên, ngày sinh, ảnh chân dung, số báo danh, số TRF |
 | KET, PET | Họ tên, Centre Reference, Verification Number |
-| Tuyển sinh 10 | Họ tên, lớp, ngày đăng ký |
+| Tuyển sinh 10 | Họ tên, lớp, ngày đăng ký, và ở một số ảnh: số định danh cá nhân, ngày sinh, địa chỉ phường/xã, nội dung tin nhắn riêng tư |
 
 Cặp Centre Reference và Verification Number cho phép bất kỳ ai tra cứu kết quả
 tại `cambridgeenglish.org/verifiers`. Nghị định 13/2023/NĐ-CP yêu cầu sự đồng ý
@@ -38,11 +68,15 @@ máy).
 
 Với mỗi ảnh, script:
 
-1. Vẽ hình chữ nhật đặc màu `#16212e` lên các vùng nhạy cảm.
-2. Chuẩn hoá lên một khung cố định cho từng khóa, nền trắng, ảnh đặt lọt trong
+1. Nếu ảnh có khai báo `crop` (chỉ áp dụng cho ảnh nguồn Zalo/Messenger trong
+   Tuyển sinh 10), cắt về đúng vùng khung "Kết Quả" trước, bỏ toàn bộ khung
+   chat xung quanh.
+2. Vẽ hình chữ nhật đặc màu `#16212e` lên các vùng nhạy cảm còn lại, tọa độ
+   tính theo ảnh **sau khi cắt** (nếu có cắt).
+3. Chuẩn hoá lên một khung cố định cho từng khóa, nền trắng, ảnh đặt lọt trong
    khung theo kiểu contain.
-3. Thu nhỏ về cạnh dài tối đa 1200px và mã hoá lại JPEG chất lượng 82.
-4. Ghi ra `images/results/<khóa>/NN.jpg` với tên tuần tự.
+4. Thu nhỏ về cạnh dài tối đa 1200px và mã hoá lại JPEG chất lượng 82.
+5. Ghi ra `images/results/<khóa>/NN.jpg` với tên tuần tự.
 
 Kích thước ảnh gốc không đồng nhất nên không thể dùng một bộ tọa độ tỉ lệ chung
 cho cả thư mục:
@@ -50,9 +84,9 @@ cho cả thư mục:
 | Thư mục | Số ảnh | Kích thước |
 | --- | --- | --- |
 | `ketresult` | 19 | Đồng nhất quanh 1075x1520 |
-| `petresult` | 20 | Đồng nhất quanh 1080x1515 |
-| `ieltsresult` | 8 | Hai khung: 869x1881 và khoảng 1075x1520 |
-| `result10` | 25 | 18 kích thước khác nhau, từ 692x362 đến 1820x900 |
+| `petresult` | 20 (11 PET + 9 KET lẫn) | Đồng nhất quanh 1080x1515 |
+| `ieltsresult` | 8 | Mỗi ảnh một khung khác nhau: chụp scan, chụp màn hình điện thoại, ảnh CamScanner |
+| `result10` | 25 | 18 kích thước khác nhau, từ 692x362 đến 1820x900; khoảng 8 ảnh cần cắt trước khi che vì chụp từ khung chat
 
 Tọa độ che của từng ảnh được ghi riêng trong `tools/redact-map.json`. Bản đồ này
 được lập trong cùng lượt đọc ảnh dùng để trích điểm, nên mỗi ảnh chỉ mở một lần.
@@ -85,7 +119,7 @@ window.NANCY_RESULTS = {
     grade: "Lớp 6-7",
     org: "Cambridge English",
     ratio: "portrait",
-    stats: { total: 19, highest: 143, range: "A2-B1" },
+    stats: { total: 28, highest: 143, range: "A2-B1" },
     items: [
       { src: "images/results/ket/01.jpg", caption: "Pass · Grade B", meta: "136 · A2" }
     ]

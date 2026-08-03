@@ -157,6 +157,14 @@ Mỗi ảnh được mở đúng một lần. Trong lần mở đó ghi lại c�
         "masks": [[0.070, 0.212, 0.660, 0.040], [0.755, 0.150, 0.190, 0.038]],
         "caption": "Pass · Grade B",
         "meta": "136 · A2"
+      },
+      {
+        "file": "IMG_20260803_172308.jpg",
+        "source": "_private/petresult",
+        "out": "20.jpg",
+        "masks": [[0.070, 0.212, 0.660, 0.040], [0.755, 0.150, 0.190, 0.038]],
+        "caption": "Pass · Grade A",
+        "meta": "147 · B1"
       }
     ]
   }
@@ -170,6 +178,13 @@ Giải thích từng trường:
 - `masks` — danh sách `[x, y, rộng, cao]` theo **tỉ lệ 0-1 của chính ảnh đó**, không phải pixel. Dùng tỉ lệ nên mỗi ảnh tự đo theo kích thước riêng của nó.
 - `out` — tên tệp đầu ra, đánh số tuần tự hai chữ số bắt đầu từ `01.jpg`.
 - `caption`, `meta` — nhãn hiển thị dưới ảnh. Nếu đọc không rõ, để chuỗi rỗng `""`.
+- `source` **trên một item** (tuỳ chọn) — ghi đè `source` của cả khối. Dùng cho
+  trường hợp một ảnh nằm sai thư mục theo nội dung thật của nó (xem ghi chú
+  dưới bảng).
+- `crop` (tuỳ chọn, `[x, y, rộng, cao]` theo tỉ lệ 0-1) — cắt ảnh về đúng vùng
+  này **trước khi** áp `masks`. Chỉ dùng cho các ảnh Tuyển sinh 10 chụp từ
+  khung chat Zalo/Messenger, để bỏ toàn bộ thanh tiêu đề, bong bóng tin nhắn và
+  avatar xung quanh khung "Kết Quả".
 
 Bốn khóa và metadata cố định:
 
@@ -182,18 +197,31 @@ Bốn khóa và metadata cố định:
 
 Với `ts10`, trường `cefr` để chuỗi rỗng vì kỳ thi này không dùng thang CEFR.
 
+**Thư mục `_private/petresult` là hỗn hợp, không được đọc là toàn PET.** Khi mở
+từng ảnh sẽ thấy 9 trong 20 ảnh của thư mục này thực ra là chứng chỉ **KET**
+("Key English Test" ở tiêu đề, không phải "Preliminary English Test"). Chín
+ảnh đó phải vào khối `ket` với `"source": "_private/petresult"` ghi đè ở từng
+item, không vào khối `pet`. Kết quả đúng: `ket` có 28 ảnh (19 gốc từ
+`ketresult` + 9 từ `petresult`), `pet` có 11 ảnh. Luôn đọc dòng tiêu đề của
+từng ảnh ("Key English Test" hay "Preliminary English Test") để xác nhận, đừng
+suy ra loại chứng chỉ từ tên thư mục.
+
 - [ ] **Step 2: Đọc và ghi nhận từng ảnh**
 
 Mở lần lượt từng tệp trong bốn thư mục `_private/`. Với mỗi ảnh ghi lại:
 
 Vùng **phải che**:
-- Họ tên thí sinh, mọi vị trí xuất hiện
+- Họ tên thí sinh, mọi vị trí xuất hiện (kể cả tên xuất hiện trong tin nhắn)
 - Ngày sinh
 - Ảnh chân dung
 - Số báo danh, Candidate ID, Candidate Number
 - Test Report Form Number
 - Centre Reference và Verification Number trên phiếu Cambridge
-- Số điện thoại, địa chỉ, ngày đăng ký nếu có
+- Số điện thoại, địa chỉ (kể cả Phường/Xã), Số định danh cá nhân, Mã học sinh
+  Bộ GD&ĐT nếu có
+- Với ảnh Tuyển sinh 10 chụp từ Zalo/Messenger: toàn bộ khung chat (thanh tiêu
+  đề tên liên hệ, bong bóng tin nhắn, avatar) — dùng `crop` để bỏ hẳn phần này
+  thay vì vẽ đè lên, vì phần lớn diện tích ảnh là nội dung không liên quan
 
 Vùng **phải giữ nguyên**:
 - Điểm từng kỹ năng và điểm tổng
@@ -213,7 +241,11 @@ Nếu một ảnh mờ hoặc thiếu thông tin tới mức không đọc chắ
 
 - [ ] **Step 3: Ghi `tools/redact-map.json`**
 
-Ghi đủ 72 bản ghi: 19 cho `ket`, 20 cho `pet`, 8 cho `ielts`, 25 cho `ts10`.
+Ghi đủ 71 bản ghi: **28 cho `ket`** (19 tệp gốc trong `ketresult` + 9 tệp có
+`source` ghi đè trỏ vào `petresult` — xem ghi chú ở Step 1), **11 cho `pet`**,
+8 cho `ielts`, **24 cho `ts10`** (không phải 25 — một ảnh trong `result10` là
+đoạn chat văn bản thuần, không có khung "Kết Quả" nào để cắt về theo quyết định
+xử lý ảnh chat ở trên, nên ảnh đó bị loại khỏi bản đồ, không xử lý).
 
 - [ ] **Step 4: Kiểm tra tệp hợp lệ và đủ số lượng**
 
@@ -222,34 +254,39 @@ cd "D:/Nancy/Web"
 python -c "
 import json, pathlib
 m = json.load(open('tools/redact-map.json', encoding='utf-8'))
-want = {'ket': 19, 'pet': 20, 'ielts': 8, 'ts10': 25}
+want = {'ket': 28, 'pet': 11, 'ielts': 8, 'ts10': 24}
 for key, expected in want.items():
     block = m[key]
     got = len(block['images'])
     assert got == expected, '%s: %d ảnh, cần %d' % (key, got, expected)
-    src = pathlib.Path(block['source'])
     outs = set()
     for item in block['images']:
+        src = pathlib.Path(item.get('source', block['source']))
         assert (src / item['file']).exists(), 'thiếu ảnh gốc: ' + item['file']
         assert item['masks'], 'chưa có vùng che: ' + item['file']
         for x, y, w, h in item['masks']:
             assert 0 <= x < 1 and 0 <= y < 1, 'tọa độ ngoài khoảng: ' + item['file']
             assert 0 < w <= 1 and 0 < h <= 1 and x + w <= 1.001 and y + h <= 1.001, \
                 'vùng che tràn ra ngoài ảnh: ' + item['file']
+        if 'crop' in item:
+            cx, cy, cw, ch = item['crop']
+            assert 0 <= cx < 1 and 0 <= cy < 1, 'crop ngoài khoảng: ' + item['file']
+            assert 0 < cw <= 1 and 0 < ch <= 1 and cx + cw <= 1.001 and cy + ch <= 1.001, \
+                'crop tràn ra ngoài ảnh: ' + item['file']
         assert item['out'] not in outs, 'trùng tên đầu ra: ' + item['out']
         outs.add(item['out'])
 print('redact-map.json hợp lệ, tổng', sum(len(m[k]['images']) for k in want))
 "
 ```
 
-Kết quả mong đợi: `redact-map.json hợp lệ, tổng 72`.
+Kết quả mong đợi: `redact-map.json hợp lệ, tổng 71`.
 
 - [ ] **Step 5: Commit**
 
 ```bash
 cd "D:/Nancy/Web"
 git add tools/redact-map.json
-git commit -m "data: map redaction regions and scores for 72 result images"
+git commit -m "data: map redaction regions and scores for 71 result images"
 ```
 
 ---
@@ -270,9 +307,9 @@ Tạo `tools/test_redact_results.py`:
 
 ```python
 import unittest
-from PIL import Image
+from PIL import Image, ImageDraw
 
-from redact_results import apply_masks, fit_canvas, process_image
+from redact_results import apply_crop, apply_masks, fit_canvas, process_image
 
 
 class ApplyMasksTest(unittest.TestCase):
@@ -292,6 +329,21 @@ class ApplyMasksTest(unittest.TestCase):
         apply_masks(image, [[0.0, 0.0, 0.2, 0.2], [0.8, 0.8, 0.2, 0.2]])
         self.assertEqual(image.getpixel((5, 5)), (22, 33, 46))
         self.assertEqual(image.getpixel((95, 95)), (22, 33, 46))
+
+
+class ApplyCropTest(unittest.TestCase):
+    def test_keeps_only_the_requested_fractional_region(self):
+        image = Image.new("RGB", (200, 100), (255, 255, 255))
+        ImageDraw.Draw(image).rectangle([100, 25, 160, 75], fill=(10, 20, 30))
+        cropped = apply_crop(image, [0.5, 0.25, 0.3, 0.5])
+        self.assertEqual(cropped.size, (60, 50))
+        self.assertEqual(cropped.getpixel((5, 5)), (10, 20, 30))
+
+    def test_drops_pixels_outside_the_region(self):
+        image = Image.new("RGB", (200, 100), (255, 255, 255))
+        ImageDraw.Draw(image).ellipse([0, 0, 40, 40], fill=(10, 20, 30))
+        cropped = apply_crop(image, [0.5, 0.25, 0.3, 0.5])
+        self.assertEqual(cropped.getpixel((0, 0)), (255, 255, 255))
 
 
 class FitCanvasTest(unittest.TestCase):
@@ -317,6 +369,22 @@ class ProcessImageTest(unittest.TestCase):
         result = process_image("/tmp/redact-sample.jpg", [[0.0, 0.0, 1.0, 1.0]], (1200, 675))
         self.assertEqual(result.size, (1200, 675))
         self.assertLess(sum(result.getpixel((600, 337))), 120)
+
+    def test_crops_before_masking_when_a_crop_region_is_given(self):
+        # A chat screenshot: only the right-hand quarter is the score card
+        # (dark), the rest is chat chrome (white). Cropping first means the
+        # mask fraction below is measured against the card alone.
+        with Image.new("RGB", (400, 200), (255, 255, 255)) as source:
+            ImageDraw.Draw(source).rectangle([300, 0, 400, 200], fill=(10, 20, 30))
+            source.save("/tmp/redact-crop-sample.jpg", quality=95)
+        result = process_image(
+            "/tmp/redact-crop-sample.jpg",
+            masks=[],
+            canvas=(100, 100),
+            crop=[0.75, 0.0, 0.25, 1.0],
+        )
+        self.assertEqual(result.size, (100, 100))
+        self.assertLess(sum(result.getpixel((50, 50))), 120)
 
 
 if __name__ == "__main__":
@@ -359,6 +427,24 @@ MASK_COLOR = (22, 33, 46)
 QUALITY = 82
 
 
+def apply_crop(image, crop):
+    """Cắt ảnh về đúng vùng cho theo tỉ lệ 0-1. Trả về ảnh mới.
+
+    Dùng cho ảnh Tuyển sinh 10 chụp từ khung chat Zalo/Messenger: khung "Kết
+    Quả" chỉ chiếm một phần nhỏ của ảnh gốc, phần còn lại là thanh tiêu đề tên
+    liên hệ, bong bóng tin nhắn và avatar. Cắt bỏ hẳn phần đó thay vì vẽ đè,
+    vì vẽ đè vẫn để lại bằng chứng rằng ảnh xuất phát từ một cuộc trò chuyện
+    riêng tư.
+    """
+    width, height = image.size
+    x, y, crop_width, crop_height = crop
+    left = round(x * width)
+    top = round(y * height)
+    right = round((x + crop_width) * width)
+    bottom = round((y + crop_height) * height)
+    return image.crop((left, top, right, bottom))
+
+
 def apply_masks(image, masks):
     """Vẽ hình chữ nhật đặc lên các vùng cho theo tỉ lệ 0-1. Sửa tại chỗ."""
     draw = ImageDraw.Draw(image)
@@ -387,10 +473,12 @@ def fit_canvas(image, canvas):
     return sheet
 
 
-def process_image(path, masks, canvas):
-    """Đọc một ảnh, che rồi chuẩn hoá khung. Trả về ảnh mới."""
+def process_image(path, masks, canvas, crop=None):
+    """Đọc một ảnh, cắt (nếu có), che rồi chuẩn hoá khung. Trả về ảnh mới."""
     with Image.open(path) as source:
         image = source.convert("RGB")
+    if crop:
+        image = apply_crop(image, crop)
     apply_masks(image, masks)
     return fit_canvas(image, canvas)
 
@@ -400,17 +488,23 @@ def main():
     total = 0
 
     for key, block in mapping.items():
-        source_dir = ROOT / block["source"]
+        default_source_dir = ROOT / block["source"]
         out_dir = OUT_ROOT / key
         out_dir.mkdir(parents=True, exist_ok=True)
         canvas = tuple(block["canvas"])
 
         for item in block["images"]:
+            # Một số ảnh nằm sai thư mục theo nội dung thật (ví dụ chứng chỉ
+            # KET bị lưu nhầm trong petresult); "source" trên item ghi đè
+            # source của cả khối cho đúng ảnh đó.
+            source_dir = ROOT / item["source"] if "source" in item else default_source_dir
             source_path = source_dir / item["file"]
             if not source_path.exists():
                 print("thiếu ảnh gốc: %s" % source_path, file=sys.stderr)
                 return 1
-            result = process_image(source_path, item["masks"], canvas)
+            result = process_image(
+                source_path, item["masks"], canvas, crop=item.get("crop")
+            )
             result.save(out_dir / item["out"], "JPEG", quality=QUALITY, optimize=True)
             total += 1
 
@@ -431,7 +525,7 @@ cd "D:/Nancy/Web"
 python -m unittest discover -s tools -p "test_*.py" -v
 ```
 
-Kết quả mong đợi: `OK`, 7 test pass.
+Kết quả mong đợi: `OK`, 10 test pass.
 
 - [ ] **Step 5: Commit**
 
@@ -452,7 +546,7 @@ Bước kiểm tra bằng mắt ở đây không bỏ được. Một vùng che 
 
 **Interfaces:**
 - Consumes: `tools/redact_results.py` và `tools/redact-map.json`
-- Produces: 72 ảnh đã che, dùng bởi Task 5
+- Produces: 71 ảnh đã che, dùng bởi Task 5
 
 - [ ] **Step 1: Chạy pipeline**
 
@@ -464,11 +558,11 @@ python tools/redact_results.py
 Kết quả mong đợi:
 
 ```
-ket: 19 ảnh -> .../images/results/ket
-pet: 20 ảnh -> .../images/results/pet
+ket: 28 ảnh -> .../images/results/ket
+pet: 11 ảnh -> .../images/results/pet
 ielts: 8 ảnh -> .../images/results/ielts
-ts10: 25 ảnh -> .../images/results/ts10
-Đã xử lý 72 ảnh.
+ts10: 24 ảnh -> .../images/results/ts10
+Đã xử lý 71 ảnh.
 ```
 
 - [ ] **Step 2: Kiểm tra số lượng và dung lượng**
@@ -481,17 +575,18 @@ done
 du -sh images/results
 ```
 
-Kết quả mong đợi: `ket: 19`, `pet: 20`, `ielts: 8`, `ts10: 25`, tổng dung lượng dưới 2,5 MB.
+Kết quả mong đợi: `ket: 28`, `pet: 11`, `ielts: 8`, `ts10: 24`, tổng dung lượng dưới 2,5 MB.
 
-- [ ] **Step 3: Đọc lại toàn bộ 72 ảnh đã che**
+- [ ] **Step 3: Đọc lại toàn bộ 71 ảnh đã che**
 
 Mở lần lượt từng tệp trong `images/results/`. Với mỗi ảnh xác nhận:
 
 1. Không còn đọc được họ tên thí sinh ở bất kỳ vị trí nào.
 2. Không còn ảnh chân dung.
-3. Không còn ngày sinh, số báo danh, Verification Number, Centre Reference, Test Report Form Number.
-4. Điểm số và thang CEFR vẫn đọc được rõ.
-5. Logo tổ chức cấp vẫn nhìn thấy.
+3. Không còn ngày sinh, số báo danh, Verification Number, Centre Reference, Test Report Form Number, số định danh cá nhân, địa chỉ phường/xã.
+4. Với ảnh Tuyển sinh 10 từng chụp từ Zalo/Messenger: không còn thanh tiêu đề tên liên hệ, bong bóng tin nhắn, hay avatar nào sót lại quanh khung "Kết Quả".
+5. Điểm số và thang CEFR vẫn đọc được rõ.
+6. Logo tổ chức cấp vẫn nhìn thấy.
 
 Ghi lại danh sách ảnh không đạt.
 
@@ -504,14 +599,14 @@ cd "D:/Nancy/Web"
 python tools/redact_results.py
 ```
 
-Lặp lại Step 3 cho những ảnh vừa sửa. Chỉ đi tiếp khi cả 72 ảnh đều đạt.
+Lặp lại Step 3 cho những ảnh vừa sửa. Chỉ đi tiếp khi cả 71 ảnh đều đạt.
 
 - [ ] **Step 5: Commit**
 
 ```bash
 cd "D:/Nancy/Web"
 git add images/results tools/redact-map.json
-git commit -m "assets: generate 72 redacted result images"
+git commit -m "assets: generate 71 redacted result images"
 ```
 
 ---
@@ -579,7 +674,7 @@ node -e "
 const fs = require('fs');
 const window = {};
 eval(fs.readFileSync('results-data.js', 'utf8'));
-const want = { ket: 19, pet: 20, ielts: 8, ts10: 25 };
+const want = { ket: 28, pet: 11, ielts: 8, ts10: 24 };
 let checked = 0;
 for (const [key, expected] of Object.entries(want)) {
   const course = window.NANCY_RESULTS[key];
@@ -594,7 +689,7 @@ console.log('results-data.js hợp lệ,', checked, 'ảnh đều tồn tại');
 "
 ```
 
-Kết quả mong đợi: `results-data.js hợp lệ, 72 ảnh đều tồn tại`.
+Kết quả mong đợi: `results-data.js hợp lệ, 71 ảnh đều tồn tại`.
 
 - [ ] **Step 4: Commit**
 
@@ -1273,7 +1368,7 @@ Với thẻ KET, đổi thẻ mở và thêm huy hiệu cùng nút. Thẻ hiện
 ```html
               <article class="course-card" data-course="ket" data-results="ket">
                 <div class="course-card__media">
-                  <span class="course-card__proof">19 kết quả</span>
+                  <span class="course-card__proof">28 kết quả</span>
                   <img
                     src="https://i.postimg.cc/Y2WstSzY/749330288-1553232106814655-737978265121435385-n.jpg"
                     alt="Học viên khóa KET tại Nancy English Center"
@@ -1300,9 +1395,9 @@ Làm tương tự cho ba thẻ còn lại, chỉ khác giá trị:
 
 | Thẻ | `data-results` | Nội dung huy hiệu |
 | --- | --- | --- |
-| `data-course="pet"` (dòng 647) | `pet` | `20 kết quả` |
+| `data-course="pet"` (dòng 647) | `pet` | `11 kết quả` |
 | `data-course="ielts"` (dòng 669) | `ielts` | `8 kết quả` |
-| `data-course="tuyen-sinh-10"` (dòng 767) | `ts10` | `25 kết quả` |
+| `data-course="tuyen-sinh-10"` (dòng 767) | `ts10` | `24 kết quả` |
 
 Không đụng vào bảy thẻ còn lại.
 
@@ -1919,7 +2014,7 @@ test("raw result images never sit inside the deployed images directory", async (
 });
 
 test("every redacted course folder holds the full set of results", async () => {
-  const expected = { ket: 19, pet: 20, ielts: 8, ts10: 25 };
+  const expected = { ket: 28, pet: 11, ielts: 8, ts10: 24 };
 
   for (const [key, count] of Object.entries(expected)) {
     const files = await readdir(new URL(`../images/results/${key}/`, import.meta.url));
