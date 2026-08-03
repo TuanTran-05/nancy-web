@@ -116,10 +116,124 @@ window.NancyResults = (function () {
     );
   }
 
+  function createResultsModal(root, data) {
+    var current = null;
+    var detailIndex = -1;
+    var lastTrigger = null;
+
+    function paint() {
+      if (!current) return;
+
+      if (detailIndex >= 0) {
+        root.innerHTML = renderDetail(current, detailIndex);
+        return;
+      }
+
+      root.innerHTML =
+        '<div class="results-panel">' +
+        '<div class="results-head">' +
+        '<span class="results-badge">' +
+        escapeHtml(current.cefr || current.grade) +
+        "</span>" +
+        "<div><h3>Thành tích học viên " +
+        escapeHtml(current.label) +
+        "</h3><p>" +
+        escapeHtml(current.org) +
+        " · " +
+        escapeHtml(current.grade) +
+        "</p></div>" +
+        '<button class="results-close" type="button" data-action="close" aria-label="Đóng">&#10005;</button>' +
+        "</div>" +
+        renderStats(current) +
+        renderGrid(current) +
+        "</div>";
+    }
+
+    function open(key, trigger) {
+      var course = data[key];
+      if (!course) return;
+
+      current = course;
+      detailIndex = -1;
+      lastTrigger = trigger || null;
+      paint();
+      root.setAttribute("aria-hidden", "false");
+      root.setAttribute("aria-label", "Thành tích học viên " + course.label);
+      root.classList.add("open");
+      document.body.classList.add("lightbox-active");
+    }
+
+    function close() {
+      current = null;
+      detailIndex = -1;
+      root.innerHTML = "";
+      root.setAttribute("aria-hidden", "true");
+      root.classList.remove("open");
+      document.body.classList.remove("lightbox-active");
+
+      if (lastTrigger) lastTrigger.focus();
+      lastTrigger = null;
+    }
+
+    function step(offset) {
+      var count = current.items.length;
+      detailIndex = (detailIndex + offset + count) % count;
+      paint();
+    }
+
+    root.addEventListener("click", function (event) {
+      // Bấm thẳng vào nền tối thì đóng. Bấm vào nội dung bên trong thì không.
+      if (event.target === root) {
+        close();
+        return;
+      }
+
+      var trigger = event.target.closest("[data-action]");
+      if (!trigger || !current) return;
+
+      var action = trigger.getAttribute("data-action");
+
+      if (action === "close") close();
+      else if (action === "grid") {
+        detailIndex = -1;
+        paint();
+      } else if (action === "zoom") {
+        detailIndex = parseInt(trigger.getAttribute("data-index"), 10);
+        paint();
+      } else if (action === "next") step(1);
+      else if (action === "prev") step(-1);
+    });
+
+    document.addEventListener("keydown", function (event) {
+      if (event.key !== "Escape" || !current) return;
+
+      // Từ ảnh phóng to, Escape lùi về lưới trước đã. Người xem đang ở hai
+      // lớp sâu, đóng thẳng cả hộp thoại là mất chỗ đang xem.
+      if (detailIndex >= 0) {
+        detailIndex = -1;
+        paint();
+        return;
+      }
+
+      close();
+    });
+
+    root.setAttribute("aria-hidden", "true");
+
+    return {
+      open: open,
+      close: close,
+      isOpen: function () {
+        return current !== null;
+      },
+    };
+  }
+
   return {
     escapeHtml: escapeHtml,
     renderStats: renderStats,
     renderGrid: renderGrid,
     renderDetail: renderDetail,
+    createResultsModal: createResultsModal,
   };
 })();
