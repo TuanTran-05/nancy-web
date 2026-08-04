@@ -48,44 +48,26 @@ test("stats strip omits figures that were left empty", () => {
   assert.equal(html.includes("Trình độ đạt"), false);
 });
 
-test("grid renders one lazy-loaded tile per item, indexed in order", () => {
-  const html = loadModule().renderGrid(course);
-  assert.equal((html.match(/data-action="zoom"/g) || []).length, 3);
-  assert.match(html, /data-index="0"/);
-  assert.match(html, /data-index="2"/);
-  assert.match(html, /loading="lazy"/);
-  assert.match(html, /images\/results\/ket\/01\.jpg/);
+test("viewer renders one readable image and one thumbnail per result", () => {
+  const html = loadModule().renderViewer(course, 0);
+  assert.match(html, /class="results-viewer"/);
+  assert.match(html, /class="results-main__image"[^>]*01\.jpg/);
+  assert.equal((html.match(/class="results-thumb"/g) || []).length, 3);
+  assert.equal((html.match(/aria-current="true"/g) || []).length, 1);
+  assert.match(html, /data-action="select" data-index="0"[^>]*aria-current="true"/);
+  assert.match(html, /1\s*\/\s*3/);
 });
 
-test("grid tiles carry captions, and stay silent when the score was unreadable", () => {
-  const html = loadModule().renderGrid(course);
-  assert.match(html, /Pass · Grade B/);
-  assert.match(html, /136 · A2/);
-  assert.equal((html.match(/results-tile__cap/g) || []).length, 2);
-});
-
-test("grid carries the shape so CSS can pick a column count", () => {
-  const portrait = loadModule().renderGrid(course);
-  const landscape = loadModule().renderGrid({ ...course, shape: "landscape" });
-  assert.match(portrait, /data-shape="portrait"/);
-  assert.match(landscape, /data-shape="landscape"/);
-});
-
-test("detail view shows a counter and the current image", () => {
-  const html = loadModule().renderDetail(course, 1);
-  assert.match(html, /2\s*\/\s*3/);
-  assert.match(html, /images\/results\/ket\/02\.jpg/);
+test("viewer marks the selected thumbnail and shows its score", () => {
+  const html = loadModule().renderViewer(course, 1);
+  assert.match(html, /class="results-main__image"[^>]*02\.jpg/);
+  assert.match(html, /data-index="1"[^>]*aria-current="true"/);
   assert.match(html, /Pass · Grade A/);
+  assert.match(html, /2\s*\/\s*3/);
 });
 
-test("detail view keeps prev and next available so navigation can wrap", () => {
-  const first = loadModule().renderDetail(course, 0);
-  assert.match(first, /data-action="prev"/);
-  assert.match(first, /data-action="next"/);
-});
-
-test("alt text describes the document without naming a student", () => {
-  const html = loadModule().renderGrid(course);
+test("viewer keeps private names out of image alternatives", () => {
+  const html = loadModule().renderViewer(course, 0);
   assert.match(html, /alt="Phiếu điểm KET của học viên Nancy English Center"/);
   assert.equal(/alt="[^"]*(Nguyen|Nguyễn|Dinh|Đinh)/.test(html), false);
 });
@@ -136,7 +118,7 @@ class FakeNode {
   }
 }
 
-function createModalFixture() {
+function createModalFixture(data = { ket: course }) {
   const root = new FakeNode();
   const body = new FakeNode();
   body.classList = { add(v) { this.v = v; }, remove() { this.v = null; }, v: null };
@@ -156,7 +138,7 @@ function createModalFixture() {
   };
   const window = { document, matchMedia: () => ({ matches: false }) };
   vm.runInNewContext(source, { window, document });
-  const modal = window.NancyResults.createResultsModal(root, { ket: course });
+  const modal = window.NancyResults.createResultsModal(root, data);
   return { modal, root, document, body };
 }
 
@@ -176,12 +158,13 @@ test("modal starts closed and hidden from assistive tech", () => {
   assert.equal(root.getAttribute("aria-hidden"), "true");
 });
 
-test("opening renders the grid and locks background scrolling", () => {
+test("opening shows the first result and locks background scrolling", () => {
   const { modal, root, body } = createModalFixture();
   modal.open("ket", new FakeNode());
   assert.equal(modal.isOpen(), true);
-  assert.match(root.innerHTML, /results-grid/);
-  assert.match(root.innerHTML, /19/);
+  assert.match(root.innerHTML, /results-viewer/);
+  assert.match(root.innerHTML, /1 \/ 3/);
+  assert.match(root.innerHTML, /01\.jpg/);
   assert.equal(root.getAttribute("aria-hidden"), "false");
   assert.equal(body.classList.v, "lightbox-active");
 });
@@ -193,33 +176,49 @@ test("opening an unknown course does nothing", () => {
   assert.equal(root.innerHTML, "");
 });
 
-test("clicking a tile swaps the grid for the detail view", () => {
+test("opening a course without results does nothing", () => {
+  const empty = { ...course, items: [] };
+  const { modal, root, body } = createModalFixture({ empty });
+  modal.open("empty", new FakeNode());
+  assert.equal(modal.isOpen(), false);
+  assert.equal(root.innerHTML, "");
+  assert.equal(body.classList.v, null);
+});
+
+test("clicking a thumbnail selects its result", () => {
   const { modal, root } = createModalFixture();
   modal.open("ket", new FakeNode());
-  clickAction(root, "zoom", 1);
-  assert.match(root.innerHTML, /results-detail/);
+  clickAction(root, "select", 1);
   assert.match(root.innerHTML, /2 \/ 3/);
+  assert.match(root.innerHTML, /02\.jpg/);
+  assert.match(root.innerHTML, /data-index="1"[^>]*aria-current="true"/);
 });
 
 test("next and prev wrap around the ends", () => {
   const { modal, root } = createModalFixture();
   modal.open("ket", new FakeNode());
-  clickAction(root, "zoom", 2);
+  clickAction(root, "select", 2);
   clickAction(root, "next");
   assert.match(root.innerHTML, /1 \/ 3/);
   clickAction(root, "prev");
   assert.match(root.innerHTML, /3 \/ 3/);
 });
 
-test("Escape steps back to the grid before closing the modal", () => {
+test("Arrow keys navigate results and wrap around", () => {
   const { modal, root, document } = createModalFixture();
   modal.open("ket", new FakeNode());
-  clickAction(root, "zoom", 0);
-  document.dispatch("keydown", { key: "Escape" });
-  assert.equal(modal.isOpen(), true);
-  assert.match(root.innerHTML, /results-grid/);
+  document.dispatch("keydown", { key: "ArrowLeft" });
+  assert.match(root.innerHTML, /3 \/ 3/);
+  document.dispatch("keydown", { key: "ArrowRight" });
+  assert.match(root.innerHTML, /1 \/ 3/);
+});
+
+test("Escape closes directly from the result viewer", () => {
+  const { modal, root, document } = createModalFixture();
+  modal.open("ket", new FakeNode());
   document.dispatch("keydown", { key: "Escape" });
   assert.equal(modal.isOpen(), false);
+  assert.equal(root.innerHTML, "");
 });
 
 test("closing returns focus to the element that opened the modal", () => {
