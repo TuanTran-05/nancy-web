@@ -5,6 +5,9 @@ _private/
 # Phiên brainstorm trực quan
 .superpowers/
 
+# Worktree cô lập cho các nhánh tính năng
+.worktrees/
+
 # Tạm
 *.zip
 __pycache__/
