@@ -135,7 +135,7 @@ test("exposes crawl discovery files for the canonical homepage", async () => {
 test("loads the versioned local stylesheet and interaction script", () => {
   assert.match(
     html,
-    /<link\s+rel="stylesheet"\s+href="styles\.css\?v=20260801-responsive-hero"\s*\/>/,
+    /<link\s+rel="stylesheet"\s+href="styles\.css\?v=20260804-results-viewer"\s*\/>/,
   );
   assert.match(
     html,
@@ -469,9 +469,49 @@ test("results scripts load before the script that consumes them", () => {
   assert.ok(modalAt < mainAt, "results-modal.js phải nạp trước script.js");
 });
 
-test("results grid uses a narrower column count for landscape documents", () => {
-  assert.match(css, /\.results-grid\[data-shape="portrait"\]/);
-  assert.match(css, /\.results-grid\[data-shape="landscape"\]/);
+test("results viewer keeps thumbnails beside the document on desktop", () => {
+  assert.match(
+    css,
+    /\.results-viewer\s*\{[^}]*grid-template-columns:\s*minmax\(0,\s*1fr\)\s+116px/s,
+  );
+  assert.match(css, /\.results-thumbs\s*\{[^}]*overflow-y:\s*auto/s);
+  assert.match(css, /\.results-thumb\[aria-current="true"\]/);
+});
+
+test("results thumbnails become a horizontal strip on small screens", () => {
+  assert.match(
+    css,
+    /@media\s*\(max-width:\s*720px\)[\s\S]*?\.results-viewer\s*\{[^}]*grid-template-columns:\s*1fr/s,
+  );
+  assert.match(
+    css,
+    /@media\s*\(max-width:\s*720px\)[\s\S]*?\.results-thumbs\s*\{[^}]*overflow-x:\s*auto/s,
+  );
+});
+
+test("results viewer assets use the current cache key", () => {
+  assert.match(html, /styles\.css\?v=20260804-results-viewer/);
+  assert.match(html, /results-modal\.js\?v=20260804-results-viewer/);
+});
+
+test("results modal stays above the sticky site header", () => {
+  const headerZ = Number(css.match(/\.site-header\s*\{[^}]*z-index:\s*(\d+)/s)?.[1]);
+  const modalZ = Number(css.match(/\.results-modal\s*\{[^}]*z-index:\s*(\d+)/s)?.[1]);
+  assert.ok(Number.isFinite(headerZ), "không đọc được z-index của site header");
+  assert.ok(Number.isFinite(modalZ), "không đọc được z-index của results modal");
+  assert.ok(modalZ > headerZ, `results modal (${modalZ}) phải nằm trên site header (${headerZ})`);
+});
+
+test("results metadata uses a text color with AA contrast", () => {
+  const text = css.match(/--text-2:\s*(#[a-f\d]{6})/i)?.[1];
+  const surface = css.match(/--surface-2:\s*(#[a-f\d]{6})/i)?.[1];
+  assert.ok(text && surface, "thiếu token màu của metadata");
+  const light = Math.max(relativeLuminance(text), relativeLuminance(surface));
+  const dark = Math.min(relativeLuminance(text), relativeLuminance(surface));
+  const contrast = (light + 0.05) / (dark + 0.05);
+  assert.ok(contrast >= 4.5, `metadata contrast is ${contrast}`);
+  assert.match(css, /\.results-detail__cap em\s*\{[^}]*color:\s*var\(--text-2\)/s);
+  assert.match(css, /\.results-detail__count\s*\{[^}]*color:\s*var\(--text-2\)/s);
 });
 
 test("results modal respects reduced motion and stays hidden until opened", () => {

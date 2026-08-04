@@ -97,7 +97,7 @@ window.NancyResults = (function () {
       course.items.length +
       "</p></div>" +
       '<button class="results-nav" type="button" data-action="next" aria-label="Phiếu điểm tiếp theo">&#8250;</button>' +
-      '</div></div><div class="results-thumbs" aria-label="Danh sách phiếu điểm">' +
+      '</div></div><div class="results-thumbs" role="group" aria-label="Danh sách phiếu điểm">' +
       thumbs +
       "</div></div>"
     );

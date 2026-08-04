@@ -55,6 +55,7 @@ test("viewer renders one readable image and one thumbnail per result", () => {
   assert.equal((html.match(/class="results-thumb"/g) || []).length, 3);
   assert.equal((html.match(/aria-current="true"/g) || []).length, 1);
   assert.match(html, /data-action="select" data-index="0"[^>]*aria-current="true"/);
+  assert.match(html, /class="results-thumbs" role="group" aria-label="Danh sách phiếu điểm"/);
   assert.match(html, /1\s*\/\s*3/);
 });
 

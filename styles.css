@@ -1924,8 +1924,7 @@ summary:focus-visible,
     scroll-behavior: auto;
   }
   .results-modal,
-  .results-panel,
-  .results-detail {
+  .results-panel {
     animation: none;
   }
   *,
@@ -1944,7 +1943,7 @@ summary:focus-visible,
   .course-card:hover,
   .contact-card:hover,
   .map-open:hover,
-  .results-tile:hover {
+  .results-thumb:hover {
     transform: none;
   }
 }
@@ -2017,7 +2016,7 @@ summary:focus-visible,
   display: none;
   position: fixed;
   inset: 0;
-  z-index: 90;
+  z-index: 210;
   background: rgba(10, 36, 69, 0.86);
   padding: clamp(12px, 3vw, 32px);
   overflow-y: auto;
@@ -2029,8 +2028,7 @@ summary:focus-visible,
   justify-content: center;
 }
 
-.results-panel,
-.results-detail {
+.results-panel {
   background: var(--surface);
   border-radius: var(--r-lg);
   box-shadow: var(--sh-3);
@@ -2078,8 +2076,7 @@ summary:focus-visible,
   margin: 2px 0 0;
 }
 
-.results-close,
-.results-detail__back {
+.results-close {
   margin-left: auto;
   background: var(--surface-2);
   border: 1px solid var(--line);
@@ -2100,17 +2097,16 @@ summary:focus-visible,
 
 /* --- dải số liệu --- */
 .results-stats {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 10px;
-  padding: 14px 20px;
+  padding: 10px 20px;
   background: var(--brand-wash);
   border-bottom: 1px solid var(--line);
-  flex-wrap: wrap;
 }
 
 .results-stat {
-  flex: 1;
-  min-width: 110px;
+  min-width: 0;
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--r-md);
@@ -2131,87 +2127,41 @@ summary:focus-visible,
   margin-top: 2px;
 }
 
-/* --- lưới ảnh --- */
-.results-grid {
+/* --- một phiếu lớn và dải ảnh thu nhỏ --- */
+.results-viewer {
   display: grid;
-  gap: 12px;
-  padding: 16px 20px 22px;
+  grid-template-columns: minmax(0, 1fr) 116px;
+  gap: 14px;
+  min-height: 0;
+  padding: 14px 20px 20px;
 }
 
-.results-grid[data-shape="portrait"] {
-  grid-template-columns: repeat(4, 1fr);
-}
-
-.results-grid[data-shape="landscape"] {
-  grid-template-columns: repeat(2, 1fr);
-}
-
-.results-tile {
-  position: relative;
-  display: block;
-  padding: 0;
-  border: 1px solid var(--line);
-  border-radius: var(--r-md);
-  overflow: hidden;
-  background: var(--surface);
-  cursor: pointer;
-  transition:
-    transform 0.2s var(--ease),
-    box-shadow 0.2s var(--ease);
-}
-
-.results-tile:hover,
-.results-tile:focus-visible {
-  transform: translateY(-3px);
-  box-shadow: var(--sh-2);
-}
-
-.results-tile img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-.results-tile__cap {
-  position: absolute;
-  inset: auto 0 0;
-  background: linear-gradient(transparent, rgba(10, 36, 69, 0.92));
-  color: #fff;
-  font-size: 0.76rem;
-  font-weight: 600;
-  text-align: left;
-  padding: 22px 10px 8px;
-}
-
-.results-tile__cap em {
-  display: block;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 0.7rem;
-  opacity: 0.85;
-}
-
-/* --- ảnh phóng to --- */
-.results-detail {
-  padding: 16px 20px 22px;
+.results-main {
+  min-width: 0;
 }
 
 .results-detail__stage {
-  display: flex;
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr) 40px;
   align-items: center;
   gap: 12px;
-  justify-content: center;
-  background: var(--surface-2);
+  min-height: 0;
   border-radius: var(--r-md);
-  padding: 14px;
-  margin-top: 12px;
+  background: var(--surface-2);
+  padding: 12px;
 }
 
-.results-detail__stage img {
-  max-width: min(620px, 100%);
-  max-height: 72vh;
+.results-main__document {
+  min-width: 0;
+  text-align: center;
+}
+
+.results-main__image {
+  display: block;
   width: auto;
-  height: auto;
+  max-width: 100%;
+  max-height: calc(100vh - 280px);
+  margin: 0 auto;
   border-radius: 6px;
   box-shadow: var(--sh-1);
 }
@@ -2228,6 +2178,13 @@ summary:focus-visible,
   cursor: pointer;
 }
 
+.results-nav:hover,
+.results-nav:focus-visible {
+  border-color: var(--brand);
+  outline: 2px solid var(--brand-tint);
+  outline-offset: 2px;
+}
+
 .results-detail__cap {
   text-align: center;
   font-weight: 700;
@@ -2238,42 +2195,121 @@ summary:focus-visible,
 .results-detail__cap em {
   font-style: normal;
   font-weight: 400;
-  color: var(--text-3);
+  color: var(--text-2);
 }
 
 .results-detail__count {
   text-align: center;
   font-size: 0.8rem;
-  color: var(--text-3);
+  color: var(--text-2);
   margin: 6px 0 0;
 }
 
-@media (max-width: 720px) {
-  .results-grid[data-shape="portrait"] {
-    grid-template-columns: repeat(2, 1fr);
-  }
+.results-thumbs {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: calc(100vh - 280px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 2px 4px 2px 2px;
+  scrollbar-width: thin;
+}
 
-  .results-grid[data-shape="landscape"] {
-    grid-template-columns: 1fr;
+.results-thumb {
+  flex: none;
+  padding: 0;
+  overflow: hidden;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  background: var(--surface-2);
+  cursor: pointer;
+  opacity: 0.72;
+  transition:
+    opacity 0.2s var(--ease),
+    border-color 0.2s var(--ease);
+}
+
+.results-thumb img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.results-thumb:hover,
+.results-thumb:focus-visible {
+  opacity: 1;
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
+
+.results-thumb[aria-current="true"] {
+  border-color: var(--accent);
+  opacity: 1;
+}
+
+@media (max-width: 720px) {
+  .results-modal {
+    padding: 8px;
   }
 
   .results-head {
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    padding: 12px;
+  }
+
+  .results-head > div {
+    min-width: 0;
+  }
+
+  .results-stats {
+    gap: 6px;
+    padding: 8px 12px;
+  }
+
+  .results-stat {
+    padding: 8px;
+  }
+
+  .results-viewer {
+    grid-template-columns: 1fr;
+    padding: 10px 12px 14px;
+  }
+
+  .results-detail__stage {
+    grid-template-columns: 34px minmax(0, 1fr) 34px;
+    gap: 6px;
+    padding: 8px;
+  }
+
+  .results-main__image {
+    max-height: 60vh;
+  }
+
+  .results-nav {
+    width: 34px;
+    height: 34px;
+  }
+
+  .results-thumbs {
+    flex-direction: row;
+    max-height: none;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 2px 2px 6px;
+  }
+
+  .results-thumb {
+    flex: 0 0 72px;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .results-panel,
-  .results-detail {
+  .results-panel {
     animation: none;
   }
 
-  .results-tile {
+  .results-thumb {
     transition: none;
-  }
-
-  .results-tile:hover,
-  .results-tile:focus-visible {
-    transform: none;
   }
 }
