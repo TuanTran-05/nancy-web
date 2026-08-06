@@ -1,10 +1,12 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { access, readFile, readdir } from "node:fs/promises";
+import { createHash } from "node:crypto";
 
 const imagesDir = new URL("../images/", import.meta.url);
 const imageEntries = await readdir(imagesDir, { withFileTypes: true });
 const gitignore = await readFile(new URL("../.gitignore", import.meta.url), "utf8");
+const logo = await readFile(new URL("../images/logo.png", import.meta.url));
 
 const [html, css, js] = await Promise.all([
   readFile(new URL("../index.html", import.meta.url), "utf8"),
@@ -44,10 +46,10 @@ function relativeLuminance(hex) {
   return 0.2126 * channels[0] + 0.7152 * channels[1] + 0.0722 * channels[2];
 }
 
-test("publishes the local Nancy identity and social metadata", () => {
+test("publishes the Thien Uy identity while preserving Nancy discovery", () => {
   assert.match(
     html,
-    /<title>\s*Anh Ngữ Nancy An Phú \| Nancy English Center\s*<\/title>/,
+    /<title>\s*Thien Uy English Center \| Nancy English Center\s*<\/title>/,
   );
   assert.match(
     html,
@@ -61,8 +63,8 @@ test("publishes the local Nancy identity and social metadata", () => {
   const expectedOpenGraph = new Map([
     ["og:type", "website"],
     ["og:locale", "vi_VN"],
-    ["og:site_name", "Nancy English Center"],
-    ["og:title", "Anh Ngữ Nancy An Phú | Nancy English Center"],
+    ["og:site_name", "Thien Uy English Center"],
+    ["og:title", "Thien Uy English Center | Nancy English Center"],
     ["og:url", "https://thienuy.edu.vn/"],
     ["og:image", "https://thienuy.edu.vn/images/logo.png"],
   ]);
@@ -95,11 +97,15 @@ test("publishes one consistent structured local-business identity", () => {
     "@type": "WebSite",
     "@id": "https://thienuy.edu.vn/#website",
     url: "https://thienuy.edu.vn/",
-    name: "Nancy English Center",
-    alternateName: "Anh Ngữ Nancy An Phú",
+    name: "Thien Uy English Center",
+    alternateName: ["Nancy English Center", "Anh Ngữ Nancy An Phú"],
     inLanguage: "vi-VN",
   });
-  assert.equal(business.name, "Nancy English Center");
+  assert.equal(business.name, "Thien Uy English Center");
+  assert.deepEqual(business.alternateName, [
+    "Nancy English Center",
+    "Anh Ngữ Nancy An Phú",
+  ]);
   assert.equal(business.telephone, "+84866169569");
   assert.equal(business.address.addressLocality, "An Phú");
   assert.equal(business.address.addressRegion, "Hồ Chí Minh");
@@ -165,8 +171,16 @@ test("keeps navigation landmarks, anchors, and the two-line brand accessible", (
     assert.match(html, new RegExp(`href="#${id}"`));
   }
   const brand = html.match(/<a\s+class="brand"[\s\S]*?<\/a>/)?.[0] ?? "";
-  assert.match(brand, /<strong>NANCY ENGLISH CENTER<\/strong>/);
+  assert.match(brand, /aria-label="Thien Uy English Center - Trang chủ"/);
+  assert.match(brand, /<strong>THIEN UY ENGLISH CENTER<\/strong>/);
   assert.match(brand, /<em>thienuy\.edu\.vn<\/em>/);
+  assert.match(html, /<span class="foot-name">THIEN UY ENGLISH CENTER<\/span>/);
+  assert.match(html, /© 2025 Thien Uy English Center\. All rights reserved\./);
+
+  assert.equal(
+    createHash("sha256").update(logo).digest("hex"),
+    "c36ba0ebd583f90c31f86726776e69647dadd61548edb1469d47038614a8c640",
+  );
 });
 
 test("local images exist and image markup reserves layout space", async () => {
