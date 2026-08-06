@@ -1707,10 +1707,7 @@ a.contact-card:hover {
   }
 }
 
-@media (max-width: 980px) {
-  html {
-    scroll-padding-top: 84px;
-  }
+@media (max-width: 1120px) {
   .main-nav,
   .header-cta {
     display: none;
@@ -1748,6 +1745,12 @@ a.contact-card:hover {
   }
   .main-nav.open a::after {
     display: none;
+  }
+}
+
+@media (max-width: 980px) {
+  html {
+    scroll-padding-top: 84px;
   }
 
   /* Hero về một cột, có lề hai bên trở lại nên bỏ mặt nạ mờ mép trái

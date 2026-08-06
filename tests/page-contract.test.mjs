@@ -141,7 +141,7 @@ test("exposes crawl discovery files for the canonical homepage", async () => {
 test("loads the versioned local stylesheet and interaction script", () => {
   assert.match(
     html,
-    /<link\s+rel="stylesheet"\s+href="styles\.css\?v=20260804-results-viewer"\s*\/>/,
+    /<link\s+rel="stylesheet"\s+href="styles\.css\?v=20260806-thien-uy-header"\s*\/>/,
   );
   assert.match(
     html,
@@ -181,6 +181,27 @@ test("keeps navigation landmarks, anchors, and the two-line brand accessible", (
     createHash("sha256").update(logo).digest("hex"),
     "c36ba0ebd583f90c31f86726776e69647dadd61548edb1469d47038614a8c640",
   );
+});
+
+test("switches only the header to compact navigation before tablet widths overflow", () => {
+  const tabletHeaderStart = css.indexOf("@media (max-width: 1120px)");
+  const responsiveLayoutStart = css.indexOf("@media (max-width: 980px)");
+
+  assert.notEqual(tabletHeaderStart, -1, "missing tablet header breakpoint");
+  assert.notEqual(responsiveLayoutStart, -1, "missing responsive layout breakpoint");
+  assert.ok(tabletHeaderStart < responsiveLayoutStart);
+
+  const tabletHeaderRules = css.slice(
+    tabletHeaderStart,
+    responsiveLayoutStart,
+  );
+  assert.match(
+    tabletHeaderRules,
+    /\.main-nav,\s*\.header-cta\s*\{\s*display:\s*none;/s,
+  );
+  assert.match(tabletHeaderRules, /\.nav-toggle\s*\{\s*display:\s*flex;/s);
+  assert.match(tabletHeaderRules, /\.main-nav\.open\s*\{\s*display:\s*flex;/s);
+  assert.doesNotMatch(tabletHeaderRules, /\.hero-grid\s*\{/);
 });
 
 test("local images exist and image markup reserves layout space", async () => {
@@ -504,7 +525,7 @@ test("results thumbnails become a horizontal strip on small screens", () => {
 });
 
 test("results viewer assets use the current cache key", () => {
-  assert.match(html, /styles\.css\?v=20260804-results-viewer/);
+  assert.match(html, /styles\.css\?v=20260806-thien-uy-header/);
   assert.match(html, /results-modal\.js\?v=20260804-results-viewer/);
 });
 
