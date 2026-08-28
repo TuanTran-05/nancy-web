@@ -218,8 +218,9 @@ test("dedicated pages carry the promised depth without fabricated profiles", () 
 
   assert.match(about, /Tiền thân là Nancy English Center tại An Phú/);
   assert.equal((about.match(/class="principle reveal"/g) ?? []).length, 5);
-  assert.equal((teachers.match(/class="teacher-profile reveal"/g) ?? []).length, 2);
-  assert.equal((teachers.match(/Hồ sơ đang được xác nhận/g) ?? []).length, 2);
+  assert.equal((teachers.match(/class="teaching-practice-row/g) ?? []).length, 3);
+  assert.doesNotMatch(teachers, /class="teacher-profile/);
+  assert.match(teachers, /Hồ sơ đội ngũ đang được trung tâm xác nhận/);
   assert.doesNotMatch(teachers, /ThS\.|Tiến sĩ|IELTS 9\.0|CELTA|TESOL/);
   assert.equal((path.match(/class="journey-step"/g) ?? []).length, 7);
   assert.equal((activities.match(/class="gallery-item gal reveal"/g) ?? []).length, 5);

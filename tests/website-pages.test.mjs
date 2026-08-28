@@ -2,7 +2,8 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { access, readFile } from "node:fs/promises";
 
-const pageNames = ["about.html", "courses.html", "achievements.html"];
+const pageNames = ["about.html", "courses.html", "achievements.html", "teachers.html"];
+const primaryPageNames = ["about.html", "courses.html", "achievements.html"];
 const pageEntries = await Promise.all(
   pageNames.map(async (name) => [
     name,
@@ -21,7 +22,8 @@ test("publishes three complete inner pages with shared accessible navigation", (
     ["achievements.html", "Thành tích"],
   ]);
 
-  for (const [name, html] of pages) {
+  for (const name of primaryPageNames) {
+    const html = pages.get(name);
     assert.match(html, /<a class="skip-link" href="#main">/);
     assert.match(html, /<main class="subpage-main" id="main">/);
     assert.match(html, /<nav class="main-nav"[^>]+aria-label="Điều hướng chính"/s);
@@ -30,7 +32,7 @@ test("publishes three complete inner pages with shared accessible navigation", (
     assert.match(html, /href="pages\.css\?v=20260820-website"/);
     assert.match(html, /src="script\.js\?v=20260820-website" defer/);
 
-    for (const route of ["index.html", ...pageNames]) {
+    for (const route of ["index.html", ...primaryPageNames]) {
       assert.match(html, new RegExp(`href="${route.replace(".", "\\.")}"`));
     }
 
@@ -47,6 +49,7 @@ test("inner pages use unique canonical metadata and valid structured data", () =
     ["about.html", ["Giới thiệu | Thien Uy English Center", "https://thienuy.edu.vn/about.html"]],
     ["courses.html", ["Khóa học tiếng Anh | Thien Uy English Center", "https://thienuy.edu.vn/courses.html"]],
     ["achievements.html", ["Thành tích học viên | Thien Uy English Center", "https://thienuy.edu.vn/achievements.html"]],
+    ["teachers.html", ["Đội ngũ giáo viên | Thien Uy English Center", "https://thienuy.edu.vn/teachers.html"]],
   ]);
 
   for (const [name, html] of pages) {
@@ -81,20 +84,17 @@ test("all inner-page images are local, accessible, dimensioned, and present", as
   }
 });
 
-test("about page carries the center story and five teaching principles", () => {
-  const html = pages.get("about.html");
-  assert.match(html, /10 năm kiến tạo/);
-  assert.match(html, /Nancy English Center tại An Phú/);
-  assert.equal((html.match(/class="principle reveal(?:"|\s)/g) ?? []).length, 5);
-  for (const heading of [
-    "Chương trình học bài bản",
-    "Giáo viên giàu kinh nghiệm",
-    "Lộ trình cá nhân hóa",
-    "Quan tâm sát sao",
-    "Môi trường tích cực",
-  ]) {
-    assert.ok(html.includes(`<h3>${heading}</h3>`));
-  }
+test("about and teachers form one concise story and team family", () => {
+  const about = pages.get("about.html");
+  const teachers = pages.get("teachers.html");
+
+  assert.match(about, /id="team"/);
+  assert.equal((about.match(/class="team-evidence/g) ?? []).length, 2);
+  assert.match(about, /href="teachers\.html"/);
+  assert.equal((teachers.match(/class="teaching-practice-row/g) ?? []).length, 3);
+  assert.doesNotMatch(teachers, /class="teacher-profile/);
+  assert.match(teachers, /Hồ sơ đội ngũ đang được trung tâm xác nhận/);
+  assert.doesNotMatch(teachers, /ThS\.|Tiến sĩ|IELTS 9\.0|CELTA|TESOL/);
 });
 
 test("courses page exposes all current programs, filters, and real result entry points", () => {
