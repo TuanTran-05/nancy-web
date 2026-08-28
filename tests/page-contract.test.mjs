@@ -222,7 +222,9 @@ test("dedicated pages carry the promised depth without fabricated profiles", () 
   assert.doesNotMatch(teachers, /class="teacher-profile/);
   assert.match(teachers, /Hồ sơ đội ngũ đang được trung tâm xác nhận/);
   assert.doesNotMatch(teachers, /ThS\.|Tiến sĩ|IELTS 9\.0|CELTA|TESOL/);
-  assert.equal((path.match(/class="journey-step"/g) ?? []).length, 7);
+  assert.equal((path.match(/class="learning-roadmap__item/g) ?? []).length, 7);
+  assert.equal((path.match(/class="enrollment-step/g) ?? []).length, 4);
+  assert.doesNotMatch(path, /class="content-grid"/);
   assert.equal((activities.match(/class="gallery-item gal reveal"/g) ?? []).length, 5);
   assert.equal((knowledge.match(/class="knowledge-card"/g) ?? []).length, 3);
   assert.equal((faq.match(/<details class="faq-item"/g) ?? []).length, 8);

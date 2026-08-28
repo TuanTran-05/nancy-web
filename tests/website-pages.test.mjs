@@ -2,7 +2,14 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { access, readFile } from "node:fs/promises";
 
-const pageNames = ["about.html", "courses.html", "achievements.html", "teachers.html"];
+const pageNames = [
+  "about.html",
+  "courses.html",
+  "course.html",
+  "learning-path.html",
+  "achievements.html",
+  "teachers.html",
+];
 const primaryPageNames = ["about.html", "courses.html", "achievements.html"];
 const pageEntries = await Promise.all(
   pageNames.map(async (name) => [
@@ -48,6 +55,8 @@ test("inner pages use unique canonical metadata and valid structured data", () =
   const expectations = new Map([
     ["about.html", ["Giới thiệu | Thien Uy English Center", "https://thienuy.edu.vn/about.html"]],
     ["courses.html", ["Khóa học tiếng Anh | Thien Uy English Center", "https://thienuy.edu.vn/courses.html"]],
+    ["course.html", ["Chi tiết khóa học | Thien Uy English Center", "https://thienuy.edu.vn/course.html"]],
+    ["learning-path.html", ["Lộ trình học tiếng Anh | Thien Uy English Center", "https://thienuy.edu.vn/learning-path.html"]],
     ["achievements.html", ["Thành tích học viên | Thien Uy English Center", "https://thienuy.edu.vn/achievements.html"]],
     ["teachers.html", ["Đội ngũ giáo viên | Thien Uy English Center", "https://thienuy.edu.vn/teachers.html"]],
   ]);
@@ -56,7 +65,7 @@ test("inner pages use unique canonical metadata and valid structured data", () =
     const [title, canonical] = expectations.get(name);
     assert.match(html, new RegExp(`<title>${title}<\\/title>`));
     assert.ok(html.includes(`<link rel="canonical" href="${canonical}" />`));
-    const json = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)?.[1];
+    const json = html.match(/<script type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/)?.[1];
     assert.ok(json, `${name} missing structured data`);
     assert.doesNotThrow(() => JSON.parse(json));
   }
@@ -119,6 +128,20 @@ test("courses page exposes all current programs, filters, and real result entry 
     ["ket", "pet", "ielts", "ts10"],
   );
   assert.match(html, /id="results-modal"/);
+});
+
+test("program pages use the compact catalog and roadmap family", () => {
+  const catalog = pages.get("courses.html");
+  const path = pages.get("learning-path.html");
+  const detail = pages.get("course.html");
+
+  assert.match(catalog, /class="program-layout"/);
+  assert.equal((catalog.match(/class="catalog-card reveal/g) ?? []).length, 11);
+  assert.equal((catalog.match(/class="filter-button"/g) ?? []).length, 4);
+  assert.equal((path.match(/class="learning-roadmap__item/g) ?? []).length, 7);
+  assert.equal((path.match(/class="enrollment-step/g) ?? []).length, 4);
+  assert.doesNotMatch(path, /class="content-grid"/);
+  assert.match(detail, /href="contact\.html#register"[^>]*>Kiểm tra trình độ miễn phí<\/a>/);
 });
 
 test("achievements page matches the redacted result data totals", () => {
