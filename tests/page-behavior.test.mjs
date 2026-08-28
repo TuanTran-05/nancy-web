@@ -519,6 +519,23 @@ test("registration posts trimmed Google Form entries and reports success", async
   assert.equal(fixture.submit.textContent, "Gửi đăng ký");
 });
 
+test("registration failure keeps entered data and restores the submit button", async () => {
+  const fixture = createRegistrationFixture({ fetchResult: Promise.reject(new Error("offline")) });
+  fixture.fields.name.input.value = "Nguyễn Văn A";
+  fixture.fields.phone.input.value = "0912345678";
+  fixture.fields.child.input.value = "Bé An";
+  fixture.fields.grade.input.value = "Lớp 4";
+
+  fixture.form.dispatch("submit");
+  await flushPromises();
+
+  assert.equal(fixture.resetCount, 0);
+  assert.equal(fixture.fields.name.input.value, "Nguyễn Văn A");
+  assert.equal(fixture.status.getAttribute("data-tone"), "error");
+  assert.equal(fixture.submit.getAttribute("aria-busy"), null);
+  assert.equal(fixture.submit.textContent, "Gửi đăng ký");
+});
+
 test("registration honeypot silently accepts bots without sending data", () => {
   const fixture = createRegistrationFixture();
   fixture.fields.website.input.value = "https://spam.test";

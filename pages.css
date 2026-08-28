@@ -82,6 +82,11 @@
   text-wrap: balance;
 }
 
+.page-title,
+.home-title {
+  padding-block: 0.08em;
+}
+
 .page-title .tx-accent {
   color: var(--accent-ink);
 }
@@ -880,6 +885,17 @@
 }
 
 @media (max-width: 680px) {
+  .page-section,
+  .section {
+    padding-block: var(--section-y-mobile);
+  }
+
+  input,
+  select,
+  textarea {
+    font-size: 1rem;
+  }
+
   .team-evidence-grid,
   .teaching-practice-row {
     grid-template-columns: 1fr;

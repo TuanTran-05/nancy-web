@@ -56,8 +56,18 @@ test("uses the approved five-route navigation and conversion shell", () => {
     const nav = navMarkup(source);
     const hrefs = [...nav.matchAll(/href="([^"]+)"/g)].map((match) => match[1]);
     assert.deepEqual(hrefs, primaryNavHrefs, `${name} primary nav`);
-    assert.match(source, />Kiểm tra trình độ miễn phí<\/a>/, name);
+    const headerCta = source.match(/<div class="header-cta">[\s\S]*?<\/div>/)?.[0];
+    assert.ok(headerCta, `${name} missing header CTA`);
+    assert.match(headerCta, />Kiểm tra trình độ miễn phí<\/a>/, name);
     assert.match(source, /class="mobile-action-bar"[\s\S]*href="tel:0866169569"[\s\S]*>Gọi tư vấn<[\s\S]*>Kiểm tra trình độ miễn phí</s, name);
+  }
+
+  for (const name of ["index.html", "contact.html"]) {
+    assert.match(
+      pages.get(name),
+      /class="mobile-action-bar__register" href="#register">Kiểm tra trình độ miễn phí<\/a>/,
+      `${name} mobile registration target`,
+    );
   }
 });
 
@@ -65,6 +75,8 @@ test("locks the approved Professional Compact tokens", () => {
   assert.match(css, /--brand:\s*#0e4ea1/i);
   assert.match(css, /--brand-strong:\s*#0a3b7d/i);
   assert.match(css, /--accent:\s*#c24c00/i);
+  assert.match(css, /--accent-hover:\s*#A84200/);
+  assert.match(css, /--accent-ink:\s*#B04500/);
   assert.match(css, /--wrap:\s*1280px/);
   assert.match(css, /--gutter:\s*clamp\(16px,\s*3\.6vw,\s*48px\)/);
   assert.match(css, /--section-y:\s*clamp\(40px,\s*4\.4vw,\s*68px\)/);
@@ -278,6 +290,56 @@ test("self-hosted typography, responsive layouts and reduced motion remain avail
   assert.match(pageCss, /\.home-hero__grid[\s\S]*grid-template-columns:/);
   const fontFiles = [...new Set([...css.matchAll(/url\("(fonts\/[^\"]+\.woff2)"\)/g)].map((match) => match[1]))];
   await Promise.all(fontFiles.map((file) => access(new URL(file, root))));
+});
+
+test("limits eyebrow labels and uses one primary CTA label", () => {
+  for (const [name, source] of pages) {
+    const sectionCount = (source.match(/<section\b/g) ?? []).length;
+    const eyebrowCount = (source.match(/class="[^"]*section-label[^"]*"/g) ?? []).length;
+    assert.ok(eyebrowCount <= Math.ceil(sectionCount / 3), `${name}: ${eyebrowCount} eyebrows for ${sectionCount} sections`);
+
+    const primaryLabels = [...source.matchAll(/class="[^"]*btn-accent[^"]*"[^>]*>([^<]+)<\/a>/g)]
+      .map((match) => match[1].trim())
+      .filter((label) => /kiểm tra|đăng ký|tư vấn/i.test(label));
+    assert.ok(primaryLabels.every((label) => label === "Kiểm tra trình độ miễn phí"), `${name}: inconsistent primary CTA`);
+  }
+});
+
+test("keeps the approved compact responsive and motion rules", () => {
+  const allCss = `${css}\n${pageCss}`;
+  assert.doesNotMatch(allCss, /@media\s*\(prefers-color-scheme:\s*dark\)/);
+  assert.doesNotMatch(allCss, /height:\s*100vh|h-screen/);
+  assert.match(allCss, /@media \(prefers-reduced-motion: reduce\)/);
+  assert.match(allCss, /:where\(a, button, input, select, textarea, summary, \[tabindex\]\):focus-visible/);
+  assert.match(allCss, /animation-duration:\s*0\.01ms !important;/);
+  assert.match(allCss, /\.page-section,\s*\.section\s*\{\s*padding-block:\s*var\(--section-y-mobile\);/s);
+  assert.match(allCss, /input,\s*select,\s*textarea\s*\{\s*font-size:\s*1rem;/s);
+  assert.match(allCss, /\.mobile-action-bar/);
+});
+
+test("keeps mobile controls touch-safe and clear of the fixed action bar", () => {
+  assert.match(css, /\.nav-toggle\s*\{[^}]*min-width:\s*44px;[^}]*min-height:\s*44px;/s);
+  assert.match(css, /\.field input,\s*\.field select\s*\{[^}]*min-height:\s*44px;/s);
+  assert.match(css, /body\s*\{[^}]*padding-bottom:\s*calc\([^;]*env\(safe-area-inset-bottom\)[^;]*\);/s);
+  assert.match(css, /\.results-close\s*\{[^}]*width:\s*44px;[^}]*height:\s*44px;/s);
+  assert.match(css, /\.results-nav\s*\{[^}]*width:\s*44px;[^}]*height:\s*44px;/s);
+  assert.match(
+    css,
+    /@media \(max-width: 720px\)[\s\S]*?\.results-detail__stage\s*\{[^}]*grid-template-columns:\s*44px minmax\(0, 1fr\) 44px;/s,
+  );
+});
+
+test("keeps Vietnamese display marks clear of tight title line boxes", () => {
+  assert.match(pageCss, /\.page-title,\s*\.home-title\s*\{[^}]*padding-block:\s*0\.08em;/s);
+});
+
+test("keeps the shared focus ring visible on form controls", () => {
+  const fieldFocus = css.match(
+    /\.field input:focus-visible,\s*\.field select:focus-visible,\s*\.field textarea:focus-visible\s*\{([^}]*)\}/s,
+  );
+  assert.ok(fieldFocus, "missing form focus styles");
+  assert.doesNotMatch(fieldFocus[1], /outline:\s*none/);
+  assert.match(fieldFocus[1], /outline:\s*3px solid color-mix\(in srgb, var\(--accent\) 72%, white\);/);
 });
 
 test("result-enabled pages load data and modal code before the interaction script", () => {

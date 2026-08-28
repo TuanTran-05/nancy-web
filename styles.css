@@ -157,8 +157,8 @@
 
   /* Accent: Energetic Warm Amber */
   --accent: #c24c00;         /* solid fills, white text = 4.8:1 */
-  --accent-hover: #a84200;
-  --accent-ink: #b04500;     /* accent-coloured text on light surfaces */
+  --accent-hover: #A84200;
+  --accent-ink: #B04500;     /* accent-coloured text on light surfaces */
   --accent-tint: #fcebdd;
   --accent-wash: #fef7f1;
 
@@ -549,7 +549,11 @@ textarea {
 .nav-toggle {
   display: none;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   gap: 5px;
+  min-width: 44px;
+  min-height: 44px;
   margin-left: auto;
   padding: 9px;
   background: none;
@@ -1165,8 +1169,12 @@ textarea {
   border-radius: var(--r-sm);
   background: var(--surface);
   color: var(--text);
-  font-size: 0.98rem;
+  font-size: 1rem;
   transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease);
+}
+.field input,
+.field select {
+  min-height: 44px;
 }
 .field textarea {
   resize: vertical;
@@ -1190,7 +1198,8 @@ textarea {
 .field input:focus-visible,
 .field select:focus-visible,
 .field textarea:focus-visible {
-  outline: none;
+  outline: 3px solid color-mix(in srgb, var(--accent) 72%, white);
+  outline-offset: 3px;
   border-color: var(--brand-ink);
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand-ink) 26%, transparent);
 }
@@ -1821,7 +1830,7 @@ a.contact-card:hover {
 
 @media (max-width: 680px) {
   body {
-    padding-bottom: 68px;
+    padding-bottom: calc(76px + env(safe-area-inset-bottom));
   }
 
   .mobile-action-bar {
@@ -1964,11 +1973,8 @@ a.contact-card:hover {
 /* ============================================================
    ACCESSIBILITY
    ============================================================ */
-a:focus-visible,
-button:focus-visible,
-summary:focus-visible,
-[tabindex]:focus-visible {
-  outline: 3px solid var(--accent);
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--accent) 72%, white);
   outline-offset: 3px;
   border-radius: var(--r-sm);
 }
@@ -1984,9 +1990,9 @@ summary:focus-visible,
   *,
   *::before,
   *::after {
-    animation-duration: 0.001ms !important;
+    animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
-    transition-duration: 0.001ms !important;
+    transition-duration: 0.01ms !important;
   }
   .js .reveal {
     opacity: 1;
@@ -2143,8 +2149,8 @@ summary:focus-visible,
 }
 
 .results-close {
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
   padding: 0;
   border-radius: 50%;
 }
@@ -2222,8 +2228,8 @@ summary:focus-visible,
 
 .results-nav {
   flex: none;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   background: var(--surface);
   border: 1px solid var(--line-2);
@@ -2331,7 +2337,7 @@ summary:focus-visible,
   }
 
   .results-detail__stage {
-    grid-template-columns: 34px minmax(0, 1fr) 34px;
+    grid-template-columns: 44px minmax(0, 1fr) 44px;
     gap: 6px;
     padding: 8px;
   }
@@ -2341,8 +2347,8 @@ summary:focus-visible,
   }
 
   .results-nav {
-    width: 34px;
-    height: 34px;
+    width: 44px;
+    height: 44px;
   }
 
   .results-thumbs {
