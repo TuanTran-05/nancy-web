@@ -11,6 +11,8 @@ const pageNames = [
   "activities.html",
   "knowledge.html",
   "teachers.html",
+  "faq.html",
+  "contact.html",
 ];
 const primaryPageNames = ["about.html", "courses.html", "achievements.html"];
 const pageEntries = await Promise.all(
@@ -43,6 +45,8 @@ const contentImageMinimums = new Map([
   ["activities.html", 7],
   ["knowledge.html", 1],
   ["teachers.html", 3],
+  ["faq.html", 0],
+  ["contact.html", 0],
 ]);
 
 const assertContentImageMinimum = (name, tags) => {
@@ -90,6 +94,8 @@ test("inner pages use unique canonical metadata and valid structured data", () =
     ["activities.html", ["Hoạt động học viên | Thien Uy English Center", "https://thienuy.edu.vn/activities.html"]],
     ["knowledge.html", ["Kiến thức tiếng Anh cho phụ huynh | Thien Uy", "https://thienuy.edu.vn/knowledge.html"]],
     ["teachers.html", ["Đội ngũ giáo viên | Thien Uy English Center", "https://thienuy.edu.vn/teachers.html"]],
+    ["faq.html", ["Câu hỏi thường gặp | Thien Uy English Center", "https://thienuy.edu.vn/faq.html"]],
+    ["contact.html", ["Liên hệ và đăng ký kiểm tra | Thien Uy", "https://thienuy.edu.vn/contact.html"]],
   ]);
 
   for (const [name, html] of pages) {
@@ -140,6 +146,7 @@ test("content image inventory excludes dynamic shells and shared logos", () => {
 
 test("route content minimum rejects below-contract inventory", () => {
   for (const [name, minimum] of contentImageMinimums) {
+    if (minimum === 0) continue;
     const mutatedTags = Array.from(
       { length: minimum - 1 },
       (_, index) =>
@@ -167,6 +174,26 @@ test("about and teachers form one concise story and team family", () => {
   assert.doesNotMatch(teachers, /class="teacher-profile/);
   assert.match(teachers, /Hồ sơ đội ngũ đang được trung tâm xác nhận/);
   assert.doesNotMatch(teachers, /ThS\.|Tiến sĩ|IELTS 9\.0|CELTA|TESOL/);
+});
+
+test("contact page puts the form first and answers the four key objections", () => {
+  const contact = pages.get("contact.html");
+  const faq = pages.get("faq.html");
+  const contactFormAt = contact.indexOf('id="register"');
+  const mapAt = contact.indexOf('id="map"');
+
+  assert.ok(contactFormAt > -1 && mapAt > contactFormAt);
+  assert.match(contact, /class="contact-conversion"/);
+  assert.equal((contact.match(/<details class="faq-item"/g) ?? []).length, 4);
+  assert.equal((faq.match(/<details class="faq-item"/g) ?? []).length, 8);
+  for (const question of [
+    "Trung tâm có những khóa học nào?",
+    "Con chưa từng học tiếng Anh thì bắt đầu từ đâu?",
+    "Trước khi vào lớp con có được kiểm tra trình độ không?",
+    "Thời lượng, lịch học và sĩ số mỗi lớp như thế nào?",
+  ]) {
+    assert.ok(contact.includes(question));
+  }
 });
 
 test("courses page exposes all current programs, filters, and real result entry points", () => {

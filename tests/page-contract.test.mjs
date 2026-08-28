@@ -175,6 +175,26 @@ test("homepage and contact page keep the exact live Google Forms field mapping",
   }
 });
 
+test("contact page puts the form first and answers the four key objections", () => {
+  const contact = pages.get("contact.html");
+  const faq = pages.get("faq.html");
+  const contactFormAt = contact.indexOf('id="register"');
+  const mapAt = contact.indexOf('id="map"');
+
+  assert.ok(contactFormAt > -1 && mapAt > contactFormAt);
+  assert.match(contact, /class="contact-conversion"/);
+  assert.equal((contact.match(/<details class="faq-item"/g) ?? []).length, 4);
+  assert.equal((faq.match(/<details class="faq-item"/g) ?? []).length, 8);
+  for (const question of [
+    "Trung tâm có những khóa học nào?",
+    "Con chưa từng học tiếng Anh thì bắt đầu từ đâu?",
+    "Trước khi vào lớp con có được kiểm tra trình độ không?",
+    "Thời lượng, lịch học và sĩ số mỗi lớp như thế nào?",
+  ]) {
+    assert.ok(contact.includes(question));
+  }
+});
+
 test("all public page images are local, accessible and dimensioned", async () => {
   const assets = new Set();
   for (const [name, source] of pages) {
