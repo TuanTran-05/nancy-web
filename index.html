@@ -31,31 +31,90 @@
     </header>
 
     <main class="home-main" id="main">
-      <section class="home-hero" aria-labelledby="home-heading">
+      <section class="home-hero home-hero--a2" aria-labelledby="home-heading">
         <div class="wrap home-hero__grid">
           <div class="home-hero__copy">
-            <span class="home-kicker">Anh ngữ tại An Phú</span>
-            <h1 class="home-title" id="home-heading">Tiếng Anh vững vàng. <span>Tương lai tươi sáng.</span></h1>
+            <h1 class="home-title" id="home-heading">
+              TIẾNG ANH VỮNG VÀNG -<br />
+              <span>TƯƠNG LAI TƯƠI SÁNG</span>
+            </h1>
             <p>Hơn 10 năm đồng hành cùng học viên từ nền tảng đầu đời đến Cambridge, IELTS và các kỳ thi chuyển cấp.</p>
-            <div class="page-actions"><a class="btn btn-accent btn-lg" href="#register">Kiểm tra trình độ miễn phí</a><a class="btn btn-ghost btn-lg" href="courses.html">Khám phá khóa học</a></div>
+            <div class="page-actions">
+              <a class="btn btn-accent btn-lg" href="#register">Kiểm tra trình độ miễn phí</a>
+              <a class="btn btn-ghost btn-lg" href="courses.html">Khám phá khóa học</a>
+            </div>
           </div>
-          <div class="home-hero__visual reveal"><img src="images/hero.jpg" alt="Giáo viên Thien Uy hướng dẫn học viên trong lớp tiếng Anh" width="1279" height="720" fetchpriority="high" decoding="async" /><div class="home-hero__badge"><strong>Thien Uy English Center</strong><span>Tiền thân là Nancy English Center tại An Phú</span></div></div>
+          <figure class="home-hero__visual reveal">
+            <img src="images/hero.jpg" alt="Giáo viên Thien Uy hướng dẫn học viên trong lớp tiếng Anh" width="1279" height="720" fetchpriority="high" decoding="async" />
+          </figure>
         </div>
       </section>
 
-      <section aria-label="Số liệu tổng quan"><div class="wrap fact-strip"><div class="fact"><strong>10+</strong><span>Năm giảng dạy</span></div><div class="fact"><strong>1.000+</strong><span>Học viên đã đồng hành</span></div><div class="fact"><strong>7 ngày</strong><span>Mở cửa mỗi tuần</span></div></div></section>
+      <section class="home-trust" id="trust" aria-label="Thông tin tổng quan">
+        <p class="wrap home-trust__legacy">Tiền thân là Nancy English Center tại An Phú</p>
+        <div class="wrap home-facts">
+          <div class="home-fact"><strong>10+</strong><span>Năm đồng hành</span></div>
+          <div class="home-fact"><strong>1.000+</strong><span>Học viên đã học</span></div>
+          <div class="home-fact"><strong>11</strong><span>Khóa học chuyên biệt</span></div>
+          <div class="home-fact"><strong>71</strong><span>Phiếu điểm xác thực</span></div>
+        </div>
+      </section>
 
-      <section class="page-section" aria-labelledby="difference-heading"><div class="wrap"><div class="page-section__head"><span class="section-label">Điều tạo nên Thien Uy</span><h2 class="h2" id="difference-heading">Tận tâm trong cách dạy. Rõ ràng trong lộ trình.</h2></div><div class="home-bento"><article class="home-bento__item reveal"><h3>Chương trình theo từng chặng phát triển</h3><p>Từ Happy Kids đến IELTS, mỗi giai đoạn có trọng tâm phù hợp với độ tuổi, năng lực và mục tiêu tiếp theo của học viên.</p><a href="learning-path.html">Xem lộ trình học</a></article><article class="home-bento__item reveal" style="--d: 60ms"><h3>Giáo viên theo sát</h3><p>Quan sát mức độ tiếp thu, khuyến khích học viên chủ động và hỗ trợ đúng phần đang cần.</p><a href="teachers.html">Gặp đội ngũ giáo viên</a></article><article class="home-bento__item reveal" style="--d: 100ms"><h3>Môi trường học tích cực</h3><p>Hoạt động tương tác giúp học viên thử sức, dùng tiếng Anh và học từ lỗi sai trong không khí thân thiện.</p><a href="activities.html">Xem hoạt động</a></article><article class="home-bento__item reveal" style="--d: 140ms"><h3>Kết quả có thể kiểm chứng</h3><p>71 phiếu điểm KET, PET, IELTS và tuyển sinh lớp 10 đã được tổng hợp, đồng thời bảo vệ thông tin riêng tư.</p><a href="achievements.html">Xem thành tích học viên</a></article></div></div></section>
+      <section class="page-section page-section--soft" id="featured-courses" aria-labelledby="courses-heading">
+        <div class="wrap">
+          <div class="page-section__head">
+            <h2 class="h2" id="courses-heading">Lộ trình đúng cho từng mục tiêu</h2>
+            <p class="lead">Ba nhóm chương trình nối tiếp từ nền tảng đầu đời đến học thuật và các kỳ thi quan trọng.</p>
+          </div>
+          <div class="home-programs">
+            <a class="home-program-card home-program-card--primary reveal" href="course.html?course=happy-kids">
+              <figure><img src="images/course-happy-kids.jpg" alt="Học viên nhỏ tuổi trong lớp Happy Kids" width="1280" height="960" loading="lazy" decoding="async" /></figure>
+              <span class="home-program-copy"><small>Nền tảng đầu đời</small><strong>Happy Kids</strong><em>Xem chương trình</em></span>
+            </a>
+            <a class="home-program-card reveal" href="courses.html#catalog" style="--d: 60ms">
+              <figure><img src="images/course-movers.jpg" alt="Học viên tham gia chương trình Cambridge" width="1279" height="583" loading="lazy" decoding="async" /></figure>
+              <span class="home-program-copy"><small>Starter đến PET</small><strong>Cambridge</strong><em>Khám phá lộ trình</em></span>
+            </a>
+            <a class="home-program-card home-program-card--compact reveal" href="courses.html#catalog" style="--d: 100ms">
+              <figure><img src="images/course-ielts.jpg" alt="Học viên trong lớp luyện thi học thuật" width="1280" height="960" loading="lazy" decoding="async" /></figure>
+              <span class="home-program-copy"><small>Học thuật và luyện thi</small><strong>IELTS, chuyển cấp, đại học</strong><em>Xem các khóa học</em></span>
+            </a>
+          </div>
+        </div>
+      </section>
 
-      <section class="page-section page-section--soft" aria-labelledby="courses-heading"><div class="wrap"><div class="page-section__head"><span class="section-label">Các nhóm khóa học</span><h2 class="h2" id="courses-heading">Chọn đúng chương trình cho mục tiêu hiện tại</h2><p class="lead">Trang chủ giới thiệu bốn nhóm chính. Mỗi khóa học có trang chi tiết về đối tượng, mục tiêu và nội dung trọng tâm.</p></div><div class="home-course-grid"><article class="home-course reveal"><img src="images/course-happy-kids.jpg" alt="Học viên nhỏ tuổi trong lớp tiếng Anh" width="1280" height="960" loading="lazy" decoding="async" /><div class="home-course__copy"><span>Nền tảng đầu đời</span><h3>Happy Kids</h3><a href="course.html?course=happy-kids">Xem chi tiết</a></div></article><article class="home-course reveal" style="--d: 60ms"><img src="images/course-movers.jpg" alt="Học viên tham gia chương trình Cambridge" width="1279" height="583" loading="lazy" decoding="async" /><div class="home-course__copy"><span>Cambridge thiếu nhi</span><h3>Starter, Movers, Flyers</h3><a href="courses.html#catalog">Khám phá nhóm khóa học</a></div></article><article class="home-course reveal" style="--d: 100ms"><img src="images/course-ket.jpg" alt="Lớp học chương trình KET" width="1280" height="960" loading="lazy" decoding="async" /><div class="home-course__copy"><span>Cambridge thiếu niên</span><h3>KET và PET</h3><a href="course.html?course=ket">Xem lộ trình KET</a></div></article><article class="home-course reveal" style="--d: 140ms"><img src="images/course-ielts.jpg" alt="Học viên trong lớp IELTS" width="1280" height="960" loading="lazy" decoding="async" /><div class="home-course__copy"><span>Học thuật và luyện thi</span><h3>IELTS, chuyển cấp, đại học</h3><a href="courses.html#catalog">Xem các khóa luyện thi</a></div></article></div><div class="page-actions"><a class="btn btn-ghost" href="courses.html">Xem toàn bộ 11 khóa học</a></div></div></section>
+      <section class="page-section" id="method" aria-labelledby="method-heading">
+        <div class="wrap home-method">
+          <figure class="home-method__visual reveal"><img src="images/about-program.jpg" alt="Giáo viên tương tác cùng nhóm học viên trong giờ học" width="1280" height="960" loading="lazy" decoding="async" /></figure>
+          <div class="home-method__copy">
+            <h2 class="h2" id="method-heading">Hiểu, thực hành, nhận phản hồi và tiến bộ</h2>
+            <p class="lead">Mỗi buổi học kết nối kiến thức với tình huống sử dụng, để học viên hiểu rõ và tự tin hơn qua từng giai đoạn.</p>
+            <ol class="principles-list">
+              <li class="principle"><span class="principle-index">01</span><div><h3>Kiểm tra điểm bắt đầu</h3><p>Tư vấn lộ trình dựa trên năng lực hiện tại và mục tiêu học tập.</p></div></li>
+              <li class="principle"><span class="principle-index">02</span><div><h3>Học qua tương tác</h3><p>Kết hợp bốn kỹ năng với hoạt động giúp học viên chủ động sử dụng.</p></div></li>
+              <li class="principle"><span class="principle-index">03</span><div><h3>Theo dõi từng giai đoạn</h3><p>Quan sát tiến độ để hỗ trợ phần cần ưu tiên tiếp theo.</p></div></li>
+            </ol>
+            <a class="text-action" href="about.html">Tìm hiểu phương pháp</a>
+          </div>
+        </div>
+      </section>
 
-      <section class="page-section" aria-labelledby="method-heading"><div class="wrap home-split"><figure class="home-split__image reveal"><img src="images/about-program.jpg" alt="Giáo viên tương tác cùng nhóm học viên trong giờ học" width="1280" height="960" loading="lazy" decoding="async" /></figure><div class="home-split__copy"><span class="section-label">Phương pháp giảng dạy</span><h2 class="h2" id="method-heading">Hiểu, thực hành, nhận phản hồi và tiến bộ</h2><p class="lead">Bài học được tổ chức để học viên không chỉ ghi nhớ kiến thức mà còn có cơ hội sử dụng trong ngữ cảnh phù hợp.</p><ol class="principles-list"><li class="principle"><span class="principle-index">01</span><div><h3>Kiểm tra điểm bắt đầu</h3><p>Tư vấn lộ trình dựa trên năng lực hiện tại và mục tiêu học tập.</p></div></li><li class="principle"><span class="principle-index">02</span><div><h3>Học qua tương tác</h3><p>Kết hợp bốn kỹ năng với hoạt động giúp học viên chủ động sử dụng.</p></div></li><li class="principle"><span class="principle-index">03</span><div><h3>Theo dõi từng giai đoạn</h3><p>Quan sát tiến độ để hỗ trợ phần cần ưu tiên tiếp theo.</p></div></li></ol><a class="text-action" href="about.html">Tìm hiểu về trung tâm</a></div></div></section>
-
-      <section class="page-section page-section--soft" aria-labelledby="results-heading"><div class="wrap home-split"><div class="home-split__copy"><span class="section-label">Thành tích học viên</span><h2 class="h2" id="results-heading">Dữ liệu thực tế thay cho lời quảng cáo</h2><p class="lead">Các phiếu điểm được hiển thị sau khi đã ẩn thông tin cá nhân, giúp phụ huynh xem trực tiếp kết quả ở từng nhóm kỳ thi.</p><div class="home-stat-row"><div class="home-stat"><strong>28</strong><span>Kết quả KET</span></div><div class="home-stat"><strong>11</strong><span>Kết quả PET</span></div><div class="home-stat"><strong>8</strong><span>Kết quả IELTS</span></div><div class="home-stat"><strong>24</strong><span>Kết quả tuyển sinh 10</span></div></div><div class="page-actions"><a class="btn btn-accent" href="achievements.html">Mở kho thành tích</a></div></div><figure class="home-split__image reveal"><img src="images/IMG_20260803_171902.jpg" alt="Lễ vinh danh và chứng nhận kết quả của học viên" width="841" height="1075" loading="lazy" decoding="async" /></figure></div></section>
-
-      <section class="page-section" aria-labelledby="teachers-heading"><div class="wrap home-split"><figure class="home-split__image reveal"><img src="images/about-teacher-2.jpg" alt="Giáo viên tổ chức hoạt động nhóm cho học viên" width="1276" height="956" loading="lazy" decoding="async" /></figure><div class="home-split__copy"><span class="section-label">Đội ngũ giáo viên</span><h2 class="h2" id="teachers-heading">Người dẫn đường gần gũi và tận tâm</h2><p class="lead">Hồ sơ tên, bằng cấp và chứng chỉ chỉ được công bố sau khi trung tâm xác nhận. Website hiện giới thiệu cách đội ngũ tổ chức lớp và đồng hành với học viên.</p><div class="page-actions"><a class="btn btn-ghost" href="teachers.html">Xem trang giáo viên</a></div></div></div></section>
-
-      <section class="page-section page-section--soft" aria-labelledby="process-heading"><div class="wrap"><div class="page-section__head"><span class="section-label">Bắt đầu học tại Thien Uy</span><h2 class="h2" id="process-heading">Bốn bước đơn giản</h2></div><div class="content-grid"><article class="content-card"><span class="number-badge">1</span><h3>Liên hệ tư vấn</h3><p>Chia sẻ độ tuổi và mục tiêu của học viên.</p></article><article class="content-card"><span class="number-badge">2</span><h3>Kiểm tra trình độ</h3><p>Xác định năng lực hiện tại trước khi chọn lớp.</p></article><article class="content-card"><span class="number-badge">3</span><h3>Xếp lớp phù hợp</h3><p>Đối chiếu kết quả với chương trình và lớp đang mở.</p></article><article class="content-card"><span class="number-badge">4</span><h3>Học và theo sát</h3><p>Giáo viên hỗ trợ trong từng giai đoạn tiến bộ.</p></article></div><div class="page-actions"><a class="text-action" href="learning-path.html">Xem toàn bộ lộ trình nhập học</a></div></div></section>
+      <section class="page-section page-section--soft" id="results" aria-labelledby="results-heading">
+        <div class="wrap home-evidence">
+          <div class="home-evidence__copy">
+            <h2 class="h2" id="results-heading">Kết quả được nhìn thấy bằng dữ liệu thật</h2>
+            <p class="lead">71 phiếu điểm đã được tổng hợp theo từng kỳ thi và ẩn thông tin cá nhân trước khi công bố.</p>
+            <dl class="home-evidence__stats">
+              <div><dt>28</dt><dd>Kết quả KET</dd></div>
+              <div><dt>11</dt><dd>Kết quả PET</dd></div>
+              <div><dt>8</dt><dd>Kết quả IELTS</dd></div>
+              <div><dt>24</dt><dd>Kết quả tuyển sinh 10</dd></div>
+            </dl>
+            <div class="page-actions"><a class="btn btn-accent" href="achievements.html">Xem thành tích học viên</a></div>
+          </div>
+          <figure class="home-evidence__visual reveal"><img src="images/IMG_20260803_171902.jpg" alt="Lễ vinh danh và chứng nhận kết quả của học viên" width="841" height="1075" loading="lazy" decoding="async" /></figure>
+        </div>
+      </section>
 
       <section class="page-section home-register" id="register" aria-labelledby="register-heading"><div class="wrap"><div class="contact-form-shell"><span class="section-label">Đăng ký tư vấn</span><h2 class="h2" id="register-heading">Kiểm tra trình độ miễn phí</h2><p class="lead">Để lại thông tin, trung tâm sẽ gọi lại trong giờ làm việc để trao đổi và xếp lịch.</p>
         <form class="reg-form" data-reg-form data-mode="google-form" data-endpoint="https://docs.google.com/forms/d/e/1FAIpQLScZ61EKmEnvKekNxQALbSdPsFqJ7B7WB7fUYYF63QL_F_7sKg/formResponse" novalidate>
@@ -69,7 +128,6 @@
         </form>
       </div></div></section>
 
-      <section class="page-cta"><div class="wrap page-cta__inner"><div><h2 class="h2">Còn điều gì phụ huynh muốn làm rõ?</h2><p>Xem câu hỏi thường gặp hoặc nhắn trực tiếp để nhận thông tin lịch học, học phí và lớp đang mở.</p></div><div class="page-cta__actions"><a class="btn btn-accent btn-lg" href="faq.html">Xem hỏi đáp</a><a class="btn btn-ghost btn-lg" href="contact.html">Liên hệ trung tâm</a></div></div></section>
     </main>
 
     <nav class="mobile-action-bar" aria-label="Hành động nhanh">

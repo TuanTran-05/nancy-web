@@ -135,26 +135,21 @@ test("every internal page and hash link resolves", async () => {
   }
 });
 
-test("the homepage is an overview that links to every deep-content branch", () => {
-  assert.equal((html.match(/class="home-course reveal"/g) ?? []).length, 4);
-  assert.equal((html.match(/class="home-bento__item reveal"/g) ?? []).length, 4);
-  assert.equal((html.match(/class="content-card"/g) ?? []).length, 4);
-  for (const href of [
-    "teachers.html",
-    "courses.html",
-    "learning-path.html",
-    "achievements.html",
-    "activities.html",
-    "knowledge.html",
-    "faq.html",
-    "contact.html",
-  ]) {
-    assert.ok(html.includes(`href="${href}`), `homepage missing ${href}`);
-  }
-  assert.match(html, />28<\/strong><span>Kết quả KET/);
-  assert.match(html, />11<\/strong><span>Kết quả PET/);
-  assert.match(html, />8<\/strong><span>Kết quả IELTS/);
-  assert.match(html, />24<\/strong><span>Kết quả tuyển sinh 10/);
+test("homepage follows the approved A2 conversion sequence", () => {
+  assert.doesNotMatch(html, /class="home-kicker"/);
+  assert.match(
+    html,
+    /<h1[^>]*>\s*TIẾNG ANH VỮNG VÀNG -\s*<br\s*\/?>\s*<span>TƯƠNG LAI TƯƠI SÁNG<\/span>\s*<\/h1>/s,
+  );
+  const ids = ["trust", "featured-courses", "method", "results", "register"];
+  const positions = ids.map((id) => html.indexOf(`id="${id}"`));
+  assert.ok(positions.every((position) => position > -1));
+  assert.deepEqual(positions, [...positions].sort((a, b) => a - b));
+  assert.equal((html.match(/class="home-program-card/g) ?? []).length, 3);
+  assert.equal((html.match(/class="home-fact/g) ?? []).length, 4);
+  assert.doesNotMatch(html, /class="home-bento/);
+  assert.doesNotMatch(html, /id="process-heading"/);
+  assert.match(section(html, "register"), />Kiểm tra trình độ miễn phí<\/h2>/);
 });
 
 test("homepage and contact page keep the exact live Google Forms field mapping", () => {
