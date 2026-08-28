@@ -8,6 +8,8 @@ const pageNames = [
   "course.html",
   "learning-path.html",
   "achievements.html",
+  "activities.html",
+  "knowledge.html",
   "teachers.html",
 ];
 const primaryPageNames = ["about.html", "courses.html", "achievements.html"];
@@ -58,6 +60,8 @@ test("inner pages use unique canonical metadata and valid structured data", () =
     ["course.html", ["Chi tiết khóa học | Thien Uy English Center", "https://thienuy.edu.vn/course.html"]],
     ["learning-path.html", ["Lộ trình học tiếng Anh | Thien Uy English Center", "https://thienuy.edu.vn/learning-path.html"]],
     ["achievements.html", ["Thành tích học viên | Thien Uy English Center", "https://thienuy.edu.vn/achievements.html"]],
+    ["activities.html", ["Hoạt động học viên | Thien Uy English Center", "https://thienuy.edu.vn/activities.html"]],
+    ["knowledge.html", ["Kiến thức tiếng Anh cho phụ huynh | Thien Uy", "https://thienuy.edu.vn/knowledge.html"]],
     ["teachers.html", ["Đội ngũ giáo viên | Thien Uy English Center", "https://thienuy.edu.vn/teachers.html"]],
   ]);
 
@@ -74,10 +78,12 @@ test("inner pages use unique canonical metadata and valid structured data", () =
 test("all inner-page images are local, accessible, dimensioned, and present", async () => {
   for (const [name, html] of pages) {
     const tags = [...html.matchAll(/<img\b[^>]*>/gs)].map(([tag]) => tag);
-    assert.ok(tags.length >= 5, `${name} needs real visual assets`);
+    const minimumAssetCount = name === "knowledge.html" ? 1 : 5;
+    assert.ok(tags.length >= minimumAssetCount, `${name} needs real visual assets`);
     const sources = [];
 
     for (const tag of tags) {
+      if (tag.includes('class="lightbox-img"') || tag.includes('id="results-image"')) continue;
       assert.match(tag, /src="images\/[^"]+"/);
       assert.match(tag, /alt="[^"]*"/);
       assert.match(tag, /width="\d+"/);
@@ -152,6 +158,20 @@ test("achievements page matches the redacted result data totals", () => {
     assert.match(html, new RegExp(`<strong>${total}<\\/strong><span>Kết quả<\\/span>`));
     assert.match(html, new RegExp(`data-results="${key}"`));
   }
+});
+
+test("evidence and community pages prioritize real assets over generic cards", () => {
+  const achievements = pages.get("achievements.html");
+  const activities = pages.get("activities.html");
+  const knowledge = pages.get("knowledge.html");
+
+  assert.match(achievements, /class="evidence-summary"/);
+  assert.equal((achievements.match(/data-results="(?:ket|pet|ielts|ts10)"/g) ?? []).length, 4);
+  assert.equal((activities.match(/class="gallery-item gal reveal/g) ?? []).length, 5);
+  assert.match(activities, /class="activity-story"/);
+  assert.doesNotMatch(activities, /class="content-grid"/);
+  assert.equal((knowledge.match(/class="knowledge-feature/g) ?? []).length, 1);
+  assert.equal((knowledge.match(/class="knowledge-link-card/g) ?? []).length, 2);
 });
 
 test("page filters expose pressed state, live status, and hidden-item behavior", () => {

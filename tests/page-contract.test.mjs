@@ -234,7 +234,8 @@ test("dedicated pages carry the promised depth without fabricated profiles", () 
   assert.equal((path.match(/class="enrollment-step/g) ?? []).length, 4);
   assert.doesNotMatch(path, /class="content-grid"/);
   assert.equal((activities.match(/class="gallery-item gal reveal"/g) ?? []).length, 5);
-  assert.equal((knowledge.match(/class="knowledge-card"/g) ?? []).length, 3);
+  assert.equal((knowledge.match(/class="knowledge-feature/g) ?? []).length, 1);
+  assert.equal((knowledge.match(/class="knowledge-link-card/g) ?? []).length, 2);
   assert.equal((faq.match(/<details class="faq-item"/g) ?? []).length, 8);
 });
 
