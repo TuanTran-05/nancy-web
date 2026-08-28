@@ -147,15 +147,15 @@
 :root {
   color-scheme: light;
 
-  /* Brand: blue, preserved from the original identity */
+  /* Brand: Enterprise Royal Navy */
   --brand: #0e4ea1;          /* solid fills, white text = 8.0:1 */
   --brand-ink: #0e4ea1;      /* brand-coloured text on light surfaces */
-  --brand-strong: #0b3f85;   /* hover state for brand fills */
+  --brand-strong: #0a3b7d;   /* hover state for brand fills */
   --brand-tint: #e4eefa;
-  --brand-wash: #f2f7fd;
+  --brand-wash: #f4f8fe;
   --on-brand: #ffffff;
 
-  /* Accent: orange. The only accent on the page. */
+  /* Accent: Energetic Warm Amber */
   --accent: #c24c00;         /* solid fills, white text = 4.8:1 */
   --accent-hover: #a84200;
   --accent-ink: #b04500;     /* accent-coloured text on light surfaces */
@@ -164,20 +164,20 @@
 
   /* Surfaces */
   --surface: #ffffff;
-  --surface-2: #f5f8fc;
-  --surface-3: #e9f0f9;
-  --footer-bg: #0a2445;
-  --footer-text: #b7c8dc;
+  --surface-2: #f6f9fd;
+  --surface-3: #e8f0f9;
+  --footer-bg: #081c33;
+  --footer-text: #b8ccdf;
   --footer-heading: #ffffff;
 
   /* Text */
-  --text: #16212e;
-  --text-2: #47566a;
+  --text: #0f172a;
+  --text-2: #3e4e63;
   --text-3: #64748b;
   --danger: #b3261e;
 
-  --line: #e2e9f1;
-  --line-2: #cfdceb;
+  --line: #e2e8f0;
+  --line-2: #cbd5e1;
 
   /* Shape */
   --r-sm: 8px;
@@ -185,10 +185,10 @@
   --r-lg: 18px;
   --r-pill: 999px;
 
-  /* Elevation */
-  --sh-1: 0 1px 2px rgba(11, 40, 79, 0.05), 0 2px 8px rgba(11, 40, 79, 0.05);
-  --sh-2: 0 2px 4px rgba(11, 40, 79, 0.05), 0 12px 28px rgba(11, 40, 79, 0.09);
-  --sh-3: 0 8px 20px rgba(11, 40, 79, 0.1), 0 28px 60px rgba(11, 40, 79, 0.14);
+  /* Elevation: Multi-layer soft shadows */
+  --sh-1: 0 1px 3px rgba(11, 40, 79, 0.05), 0 2px 8px rgba(11, 40, 79, 0.04);
+  --sh-2: 0 4px 12px rgba(11, 40, 79, 0.07), 0 12px 28px rgba(11, 40, 79, 0.08);
+  --sh-3: 0 12px 32px rgba(11, 40, 79, 0.1), 0 28px 64px rgba(11, 40, 79, 0.12);
 
   /* Type scale */
   --fs-hero: clamp(2rem, 1.3rem + 2.9vw, 3.05rem);
@@ -198,9 +198,7 @@
   --fs-body: 1rem;
   --fs-sm: 0.875rem;
 
-  /* Rhythm
-     Các section trước đây cách nhau tới 124px mỗi đầu, cộng lại gần 250px
-     giữa hai khối nội dung nên trang trông rỗng. Rút lại còn 92px. */
+  /* Rhythm */
   --wrap: 1320px;
   --gutter: clamp(20px, 5vw, 56px);
   --section-y: clamp(52px, 5.6vw, 92px);
@@ -512,6 +510,13 @@ textarea {
   color: var(--text);
 }
 .main-nav a:hover::after {
+  transform: scaleX(1);
+}
+.main-nav a[aria-current="page"] {
+  color: var(--brand-ink);
+  font-weight: 800;
+}
+.main-nav a[aria-current="page"]::after {
   transform: scaleX(1);
 }
 

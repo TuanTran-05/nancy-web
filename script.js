@@ -394,7 +394,8 @@
     // Clear a field's error as soon as the parent starts fixing it.
     regForm.querySelectorAll("input, select, textarea").forEach(function (el) {
       el.addEventListener("input", function () {
-        if (el.closest(".field").classList.contains("has-error")) {
+        var field = el.closest(".field");
+        if (field && field.classList.contains("has-error")) {
           setFieldError(el, "");
         }
       });
@@ -545,14 +546,16 @@
         resultsModal.open(key, card);
       });
 
-      // Thẻ là <article>, không tự nhận bàn phím. Nút "Xem thành tích"
-      // bên trong mới là điểm vào chính thức, và nó nổi sự kiện click lên
-      // đây. Nhánh này lo trường hợp người dùng focus thẳng vào thẻ.
-      card.addEventListener("keydown", function (e) {
-        if (e.key !== "Enter" && e.key !== " ") return;
-        e.preventDefault();
-        resultsModal.open(key, card);
-      });
+      // Article trên trang chủ cần phím Enter/Space thủ công. Các trang con
+      // dùng button thật, nên để trình duyệt tự chuyển phím thành click và
+      // tránh mở hộp thoại hai lần.
+      if (card.tagName !== "BUTTON" && card.tagName !== "A") {
+        card.addEventListener("keydown", function (e) {
+          if (e.key !== "Enter" && e.key !== " ") return;
+          e.preventDefault();
+          resultsModal.open(key, card);
+        });
+      }
     });
   }
 })();
