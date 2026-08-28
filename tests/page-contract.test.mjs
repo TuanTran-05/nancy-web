@@ -37,6 +37,40 @@ const section = (source, id) => {
   return source.slice(start, end + 10);
 };
 
+const primaryNavHrefs = [
+  "about.html",
+  "courses.html",
+  "learning-path.html",
+  "achievements.html",
+  "contact.html",
+];
+
+const navMarkup = (source) => {
+  const match = source.match(/<nav class="main-nav"[\s\S]*?<\/nav>/);
+  assert.ok(match, "missing primary navigation");
+  return match[0];
+};
+
+test("uses the approved five-route navigation and conversion shell", () => {
+  for (const [name, source] of pages) {
+    const nav = navMarkup(source);
+    const hrefs = [...nav.matchAll(/href="([^"]+)"/g)].map((match) => match[1]);
+    assert.deepEqual(hrefs, primaryNavHrefs, `${name} primary nav`);
+    assert.match(source, />Kiểm tra trình độ miễn phí<\/a>/, name);
+    assert.match(source, /class="mobile-action-bar"[\s\S]*href="tel:0866169569"[\s\S]*>Gọi tư vấn<[\s\S]*>Kiểm tra trình độ miễn phí</s, name);
+  }
+});
+
+test("locks the approved Professional Compact tokens", () => {
+  assert.match(css, /--brand:\s*#0e4ea1/i);
+  assert.match(css, /--brand-strong:\s*#0a3b7d/i);
+  assert.match(css, /--accent:\s*#c24c00/i);
+  assert.match(css, /--wrap:\s*1280px/);
+  assert.match(css, /--gutter:\s*clamp\(16px,\s*3\.6vw,\s*48px\)/);
+  assert.match(css, /--section-y:\s*clamp\(40px,\s*4\.4vw,\s*68px\)/);
+  assert.match(css, /--section-y-mobile:\s*clamp\(34px,\s*10vw,\s*52px\)/);
+});
+
 test("publishes Thien Uy as the primary identity and Nancy as the legacy identity", () => {
   assert.match(html, /<title>Thien Uy English Center \| Anh ngữ tại An Phú<\/title>/);
   assert.match(html, /content="Thien Uy English Center, tiền thân Nancy English Center,/);
