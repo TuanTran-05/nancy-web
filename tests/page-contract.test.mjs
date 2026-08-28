@@ -208,6 +208,14 @@ test("course catalog exposes all 11 programs and a reusable detail route", () =>
   assert.match(pages.get("course.html"), /Học phí<\/dt><dd class="data-pending">Liên hệ trung tâm/);
 });
 
+test("course detail avoids unsupported placement-test duration claims", () => {
+  const detail = pages.get("course.html");
+  assert.doesNotMatch(
+    detail,
+    /(?:bài kiểm tra|kiểm tra trình độ)[^<]{0,32}\b(?:ngắn|nhanh)\b/i,
+  );
+});
+
 test("dedicated pages carry the promised depth without fabricated profiles", () => {
   const about = pages.get("about.html");
   const teachers = pages.get("teachers.html");
