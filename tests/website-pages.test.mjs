@@ -34,6 +34,23 @@ const contentImageTags = (source) =>
         !/class="[^"]*\b(?:brand-logo|foot-logo-img)\b/.test(tag),
     );
 
+const contentImageMinimums = new Map([
+  ["about.html", 5],
+  ["courses.html", 13],
+  ["course.html", 3],
+  ["learning-path.html", 3],
+  ["achievements.html", 9],
+  ["activities.html", 7],
+  ["knowledge.html", 1],
+  ["teachers.html", 3],
+]);
+
+const assertContentImageMinimum = (name, tags) => {
+  assert.ok(contentImageMinimums.has(name), `${name} needs a declared content image minimum`);
+  const minimumAssetCount = contentImageMinimums.get(name);
+  assert.ok(tags.length >= minimumAssetCount, `${name} needs real visual assets`);
+};
+
 test("publishes three complete inner pages with shared accessible navigation", () => {
   const currentPages = new Map([
     ["about.html", "Giới thiệu"],
@@ -88,8 +105,7 @@ test("inner pages use unique canonical metadata and valid structured data", () =
 test("all inner-page images are local, accessible, dimensioned, and present", async () => {
   for (const [name, html] of pages) {
     const tags = contentImageTags(html);
-    const minimumAssetCount = name === "knowledge.html" ? 1 : 3;
-    assert.ok(tags.length >= minimumAssetCount, `${name} needs real visual assets`);
+    assertContentImageMinimum(name, tags);
     const sources = [];
 
     for (const tag of tags) {
@@ -120,6 +136,24 @@ test("content image inventory excludes dynamic shells and shared logos", () => {
   const tags = contentImageTags(fixture);
   assert.equal(tags.length, 1);
   assert.match(tags[0], /src="images\/g1\.jpg"/);
+});
+
+test("route content minimum rejects below-contract inventory", () => {
+  for (const [name, minimum] of contentImageMinimums) {
+    const mutatedTags = Array.from(
+      { length: minimum - 1 },
+      (_, index) =>
+        `<img src="images/mutation-${index}.jpg" alt="Mutation" width="100" height="100" />`,
+    );
+
+    assert.throws(
+      () => assertContentImageMinimum(name, mutatedTags),
+      (error) =>
+        error instanceof assert.AssertionError &&
+        error.message === `${name} needs real visual assets`,
+      `${name} must reject ${minimum - 1} genuine content images`,
+    );
+  }
 });
 
 test("about and teachers form one concise story and team family", () => {
