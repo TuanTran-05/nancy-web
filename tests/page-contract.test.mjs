@@ -308,7 +308,7 @@ test("limits eyebrow labels and uses one primary CTA label", () => {
 test("keeps the approved compact responsive and motion rules", () => {
   const allCss = `${css}\n${pageCss}`;
   assert.doesNotMatch(allCss, /@media\s*\(prefers-color-scheme:\s*dark\)/);
-  assert.doesNotMatch(allCss, /height:\s*100vh|h-screen/);
+  assert.doesNotMatch(allCss, /\b100vh\b|h-screen/);
   assert.match(allCss, /@media \(prefers-reduced-motion: reduce\)/);
   assert.match(allCss, /:where\(a, button, input, select, textarea, summary, \[tabindex\]\):focus-visible/);
   assert.match(allCss, /animation-duration:\s*0\.01ms !important;/);

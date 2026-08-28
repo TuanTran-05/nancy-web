@@ -2220,7 +2220,7 @@ a.contact-card:hover {
   display: block;
   width: auto;
   max-width: 100%;
-  max-height: calc(100vh - 280px);
+  max-height: calc(100dvh - 280px);
   margin: 0 auto;
   border-radius: 6px;
   box-shadow: var(--sh-1);
@@ -2269,7 +2269,7 @@ a.contact-card:hover {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  max-height: calc(100vh - 280px);
+  max-height: calc(100dvh - 280px);
   overflow-y: auto;
   overscroll-behavior: contain;
   padding: 2px 4px 2px 2px;
