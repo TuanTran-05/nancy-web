@@ -1343,6 +1343,18 @@
   font-weight: 700;
 }
 
+.knowledge-feature figure {
+  margin: 18px 0 0;
+  overflow: hidden;
+  border-radius: var(--r-sm);
+}
+
+.knowledge-feature figure img {
+  width: 100%;
+  aspect-ratio: 16 / 8;
+  object-fit: cover;
+}
+
 .knowledge-feature h2 {
   max-width: 18ch;
   margin-top: 18px;

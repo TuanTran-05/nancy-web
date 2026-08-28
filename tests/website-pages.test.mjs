@@ -24,6 +24,16 @@ const pagesCss = await readFile(new URL("../pages.css", import.meta.url), "utf8"
 const pagesJs = await readFile(new URL("../pages.js", import.meta.url), "utf8");
 const sitemap = await readFile(new URL("../sitemap.xml", import.meta.url), "utf8");
 
+const contentImageTags = (source) =>
+  [...source.matchAll(/<img\b[^>]*>/gs)]
+    .map(([tag]) => tag)
+    .filter(
+      (tag) =>
+        !tag.includes('class="lightbox-img"') &&
+        !tag.includes('id="results-image"') &&
+        !/class="[^"]*\b(?:brand-logo|foot-logo-img)\b/.test(tag),
+    );
+
 test("publishes three complete inner pages with shared accessible navigation", () => {
   const currentPages = new Map([
     ["about.html", "Giới thiệu"],
@@ -77,13 +87,12 @@ test("inner pages use unique canonical metadata and valid structured data", () =
 
 test("all inner-page images are local, accessible, dimensioned, and present", async () => {
   for (const [name, html] of pages) {
-    const tags = [...html.matchAll(/<img\b[^>]*>/gs)].map(([tag]) => tag);
-    const minimumAssetCount = name === "knowledge.html" ? 1 : 5;
+    const tags = contentImageTags(html);
+    const minimumAssetCount = name === "knowledge.html" ? 1 : 3;
     assert.ok(tags.length >= minimumAssetCount, `${name} needs real visual assets`);
     const sources = [];
 
     for (const tag of tags) {
-      if (tag.includes('class="lightbox-img"') || tag.includes('id="results-image"')) continue;
       assert.match(tag, /src="images\/[^"]+"/);
       assert.match(tag, /alt="[^"]*"/);
       assert.match(tag, /width="\d+"/);
@@ -97,6 +106,20 @@ test("all inner-page images are local, accessible, dimensioned, and present", as
       ),
     );
   }
+});
+
+test("content image inventory excludes dynamic shells and shared logos", () => {
+  const fixture = `
+    <img class="brand-logo" src="images/logo.png" alt="" width="52" height="52" />
+    <img class="foot-logo-img" src="images/logo.png" alt="" width="46" height="46" />
+    <img class="lightbox-img" alt="" />
+    <img id="results-image" alt="" />
+    <img src="images/g1.jpg" alt="Hoạt động học viên" width="1024" height="1024" />
+  `;
+
+  const tags = contentImageTags(fixture);
+  assert.equal(tags.length, 1);
+  assert.match(tags[0], /src="images\/g1\.jpg"/);
 });
 
 test("about and teachers form one concise story and team family", () => {
@@ -158,6 +181,16 @@ test("achievements page matches the redacted result data totals", () => {
     assert.match(html, new RegExp(`<strong>${total}<\\/strong><span>Kết quả<\\/span>`));
     assert.match(html, new RegExp(`data-results="${key}"`));
   }
+});
+
+test("achievement summary avoids universal privacy claims", () => {
+  const html = pages.get("achievements.html");
+  const summary = html.match(/<div class="evidence-summary">[\s\S]*?<\/section>/)?.[0] ?? "";
+
+  assert.doesNotMatch(
+    summary,
+    /(?:Tất cả|Mọi|Toàn bộ)\s+phiếu điểm[^.]*\b(?:che|ẩn)\b/i,
+  );
 });
 
 test("evidence and community pages prioritize real assets over generic cards", () => {
