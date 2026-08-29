@@ -384,3 +384,38 @@ test("raw and unreviewed result images stay out of the deployed directory", asyn
     assert.doesNotMatch(source, /images\/(ielts|ket|pet)result\/|images\/result10\//);
   }
 });
+
+test("all pages publish the final Professional Compact asset versions", () => {
+  for (const [name, source] of pages) {
+    assert.match(source, /href="styles\.css\?v=20260828-professional-compact"/, `${name} styles version`);
+    assert.match(source, /href="pages\.css\?v=20260828-professional-compact"/, `${name} pages version`);
+    assert.match(source, /src="script\.js\?v=20260828-professional-compact"/, `${name} script version`);
+  }
+});
+
+test("all routes retain canonical metadata and valid structured data", () => {
+  for (const [name, source] of pages) {
+    const canonical = name === "index.html"
+      ? "https://thienuy.edu.vn/"
+      : `https://thienuy.edu.vn/${name}`;
+    const jsonBlocks = [...source.matchAll(
+      /<script type="application\/ld\+json"(?: id="[^"]+")?>([\s\S]*?)<\/script>/g,
+    )];
+
+    assert.match(source, /<title>[^<]+<\/title>/, `${name} title`);
+    assert.match(
+      source,
+      /<meta\s+name="description"\s+content="[^"]+"\s*\/?>/s,
+      `${name} description`,
+    );
+    assert.ok(
+      source.includes(`<link rel="canonical" href="${canonical}" />`),
+      `${name} canonical`,
+    );
+    assert.ok(jsonBlocks.length > 0, `${name} structured data`);
+
+    for (const [, json] of jsonBlocks) {
+      assert.doesNotThrow(() => JSON.parse(json), `${name} structured data JSON`);
+    }
+  }
+});

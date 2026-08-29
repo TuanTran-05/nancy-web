@@ -68,9 +68,9 @@ test("publishes three complete inner pages with shared accessible navigation", (
     assert.match(html, /<main class="subpage-main" id="main">/);
     assert.match(html, /<nav class="main-nav"[^>]+aria-label="Điều hướng chính"/s);
     assert.match(html, /<button class="nav-toggle"[^>]+aria-expanded="false"/s);
-    assert.match(html, /href="styles\.css\?v=20260806-thien-uy-header"/);
-    assert.match(html, /href="pages\.css\?v=20260820-website"/);
-    assert.match(html, /src="script\.js\?v=20260820-website" defer/);
+    assert.match(html, /href="styles\.css\?v=20260828-professional-compact"/);
+    assert.match(html, /href="pages\.css\?v=20260828-professional-compact"/);
+    assert.match(html, /src="script\.js\?v=20260828-professional-compact" defer/);
 
     for (const route of ["index.html", ...primaryPageNames]) {
       assert.match(html, new RegExp(`href="${route.replace(".", "\\.")}"`));
