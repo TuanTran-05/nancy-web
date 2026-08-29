@@ -588,8 +588,9 @@
 .results-mosaic {
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
-  grid-template-rows: repeat(2, minmax(170px, 1fr));
-  gap: 16px;
+  grid-template-rows: repeat(2, clamp(130px, 16vw, 170px));
+  gap: 12px;
+  max-height: 360px;
 }
 
 .results-mosaic figure {
@@ -599,6 +600,7 @@
   border-radius: var(--r-lg);
   background: var(--surface);
   box-shadow: var(--sh-2);
+  height: 100%;
 }
 
 .results-mosaic figure:first-child {
@@ -612,15 +614,15 @@
 }
 
 .results-mosaic figure:first-child img {
-  object-position: top center;
+  object-position: center;
 }
 
 .evidence-summary {
   display: grid;
-  grid-template-columns: minmax(180px, 0.34fr) minmax(0, 0.66fr);
-  gap: 28px;
-  align-items: end;
-  padding: 24px;
+  grid-template-columns: minmax(140px, 0.28fr) minmax(0, 0.72fr);
+  gap: 20px;
+  align-items: center;
+  padding: 18px 24px;
   border-radius: var(--r-lg);
   background: var(--brand);
   color: var(--on-brand);
@@ -633,30 +635,31 @@
 
 .evidence-summary__total strong {
   font-family: "Baloo 2", sans-serif;
-  font-size: clamp(3.6rem, 7vw, 6.4rem);
-  line-height: 0.82;
+  font-size: clamp(2.8rem, 5vw, 4.4rem);
+  line-height: 0.88;
 }
 
 .evidence-summary__total span {
-  margin-top: 14px;
+  margin-top: 6px;
   font-weight: 700;
+  font-size: 0.88rem;
 }
 
 .evidence-summary__copy {
-  padding-left: 28px;
+  padding-left: 20px;
   border-left: 1px solid rgba(255, 255, 255, 0.32);
 }
 
 .evidence-summary__copy h2 {
   max-width: 24ch;
-  font-size: clamp(1.4rem, 1.1rem + 1vw, 2rem);
+  font-size: clamp(1.3rem, 1rem + 0.8vw, 1.8rem);
 }
 
 .evidence-summary__copy p {
   max-width: 58ch;
-  margin-top: 10px;
-  color: rgba(255, 255, 255, 0.86);
-  line-height: 1.65;
+  margin-top: 6px;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.6;
 }
 
 .achievement-grid {
