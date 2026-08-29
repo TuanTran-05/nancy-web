@@ -353,15 +353,14 @@
 
 /* Courses */
 .program-layout {
-  display: grid;
-  grid-template-columns: minmax(220px, 0.28fr) minmax(0, 0.72fr);
-  gap: clamp(20px, 3vw, 40px);
-  align-items: start;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(24px, 3vw, 40px);
+  width: 100%;
 }
 
 .program-layout__rail {
-  position: sticky;
-  top: 88px;
+  position: static;
 }
 
 .program-layout__rail .page-section__head {
@@ -376,12 +375,12 @@
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin: 0 0 20px;
+  margin: 0;
 }
 
 .filter-button {
-  min-height: 44px;
-  padding: 10px 20px;
+  min-height: 40px;
+  padding: 8px 18px;
   border: 1.5px solid var(--line-2);
   border-radius: var(--r-pill);
   background: var(--surface);
@@ -413,46 +412,28 @@
 
 .catalog-grid {
   display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+  width: 100%;
 }
 
 .catalog-card {
-  grid-column: span 6;
   display: flex;
-  min-width: 0;
   flex-direction: column;
-  overflow: hidden;
-  border: 1px solid var(--line);
-  border-radius: var(--r-lg);
-  background: var(--surface);
-  box-shadow: var(--sh-1);
-  transition: border-color 0.25s var(--ease), box-shadow 0.25s var(--ease),
-    transform 0.25s var(--ease);
+  min-width: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .catalog-card:nth-child(1),
 .catalog-card:nth-child(7) {
-  grid-column: span 12;
-  display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(260px, 0.9fr);
-}
-
-.catalog-card:hover {
-  transform: translateY(-4px);
-  border-color: var(--line-2);
-  box-shadow: var(--sh-2);
+  grid-column: auto;
+  display: flex;
+  grid-template-columns: none;
 }
 
 .catalog-card__media {
-  min-height: 220px;
   overflow: hidden;
-  background: var(--surface-3);
-}
-
-.catalog-card:nth-child(1) .catalog-card__media,
-.catalog-card:nth-child(7) .catalog-card__media {
-  min-height: 100%;
 }
 
 .catalog-card__media img {
