@@ -125,7 +125,7 @@
 }
 
 .page-hero__image--portrait img {
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 4 / 3;
 }
 
 .page-hero__note {
@@ -265,7 +265,7 @@
 
 .story-figure img {
   width: 100%;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 4 / 3;
   object-fit: cover;
   border-radius: var(--r-lg);
   box-shadow: var(--sh-2);
