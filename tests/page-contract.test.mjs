@@ -271,13 +271,13 @@ test("dedicated pages carry the promised depth without fabricated profiles", () 
   assert.equal((faq.match(/<details class="faq-item"/g) ?? []).length, 8);
 });
 
-test("contact page exposes every verified channel and labels unverified address detail", () => {
+test("contact page exposes every verified channel and address", () => {
   const contact = pages.get("contact.html");
   assert.match(contact, /href="tel:0866169569"/);
   assert.match(contact, /href="mailto:thienuy@gmail\.com"/);
   assert.match(contact, /href="https:\/\/zalo\.me\/1175234011658712481"/);
   assert.match(contact, /href="https:\/\/maps\.app\.goo\.gl\/Gme3adX9ZEsUhnwYA"/);
-  assert.match(contact, /Số nhà và địa chỉ hành chính đầy đủ đang chờ trung tâm xác nhận/);
+  assert.match(contact, /Đường Nguyễn Văn Trỗi, An Phú, Hồ Chí Minh 75256/);
   assert.match(contact, /<iframe title="Bản đồ đến Thien Uy English Center"/);
 });
 
