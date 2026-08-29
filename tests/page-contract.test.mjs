@@ -79,8 +79,8 @@ test("locks the approved Professional Compact tokens", () => {
   assert.match(css, /--accent-ink:\s*#B04500/);
   assert.match(css, /--wrap:\s*1280px/);
   assert.match(css, /--gutter:\s*clamp\(16px,\s*3\.6vw,\s*48px\)/);
-  assert.match(css, /--section-y:\s*clamp\(40px,\s*4\.4vw,\s*68px\)/);
-  assert.match(css, /--section-y-mobile:\s*clamp\(34px,\s*10vw,\s*52px\)/);
+  assert.match(css, /--section-y:\s*clamp\(28px,\s*3\.2vw,\s*48px\)/);
+  assert.match(css, /--section-y-mobile:\s*clamp\(20px,\s*5\.5vw,\s*32px\)/);
 });
 
 test("publishes Thien Uy as the primary identity and Nancy as the legacy identity", () => {
@@ -330,7 +330,7 @@ test("keeps mobile controls touch-safe and clear of the fixed action bar", () =>
 });
 
 test("keeps Vietnamese display marks clear of tight title line boxes", () => {
-  assert.match(pageCss, /\.page-title,\s*\.home-title\s*\{[^}]*padding-block:\s*0\.08em;/s);
+  assert.match(pageCss, /\.page-title,\s*\.home-title\s*\{[^}]*padding-block:\s*0\.04em;/s);
 });
 
 test("keeps the shared focus ring visible on form controls", () => {

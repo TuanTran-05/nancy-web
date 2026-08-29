@@ -277,7 +277,7 @@ test("page filters expose pressed state, live status, and hidden-item behavior",
 });
 
 test("multi-page styles define responsive collapse and stable mobile viewport behavior", () => {
-  assert.match(pagesCss, /min-height:\s*calc\(100dvh - 78px\)/);
+  assert.match(pagesCss, /\.page-hero\s*\{[^}]*min-height:\s*auto/s);
   assert.doesNotMatch(pagesCss, /h-screen|100vh/);
   assert.match(pagesCss, /@media \(max-width: 860px\)[\s\S]*?\.page-hero__grid,[\s\S]*?grid-template-columns:\s*1fr/s);
   assert.match(pagesCss, /@media \(max-width: 680px\)[\s\S]*?\.catalog-card,[\s\S]*?grid-column:\s*1 \/ -1/s);
