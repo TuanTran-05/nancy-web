@@ -48,19 +48,112 @@
     <link rel="preload" as="font" type="font/woff2" href="fonts/baloo2-vietnamese.woff2" crossorigin />
     <link rel="preload" as="font" type="font/woff2" href="fonts/bevietnampro-400-vietnamese.woff2" crossorigin />
     <link rel="preload" as="image" href="images/course-happy-kids.jpg" fetchpriority="high" />
-    <meta name="theme-color" content="#0E4EA1" />
+    <meta name="theme-color" content="#002d54" />
+
+    <!-- Google Stitch Tailwind CSS & Typography -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#002d54",
+              "on-primary": "#ffffff",
+              "primary-container": "#00437a",
+              "on-primary-container": "#83b1ef",
+              "primary-fixed": "#d3e3ff",
+              "primary-fixed-dim": "#a3c9ff",
+              "on-primary-fixed": "#001c39",
+              "on-primary-fixed-variant": "#0b487f",
+              "secondary": "#a04100",
+              "on-secondary": "#ffffff",
+              "secondary-container": "#fd7629",
+              "on-secondary-container": "#5e2300",
+              "secondary-fixed": "#ffdbcc",
+              "secondary-fixed-dim": "#ffb693",
+              "on-secondary-fixed": "#351000",
+              "on-secondary-fixed-variant": "#7a3000",
+              "tertiary": "#002d53",
+              "on-tertiary": "#ffffff",
+              "tertiary-container": "#004378",
+              "on-tertiary-container": "#78b1f8",
+              "tertiary-fixed": "#d3e4ff",
+              "tertiary-fixed-dim": "#a2c9ff",
+              "on-tertiary-fixed": "#001c38",
+              "on-tertiary-fixed-variant": "#004881",
+              "surface": "#f8f9fa",
+              "on-surface": "#191c1d",
+              "surface-variant": "#e1e3e4",
+              "on-surface-variant": "#424750",
+              "surface-container-lowest": "#ffffff",
+              "surface-container-low": "#f3f4f5",
+              "surface-container": "#edeeef",
+              "surface-container-high": "#e7e8e9",
+              "surface-container-highest": "#e1e3e4",
+              "surface-dim": "#d9dadb",
+              "surface-bright": "#f8f9fa",
+              "background": "#f8f9fa",
+              "on-background": "#191c1d",
+              "outline": "#727781",
+              "outline-variant": "#c2c6d1",
+              "inverse-surface": "#2e3132",
+              "inverse-on-surface": "#f0f1f2",
+              "inverse-primary": "#a3c9ff",
+              "error": "#ba1a1a",
+              "on-error": "#ffffff",
+              "error-container": "#ffdad6",
+              "on-error-container": "#93000a",
+              "surface-tint": "#2e6099"
+            },
+            borderRadius: {
+              "DEFAULT": "0.25rem",
+              "lg": "0.5rem",
+              "xl": "0.75rem",
+              "full": "9999px"
+            },
+            spacing: {
+              "stack-sm": "8px",
+              "stack-md": "16px",
+              "stack-lg": "24px",
+              "gutter": "24px",
+              "margin-mobile": "16px",
+              "margin-desktop": "40px",
+              "container-max": "1280px",
+              "section-gap": "60px"
+            },
+            fontFamily: {
+              "body-md": ["Hanken Grotesk", "Be Vietnam Pro", "sans-serif"],
+              "display-lg": ["Manrope", "Baloo 2", "sans-serif"],
+              "headline-lg-mobile": ["Manrope", "Baloo 2", "sans-serif"],
+              "headline-md": ["Manrope", "Baloo 2", "sans-serif"],
+              "headline-lg": ["Manrope", "Baloo 2", "sans-serif"],
+              "button-text": ["Hanken Grotesk", "Be Vietnam Pro", "sans-serif"],
+              "label-md": ["Hanken Grotesk", "Be Vietnam Pro", "sans-serif"],
+              "body-lg": ["Hanken Grotesk", "Be Vietnam Pro", "sans-serif"]
+            }
+          }
+        }
+      };
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+
     <link rel="stylesheet" href="styles.css?v=20260828-professional-compact" />
     <link rel="stylesheet" href="pages.css?v=20260828-professional-compact" />
     <script>document.documentElement.classList.add("js");</script>
   </head>
-  <body>
+  <body class="bg-surface font-body-md text-body-md text-on-surface">
     <a class="skip-link" href="#main">Bỏ qua và tới nội dung chính</a>
 
-    <header class="site-header" id="top">
-      <div class="wrap header-inner">
-        <a class="brand" href="index.html" aria-label="Thien Uy English Center - Trang chủ">
-          <img src="images/logo.png" alt="" width="52" height="52" class="brand-logo" />
-          <span class="brand-text"><strong>THIEN UY ENGLISH CENTER</strong><em>thienuy.edu.vn</em></span>
+    <!-- Header Navigation (Stitch Glassmorphism Bar) -->
+    <header class="site-header fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-md shadow-[0_4px_20px_rgba(0,67,122,0.08)] border-b border-outline-variant/30" id="top">
+      <div class="wrap header-inner max-w-container-max mx-auto px-4 md:px-margin-desktop h-18 flex items-center justify-between">
+        <a class="brand flex items-center gap-3 group" href="index.html" aria-label="Thien Uy English Center - Trang chủ">
+          <img src="images/logo.png" alt="" width="48" height="48" class="brand-logo rounded-lg transition-transform group-hover:scale-105" />
+          <span class="brand-text flex flex-col">
+            <strong class="font-headline-md text-primary text-[1.05rem] leading-tight font-bold tracking-tight">THIEN UY ENGLISH CENTER</strong>
+            <em class="text-[0.75rem] text-secondary font-medium tracking-wide not-italic">thienuy.edu.vn</em>
+          </span>
         </a>
         <nav class="main-nav" id="main-nav" aria-label="Điều hướng chính">
           <a href="about.html">Giới thiệu</a>
@@ -70,215 +163,490 @@
           <a href="contact.html">Liên hệ</a>
         </nav>
         <div class="header-cta">
-          <a class="header-phone" href="tel:0866169569">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.02-.24c1.12.37 2.33.57 3.57.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.57a1 1 0 01-.25 1.02l-2.2 2.2z" /></svg>
+          <a class="btn btn-ghost" href="tel:0866169569">
+            <span class="material-symbols-outlined text-[18px]">call</span>
             <span>0866 169 569</span>
           </a>
           <a class="btn btn-accent" href="contact.html#register">Kiểm tra trình độ miễn phí</a>
         </div>
-        <button class="nav-toggle" type="button" aria-label="Mở menu" aria-expanded="false" aria-controls="main-nav"><span></span><span></span><span></span></button>
+        <button class="nav-toggle" type="button" aria-label="Mở menu" aria-expanded="false" aria-controls="main-nav">
+          <span></span><span></span><span></span>
+        </button>
       </div>
     </header>
 
     <main class="subpage-main" id="main">
-      <section class="page-hero" aria-labelledby="page-heading">
-        <div class="wrap page-hero__grid">
-          <div class="page-hero__copy">
-            <nav class="breadcrumb" aria-label="Đường dẫn trang">
-              <a href="index.html">Trang chủ</a><span class="breadcrumb-separator" aria-hidden="true">/</span><span>Khóa học</span>
+      <!-- Stitch Courses Header -->
+      <section class="page-hero relative w-full max-w-container-max mx-auto px-4 md:px-margin-desktop py-8 md:py-12" aria-labelledby="page-heading">
+        <div class="wrap page-hero__grid grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div class="page-hero__copy lg:col-span-6 flex flex-col gap-4">
+            <nav class="breadcrumb flex items-center gap-2 text-xs text-on-surface-variant font-medium mb-1" aria-label="Đường dẫn trang">
+              <a class="hover:text-primary transition-colors" href="index.html">Trang chủ</a>
+              <span class="breadcrumb-separator text-outline" aria-hidden="true">/</span>
+              <span class="text-primary font-bold">Khóa học</span>
             </nav>
-            <h1 class="page-title" id="page-heading">Lộ trình rõ ràng. <span class="tx-accent">Tiến bộ vững chắc.</span></h1>
-            <p class="page-hero__lead">Chọn chương trình theo độ tuổi, năng lực hiện tại và mục tiêu tiếp theo của học viên.</p>
-            <div class="page-actions">
-              <a class="btn btn-accent btn-lg" href="#catalog">Tìm khóa học</a>
-              <a class="btn btn-ghost btn-lg" href="contact.html#register">Đăng ký kiểm tra</a>
+            <div class="inline-flex items-center gap-2 bg-primary/10 text-primary px-3.5 py-1 rounded-full self-start">
+              <span class="material-symbols-outlined text-[16px] text-secondary">auto_stories</span>
+              <span class="font-label-md text-xs uppercase tracking-wider font-bold">Chương trình đào tạo</span>
+            </div>
+            <h1 class="page-title font-display-lg text-[2.2rem] sm:text-[2.6rem] text-primary font-extrabold leading-tight" id="page-heading">
+              Lộ trình rõ ràng. <span class="tx-accent text-secondary">Tiến bộ vững chắc.</span>
+            </h1>
+            <p class="page-hero__lead font-body-lg text-on-surface-variant">
+              Chọn chương trình theo độ tuổi, năng lực hiện tại và mục tiêu tiếp theo của học viên từ mầm non đến IELTS 7.0+.
+            </p>
+            <div class="page-actions flex flex-wrap items-center gap-3 pt-2">
+              <a class="btn btn-accent btn-lg bg-secondary text-on-secondary font-button-text px-7 py-3.5 rounded-full shadow-md hover:bg-secondary-container transition-all" href="#catalog">Tìm khóa học</a>
+              <a class="btn btn-ghost btn-lg bg-surface-container-high text-primary font-button-text px-6 py-3.5 rounded-full shadow-sm hover:bg-surface-container-highest transition-all flex items-center gap-2" href="contact.html#register">
+                Đăng ký kiểm tra
+                <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+              </a>
             </div>
           </div>
-          <div class="page-hero__visual reveal">
-            <div class="page-hero__image">
-              <img src="images/course-happy-kids.jpg" alt="Học viên nhỏ tuổi tham gia lớp tiếng Anh tương tác" width="1280" height="960" fetchpriority="high" decoding="async" />
+          <div class="page-hero__visual lg:col-span-6 relative">
+            <div class="page-hero__image aspect-[4/3] rounded-xl overflow-hidden shadow-xl border border-line">
+              <img class="w-full h-full object-cover" src="images/course-happy-kids.jpg" alt="Học viên nhỏ tuổi tham gia lớp tiếng Anh tương tác" width="1280" height="960" fetchpriority="high" decoding="async" />
             </div>
-            <div class="page-hero__note"><strong>Bắt đầu từ đúng trình độ</strong><span>Bài kiểm tra ngắn giúp trung tâm tư vấn lớp phù hợp hơn cho con.</span></div>
+            <div class="page-hero__note absolute -bottom-4 -right-4 sm:bottom-4 sm:right-4 bg-surface-container-lowest p-3.5 rounded-xl shadow-xl border border-line flex flex-col gap-0.5 max-w-xs">
+              <strong class="text-xs font-bold text-primary flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-[16px] text-secondary">verified</span>
+                Bắt đầu từ đúng trình độ
+              </strong>
+              <span class="text-xs text-on-surface-variant">Bài kiểm tra ngắn giúp trung tâm tư vấn lớp phù hợp nhất cho con.</span>
+            </div>
           </div>
         </div>
       </section>
 
-      <section class="page-section" id="catalog" aria-labelledby="catalog-heading">
-        <div class="wrap">
+      <!-- Stitch Catalog Section -->
+      <section class="page-section w-full py-12 md:py-16 bg-surface-container-low" id="catalog" aria-labelledby="catalog-heading">
+        <div class="wrap max-w-container-max mx-auto px-4 md:px-margin-desktop">
           <div class="program-layout">
-            <aside class="program-layout__rail">
-          <div class="page-section__head">
-            <span class="section-label">Danh mục khóa học</span>
-            <h2 class="h2" id="catalog-heading">Chương trình cho từng chặng học tập</h2>
-            <p class="lead">Lọc nhanh theo nhóm chương trình hoặc xem toàn bộ 11 lựa chọn hiện có.</p>
-          </div>
-          <div class="filter-bar" data-filter-group=".catalog-card" data-filter-unit="khóa học" aria-label="Lọc khóa học">
-            <button class="filter-button" type="button" data-filter-value="all" aria-pressed="true">Tất cả</button>
-            <button class="filter-button" type="button" data-filter-value="foundation" aria-pressed="false">Nền tảng</button>
-            <button class="filter-button" type="button" data-filter-value="cambridge" aria-pressed="false">Cambridge</button>
-            <button class="filter-button" type="button" data-filter-value="exam" aria-pressed="false">Luyện thi</button>
-          </div>
-          <p class="visually-hidden" data-filter-status aria-live="polite"></p>
-
-          </aside>
-
-          <div class="catalog-grid">
-            <article class="catalog-card reveal" data-filter-item="foundation" data-course="happy-kids">
-              <div class="catalog-card__media"><img src="images/course-happy-kids.jpg" alt="Lớp Happy Kids với các hoạt động tiếng Anh sinh động" width="1280" height="960" loading="lazy" decoding="async" /></div>
-              <div class="catalog-card__body">
-                <span class="catalog-card__meta">Lớp 2 trở xuống</span><h2>Happy Kids</h2>
-                <p>Làm quen tiếng Anh qua trò chơi, âm nhạc và hoạt động tương tác để hình thành phản xạ tự nhiên.</p>
-                <div class="catalog-card__facts"><span>Nền tảng nghe nói</span><span>Môi trường vui học</span></div>
-                <div class="catalog-card__actions"><a class="text-action" href="course.html?course=happy-kids">Xem chi tiết</a></div>
+            <div class="flex flex-col gap-8">
+            <div class="page-section__head flex flex-col md:flex-row md:items-end justify-between gap-4">
+              <div>
+                <span class="section-label inline-flex items-center gap-2 text-secondary font-bold text-xs uppercase tracking-widest mb-1">Danh mục khóa học</span>
+                <h2 class="h2 font-headline-lg text-[1.8rem] md:text-[2.2rem] text-primary font-bold" id="catalog-heading">Chương trình cho từng chặng học tập</h2>
+                <p class="lead font-body-lg text-on-surface-variant mt-1">Lọc nhanh theo nhóm chương trình hoặc xem toàn bộ 11 lựa chọn hiện có.</p>
               </div>
-            </article>
 
-            <article class="catalog-card reveal" data-filter-item="foundation" data-course="starter" style="--d: 40ms">
-              <div class="catalog-card__media"><img src="images/course-starter.jpg" alt="Học viên xây dựng từ vựng và mẫu câu tiếng Anh nền tảng" width="1280" height="960" loading="lazy" decoding="async" /></div>
-              <div class="catalog-card__body">
-                <span class="catalog-card__meta">Lớp 3</span><h3>Starter</h3>
-                <p>Xây dựng vốn từ, mẫu câu và phản xạ giao tiếp phù hợp với học viên tiểu học.</p>
-                <div class="catalog-card__facts"><span>Phát âm</span><span>Từ vựng nền tảng</span></div>
-                <div class="catalog-card__actions"><a class="text-action" href="course.html?course=starter">Xem chi tiết</a></div>
+              <!-- Filter Pills (Stitch category filter) -->
+              <div class="filter-bar inline-flex flex-wrap items-center gap-2 bg-surface-container-lowest p-1.5 rounded-full border border-line shadow-sm" data-filter-group=".catalog-card" data-filter-unit="khóa học" aria-label="Lọc khóa học">
+                <button class="filter-button" type="button" data-filter-value="all" aria-pressed="true">Tất cả</button>
+                <button class="filter-button" type="button" data-filter-value="foundation" aria-pressed="false">Nền tảng</button>
+                <button class="filter-button" type="button" data-filter-value="cambridge" aria-pressed="false">Cambridge</button>
+                <button class="filter-button" type="button" data-filter-value="exam" aria-pressed="false">Luyện thi</button>
               </div>
-            </article>
+            </div>
+            <p class="visually-hidden" data-filter-status aria-live="polite"></p>
 
-            <article class="catalog-card reveal" data-filter-item="cambridge" data-course="movers" style="--d: 80ms">
-              <div class="catalog-card__media"><img src="images/course-movers.jpg" alt="Học viên nhận chứng nhận sau quá trình học tiếng Anh" width="1279" height="583" loading="lazy" decoding="async" /></div>
-              <div class="catalog-card__body">
-                <span class="catalog-card__meta">Lớp 4</span><h3>Movers</h3>
-                <p>Phát triển cân bằng nghe, nói, đọc, viết qua các chủ đề gần gũi với độ tuổi.</p>
-                <div class="catalog-card__facts"><span>4 kỹ năng</span><span>Chuẩn Cambridge</span></div>
-                <div class="catalog-card__actions"><a class="text-action" href="course.html?course=movers">Xem chi tiết</a></div>
-              </div>
-            </article>
+            <div class="catalog-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <!-- Course 1: Happy Kids -->
+              <article class="catalog-card reveal" data-filter-item="foundation" data-course="happy-kids">
+                <div class="group bg-surface-container-lowest rounded-2xl shadow-md overflow-hidden hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col border border-line h-full">
+                  <div class="catalog-card__media relative h-48 w-full overflow-hidden">
+                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="images/course-happy-kids.jpg" alt="Lớp Happy Kids với các hoạt động tiếng Anh sinh động" width="1280" height="960" loading="lazy" decoding="async" />
+                    <span class="catalog-card__meta absolute top-3 left-3 bg-primary text-on-primary text-xs font-bold px-3 py-1 rounded-md">Lớp 2 trở xuống</span>
+                  </div>
+                  <div class="catalog-card__body p-5 flex flex-col flex-1 justify-between gap-4">
+                    <div>
+                      <h3 class="text-xl font-bold text-primary group-hover:text-secondary transition-colors">Happy Kids</h3>
+                      <p class="text-xs text-on-surface-variant mt-1.5 leading-relaxed">Làm quen tiếng Anh qua trò chơi, âm nhạc và hoạt động tương tác để hình thành phản xạ tự nhiên.</p>
+                      <div class="catalog-card__facts flex flex-wrap gap-2 mt-3 text-xs text-on-surface-variant">
+                        <span class="bg-surface-container px-2.5 py-1 rounded-md font-medium">Nền tảng nghe nói</span>
+                        <span class="bg-surface-container px-2.5 py-1 rounded-md font-medium">Môi trường vui học</span>
+                      </div>
+                    </div>
+                    <div class="catalog-card__actions pt-2 border-t border-line flex items-center justify-between">
+                      <a class="text-action text-xs font-bold text-primary hover:text-secondary flex items-center gap-1 transition-colors" href="course.html?course=happy-kids">
+                        Xem chi tiết <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </article>
 
-            <article class="catalog-card reveal" data-filter-item="cambridge" data-course="flyers">
-              <div class="catalog-card__media"><img src="images/course-flyers.jpg" alt="Học viên luyện tập kỹ năng tiếng Anh trình độ Flyers" width="1280" height="960" loading="lazy" decoding="async" /></div>
-              <div class="catalog-card__body">
-                <span class="catalog-card__meta">Lớp 5</span><h3>Flyers</h3>
-                <p>Củng cố kỹ năng ngôn ngữ và chuẩn bị nền tảng cho các chứng chỉ Cambridge tiếp theo.</p>
-                <div class="catalog-card__facts"><span>4 kỹ năng</span><span>Tư duy làm bài</span></div>
-                <div class="catalog-card__actions"><a class="text-action" href="course.html?course=flyers">Xem chi tiết</a></div>
-              </div>
-            </article>
+              <!-- Course 2: Starter -->
+              <article class="catalog-card reveal" data-filter-item="foundation" data-course="starter">
+                <div class="group bg-surface-container-lowest rounded-2xl shadow-md overflow-hidden hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col border border-line h-full">
+                  <div class="catalog-card__media relative h-48 w-full overflow-hidden">
+                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="images/course-starter.jpg" alt="Học viên xây dựng từ vựng và mẫu câu tiếng Anh nền tảng" width="1280" height="960" loading="lazy" decoding="async" />
+                    <span class="catalog-card__meta absolute top-3 left-3 bg-primary text-on-primary text-xs font-bold px-3 py-1 rounded-md">Lớp 3</span>
+                  </div>
+                  <div class="catalog-card__body p-5 flex flex-col flex-1 justify-between gap-4">
+                    <div>
+                      <h3 class="text-xl font-bold text-primary group-hover:text-secondary transition-colors">Starter</h3>
+                      <p class="text-xs text-on-surface-variant mt-1.5 leading-relaxed">Xây dựng vốn từ, mẫu câu và phản xạ giao tiếp phù hợp với học viên tiểu học.</p>
+                      <div class="catalog-card__facts flex flex-wrap gap-2 mt-3 text-xs text-on-surface-variant">
+                        <span class="bg-surface-container px-2.5 py-1 rounded-md font-medium">Phát âm</span>
+                        <span class="bg-surface-container px-2.5 py-1 rounded-md font-medium">Từ vựng nền tảng</span>
+                      </div>
+                    </div>
+                    <div class="catalog-card__actions pt-2 border-t border-line flex items-center justify-between">
+                      <a class="text-action text-xs font-bold text-primary hover:text-secondary flex items-center gap-1 transition-colors" href="course.html?course=starter">
+                        Xem chi tiết <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </article>
 
-            <article class="catalog-card reveal" data-filter-item="cambridge" data-course="ket" style="--d: 40ms">
-              <div class="catalog-card__media"><img src="images/course-ket.jpg" alt="Giáo viên hướng dẫn học viên luyện tập trong khóa KET" width="1280" height="960" loading="lazy" decoding="async" /></div>
-              <div class="catalog-card__body">
-                <span class="catalog-card__meta">Lớp 6-7</span><h3>KET</h3>
-                <p>Rèn năng lực tiếng Anh trình độ A2 và phương pháp làm bài Cambridge hiệu quả.</p>
-                <div class="catalog-card__facts"><span>Mục tiêu A2</span><span>28 kết quả đã lưu</span></div>
-                <div class="catalog-card__actions"><button class="result-action" type="button" data-results="ket">Xem thành tích</button><a class="text-action" href="course.html?course=ket">Xem chi tiết</a></div>
-              </div>
-            </article>
+              <!-- Course 3: Movers -->
+              <article class="catalog-card reveal" data-filter-item="cambridge" data-course="movers">
+                <div class="group bg-surface-container-lowest rounded-2xl shadow-md overflow-hidden hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col border border-line h-full">
+                  <div class="catalog-card__media relative h-48 w-full overflow-hidden">
+                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="images/course-movers.jpg" alt="Học viên nhận chứng nhận sau quá trình học tiếng Anh" width="1279" height="583" loading="lazy" decoding="async" />
+                    <span class="catalog-card__meta absolute top-3 left-3 bg-secondary text-on-secondary text-xs font-bold px-3 py-1 rounded-md">Lớp 4</span>
+                  </div>
+                  <div class="catalog-card__body p-5 flex flex-col flex-1 justify-between gap-4">
+                    <div>
+                      <h3 class="text-xl font-bold text-primary group-hover:text-secondary transition-colors">Movers</h3>
+                      <p class="text-xs text-on-surface-variant mt-1.5 leading-relaxed">Phát triển cân bằng nghe, nói, đọc, viết qua các chủ đề gần gũi với độ tuổi.</p>
+                      <div class="catalog-card__facts flex flex-wrap gap-2 mt-3 text-xs text-on-surface-variant">
+                        <span class="bg-surface-container px-2.5 py-1 rounded-md font-medium">4 kỹ năng</span>
+                        <span class="bg-surface-container px-2.5 py-1 rounded-md font-medium">Chuẩn Cambridge</span>
+                      </div>
+                    </div>
+                    <div class="catalog-card__actions pt-2 border-t border-line flex items-center justify-between">
+                      <a class="text-action text-xs font-bold text-primary hover:text-secondary flex items-center gap-1 transition-colors" href="course.html?course=movers">
+                        Xem chi tiết <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </article>
 
-            <article class="catalog-card reveal" data-filter-item="cambridge" data-course="pet" style="--d: 80ms">
-              <div class="catalog-card__media"><img src="images/course-pet.jpg" alt="Nhóm học viên trung học luyện tập tiếng Anh cùng giáo viên" width="1280" height="960" loading="lazy" decoding="async" /></div>
-              <div class="catalog-card__body">
-                <span class="catalog-card__meta">Lớp 8-9</span><h3>PET</h3>
-                <p>Phát triển tiếng Anh trình độ B1 cho học tập, giao tiếp và kỳ thi Cambridge.</p>
-                <div class="catalog-card__facts"><span>Mục tiêu B1</span><span>11 kết quả đã lưu</span></div>
-                <div class="catalog-card__actions"><button class="result-action" type="button" data-results="pet">Xem thành tích</button><a class="text-action" href="course.html?course=pet">Xem chi tiết</a></div>
-              </div>
-            </article>
+              <!-- Course 4: Flyers -->
+              <article class="catalog-card reveal" data-filter-item="cambridge" data-course="flyers">
+                <div class="group bg-surface-container-lowest rounded-2xl shadow-md overflow-hidden hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col border border-line h-full">
+                  <div class="catalog-card__media relative h-48 w-full overflow-hidden">
+                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="images/course-flyers.jpg" alt="Học viên luyện tập kỹ năng tiếng Anh trình độ Flyers" width="1280" height="960" loading="lazy" decoding="async" />
+                    <span class="catalog-card__meta absolute top-3 left-3 bg-secondary text-on-secondary text-xs font-bold px-3 py-1 rounded-md">Lớp 5</span>
+                  </div>
+                  <div class="catalog-card__body p-5 flex flex-col flex-1 justify-between gap-4">
+                    <div>
+                      <h3 class="text-xl font-bold text-primary group-hover:text-secondary transition-colors">Flyers</h3>
+                      <p class="text-xs text-on-surface-variant mt-1.5 leading-relaxed">Củng cố kỹ năng ngôn ngữ và chuẩn bị nền tảng cho các chứng chỉ Cambridge tiếp theo.</p>
+                      <div class="catalog-card__facts flex flex-wrap gap-2 mt-3 text-xs text-on-surface-variant">
+                        <span class="bg-surface-container px-2.5 py-1 rounded-md font-medium">4 kỹ năng</span>
+                        <span class="bg-surface-container px-2.5 py-1 rounded-md font-medium">Tư duy làm bài</span>
+                      </div>
+                    </div>
+                    <div class="catalog-card__actions pt-2 border-t border-line flex items-center justify-between">
+                      <a class="text-action text-xs font-bold text-primary hover:text-secondary flex items-center gap-1 transition-colors" href="course.html?course=flyers">
+                        Xem chi tiết <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </article>
 
-            <article class="catalog-card reveal" data-filter-item="exam" data-course="ielts">
-              <div class="catalog-card__media"><img src="images/course-ielts.jpg" alt="Giáo viên trao đổi cùng nhóm học viên trong lớp IELTS" width="1280" height="960" loading="lazy" decoding="async" /></div>
-              <div class="catalog-card__body">
-                <span class="catalog-card__meta">Từ lớp 10</span><h3>IELTS</h3>
-                <p>Xây dựng tư duy học thuật và chiến lược làm bài cho cả bốn kỹ năng.</p>
-                <div class="catalog-card__facts"><span>4 kỹ năng</span><span>8 kết quả đã lưu</span></div>
-                <div class="catalog-card__actions"><button class="result-action" type="button" data-results="ielts">Xem thành tích</button><a class="text-action" href="course.html?course=ielts">Xem chi tiết</a></div>
-              </div>
-            </article>
+              <!-- Course 5: KET -->
+              <article class="catalog-card reveal" data-filter-item="cambridge" data-course="ket">
+                <div class="group bg-surface-container-lowest rounded-2xl shadow-md overflow-hidden hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col border border-line h-full">
+                  <div class="catalog-card__media relative h-48 w-full overflow-hidden">
+                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="images/course-ket.jpg" alt="Giáo viên hướng dẫn học viên luyện tập trong khóa KET" width="1280" height="960" loading="lazy" decoding="async" />
+                    <span class="catalog-card__meta absolute top-3 left-3 bg-secondary text-on-secondary text-xs font-bold px-3 py-1 rounded-md">Lớp 6-7</span>
+                  </div>
+                  <div class="catalog-card__body p-5 flex flex-col flex-1 justify-between gap-4">
+                    <div>
+                      <h3 class="text-xl font-bold text-primary group-hover:text-secondary transition-colors">KET</h3>
+                      <p class="text-xs text-on-surface-variant mt-1.5 leading-relaxed">Rèn năng lực tiếng Anh trình độ A2 và phương pháp làm bài Cambridge hiệu quả.</p>
+                      <div class="catalog-card__facts flex flex-wrap gap-2 mt-3 text-xs text-on-surface-variant">
+                        <span class="bg-surface-container px-2.5 py-1 rounded-md font-medium">Mục tiêu A2</span>
+                        <span class="bg-secondary-fixed text-on-secondary-fixed px-2.5 py-1 rounded-md font-bold">28 kết quả đã lưu</span>
+                      </div>
+                    </div>
+                    <div class="catalog-card__actions pt-2 border-t border-line flex items-center justify-between">
+                      <button class="result-action text-xs font-bold text-secondary hover:underline cursor-pointer flex items-center gap-1" type="button" data-results="ket">
+                        <span class="material-symbols-outlined text-[16px]">verified</span> Xem thành tích
+                      </button>
+                      <a class="text-action text-xs font-bold text-primary hover:text-secondary flex items-center gap-1 transition-colors" href="course.html?course=ket">
+                        Xem chi tiết <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </article>
 
-            <article class="catalog-card reveal" data-filter-item="foundation" data-course="tang-cuong" style="--d: 40ms">
-              <div class="catalog-card__media"><img src="images/g1.jpg" alt="Học viên tham gia giờ học tiếng Anh tăng cường" width="1024" height="1024" loading="lazy" decoding="async" /></div>
-              <div class="catalog-card__body">
-                <span class="catalog-card__meta">Theo cấp lớp</span><h3>Tiếng Anh tăng cường</h3>
-                <p>Bổ trợ ngữ pháp, từ vựng và kỹ năng làm bài theo chương trình trên lớp.</p>
-                <div class="catalog-card__facts"><span>Củng cố kiến thức</span><span>Theo sát cấp lớp</span></div>
-                <div class="catalog-card__actions"><a class="text-action" href="course.html?course=tang-cuong">Xem chi tiết</a></div>
-              </div>
-            </article>
+              <!-- Course 6: PET -->
+              <article class="catalog-card reveal" data-filter-item="cambridge" data-course="pet">
+                <div class="group bg-surface-container-lowest rounded-2xl shadow-md overflow-hidden hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col border border-line h-full">
+                  <div class="catalog-card__media relative h-48 w-full overflow-hidden">
+                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="images/course-pet.jpg" alt="Nhóm học viên trung học luyện tập tiếng Anh cùng giáo viên" width="1280" height="960" loading="lazy" decoding="async" />
+                    <span class="catalog-card__meta absolute top-3 left-3 bg-secondary text-on-secondary text-xs font-bold px-3 py-1 rounded-md">Lớp 8-9</span>
+                  </div>
+                  <div class="catalog-card__body p-5 flex flex-col flex-1 justify-between gap-4">
+                    <div>
+                      <h3 class="text-xl font-bold text-primary group-hover:text-secondary transition-colors">PET</h3>
+                      <p class="text-xs text-on-surface-variant mt-1.5 leading-relaxed">Phát triển tiếng Anh trình độ B1 cho học tập, giao tiếp và kỳ thi Cambridge.</p>
+                      <div class="catalog-card__facts flex flex-wrap gap-2 mt-3 text-xs text-on-surface-variant">
+                        <span class="bg-surface-container px-2.5 py-1 rounded-md font-medium">Mục tiêu B1</span>
+                        <span class="bg-secondary-fixed text-on-secondary-fixed px-2.5 py-1 rounded-md font-bold">11 kết quả đã lưu</span>
+                      </div>
+                    </div>
+                    <div class="catalog-card__actions pt-2 border-t border-line flex items-center justify-between">
+                      <button class="result-action text-xs font-bold text-secondary hover:underline cursor-pointer flex items-center gap-1" type="button" data-results="pet">
+                        <span class="material-symbols-outlined text-[16px]">verified</span> Xem thành tích
+                      </button>
+                      <a class="text-action text-xs font-bold text-primary hover:text-secondary flex items-center gap-1 transition-colors" href="course.html?course=pet">
+                        Xem chi tiết <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </article>
 
-            <article class="catalog-card reveal" data-filter-item="exam" data-course="tao-nguon-anh-6" style="--d: 80ms">
-              <div class="catalog-card__media"><img src="images/g3.jpg" alt="Học viên luyện đề chuẩn bị kỳ thi tạo nguồn tiếng Anh lớp 6" width="1024" height="1024" loading="lazy" decoding="async" /></div>
-              <div class="catalog-card__body">
-                <span class="catalog-card__meta">Chuẩn bị vào lớp 6</span><h3>Luyện thi tạo nguồn tiếng Anh 6</h3>
-                <p>Củng cố từ vựng, ngữ pháp và kỹ năng làm bài cho kỳ thi tạo nguồn.</p>
-                <div class="catalog-card__facts"><span>Hệ thống kiến thức</span><span>Luyện đề</span></div>
-                <div class="catalog-card__actions"><a class="text-action" href="course.html?course=tao-nguon-6">Xem chi tiết</a></div>
-              </div>
-            </article>
+              <!-- Course 7: IELTS -->
+              <article class="catalog-card reveal" data-filter-item="exam" data-course="ielts">
+                <div class="group bg-surface-container-lowest rounded-2xl shadow-md overflow-hidden hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col border border-line h-full">
+                  <div class="catalog-card__media relative h-48 w-full overflow-hidden">
+                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="images/course-ielts.jpg" alt="Giáo viên trao đổi cùng nhóm học viên trong lớp IELTS" width="1280" height="960" loading="lazy" decoding="async" />
+                    <span class="catalog-card__meta absolute top-3 left-3 bg-tertiary text-on-primary text-xs font-bold px-3 py-1 rounded-md">Từ lớp 10</span>
+                  </div>
+                  <div class="catalog-card__body p-5 flex flex-col flex-1 justify-between gap-4">
+                    <div>
+                      <h3 class="text-xl font-bold text-primary group-hover:text-secondary transition-colors">IELTS</h3>
+                      <p class="text-xs text-on-surface-variant mt-1.5 leading-relaxed">Xây dựng tư duy học thuật và chiến lược làm bài cho cả bốn kỹ năng.</p>
+                      <div class="catalog-card__facts flex flex-wrap gap-2 mt-3 text-xs text-on-surface-variant">
+                        <span class="bg-surface-container px-2.5 py-1 rounded-md font-medium">4 kỹ năng</span>
+                        <span class="bg-secondary-fixed text-on-secondary-fixed px-2.5 py-1 rounded-md font-bold">8 kết quả đã lưu</span>
+                      </div>
+                    </div>
+                    <div class="catalog-card__actions pt-2 border-t border-line flex items-center justify-between">
+                      <button class="result-action text-xs font-bold text-secondary hover:underline cursor-pointer flex items-center gap-1" type="button" data-results="ielts">
+                        <span class="material-symbols-outlined text-[16px]">verified</span> Xem thành tích
+                      </button>
+                      <a class="text-action text-xs font-bold text-primary hover:text-secondary flex items-center gap-1 transition-colors" href="course.html?course=ielts">
+                        Xem chi tiết <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </article>
 
-            <article class="catalog-card reveal" data-filter-item="exam" data-course="tuyen-sinh-10">
-              <div class="catalog-card__media"><img src="images/g5.jpg" alt="Học viên ôn tập chuẩn bị kỳ thi tuyển sinh lớp 10" width="1024" height="1024" loading="lazy" decoding="async" /></div>
-              <div class="catalog-card__body">
-                <span class="catalog-card__meta">Lớp 9</span><h3>Luyện thi tuyển sinh 10</h3>
-                <p>Hệ thống kiến thức trọng tâm và luyện đề bám sát kỳ thi vào lớp 10.</p>
-                <div class="catalog-card__facts"><span>Ôn trọng tâm</span><span>24 kết quả đã lưu</span></div>
-                <div class="catalog-card__actions"><button class="result-action" type="button" data-results="ts10">Xem thành tích</button><a class="text-action" href="course.html?course=tuyen-sinh-10">Xem chi tiết</a></div>
-              </div>
-            </article>
+              <!-- Course 8: Tiếng Anh tăng cường -->
+              <article class="catalog-card reveal" data-filter-item="foundation" data-course="tang-cuong">
+                <div class="group bg-surface-container-lowest rounded-2xl shadow-md overflow-hidden hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col border border-line h-full">
+                  <div class="catalog-card__media relative h-48 w-full overflow-hidden">
+                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="images/g1.jpg" alt="Học viên tham gia giờ học tiếng Anh tăng cường" width="1024" height="1024" loading="lazy" decoding="async" />
+                    <span class="catalog-card__meta absolute top-3 left-3 bg-primary text-on-primary text-xs font-bold px-3 py-1 rounded-md">Theo cấp lớp</span>
+                  </div>
+                  <div class="catalog-card__body p-5 flex flex-col flex-1 justify-between gap-4">
+                    <div>
+                      <h3 class="text-xl font-bold text-primary group-hover:text-secondary transition-colors">Tiếng Anh tăng cường</h3>
+                      <p class="text-xs text-on-surface-variant mt-1.5 leading-relaxed">Bổ trợ ngữ pháp, từ vựng và kỹ năng làm bài theo chương trình trên lớp.</p>
+                      <div class="catalog-card__facts flex flex-wrap gap-2 mt-3 text-xs text-on-surface-variant">
+                        <span class="bg-surface-container px-2.5 py-1 rounded-md font-medium">Củng cố kiến thức</span>
+                        <span class="bg-surface-container px-2.5 py-1 rounded-md font-medium">Theo sát cấp lớp</span>
+                      </div>
+                    </div>
+                    <div class="catalog-card__actions pt-2 border-t border-line flex items-center justify-between">
+                      <a class="text-action text-xs font-bold text-primary hover:text-secondary flex items-center gap-1 transition-colors" href="course.html?course=tang-cuong">
+                        Xem chi tiết <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </article>
 
-            <article class="catalog-card reveal" data-filter-item="exam" data-course="dai-hoc" style="--d: 40ms">
-              <div class="catalog-card__media"><img src="images/course-ielts.jpg" alt="Nhóm học viên trung học phổ thông ôn tập tiếng Anh" width="1280" height="960" loading="lazy" decoding="async" /></div>
-              <div class="catalog-card__body">
-                <span class="catalog-card__meta">Lớp 12</span><h3>Luyện thi đại học</h3>
-                <p>Củng cố ngữ pháp, đọc hiểu và chiến lược làm bài cho kỳ thi tốt nghiệp.</p>
-                <div class="catalog-card__facts"><span>Đọc hiểu</span><span>Chiến lược làm bài</span></div>
-                <div class="catalog-card__actions"><a class="text-action" href="course.html?course=dai-hoc">Xem chi tiết</a></div>
-              </div>
-            </article>
-          </div>
+              <!-- Course 9: Tạo nguồn tiếng Anh 6 -->
+              <article class="catalog-card reveal" data-filter-item="exam" data-course="tao-nguon-anh-6">
+                <div class="group bg-surface-container-lowest rounded-2xl shadow-md overflow-hidden hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col border border-line h-full">
+                  <div class="catalog-card__media relative h-48 w-full overflow-hidden">
+                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="images/g3.jpg" alt="Học viên luyện đề chuẩn bị kỳ thi tạo nguồn tiếng Anh lớp 6" width="1024" height="1024" loading="lazy" decoding="async" />
+                    <span class="catalog-card__meta absolute top-3 left-3 bg-tertiary text-on-primary text-xs font-bold px-3 py-1 rounded-md">Chuẩn bị vào lớp 6</span>
+                  </div>
+                  <div class="catalog-card__body p-5 flex flex-col flex-1 justify-between gap-4">
+                    <div>
+                      <h3 class="text-xl font-bold text-primary group-hover:text-secondary transition-colors">Luyện thi tạo nguồn tiếng Anh 6</h3>
+                      <p class="text-xs text-on-surface-variant mt-1.5 leading-relaxed">Củng cố từ vựng, ngữ pháp và kỹ năng làm bài cho kỳ thi tạo nguồn.</p>
+                      <div class="catalog-card__facts flex flex-wrap gap-2 mt-3 text-xs text-on-surface-variant">
+                        <span class="bg-surface-container px-2.5 py-1 rounded-md font-medium">Hệ thống kiến thức</span>
+                        <span class="bg-surface-container px-2.5 py-1 rounded-md font-medium">Luyện đề</span>
+                      </div>
+                    </div>
+                    <div class="catalog-card__actions pt-2 border-t border-line flex items-center justify-between">
+                      <a class="text-action text-xs font-bold text-primary hover:text-secondary flex items-center gap-1 transition-colors" href="course.html?course=tao-nguon-6">
+                        Xem chi tiết <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Course 10: Tuyển sinh 10 -->
+              <article class="catalog-card reveal" data-filter-item="exam" data-course="tuyen-sinh-10">
+                <div class="group bg-surface-container-lowest rounded-2xl shadow-md overflow-hidden hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col border border-line h-full">
+                  <div class="catalog-card__media relative h-48 w-full overflow-hidden">
+                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="images/g5.jpg" alt="Học viên ôn tập chuẩn bị kỳ thi tuyển sinh lớp 10" width="1024" height="1024" loading="lazy" decoding="async" />
+                    <span class="catalog-card__meta absolute top-3 left-3 bg-tertiary text-on-primary text-xs font-bold px-3 py-1 rounded-md">Lớp 9</span>
+                  </div>
+                  <div class="catalog-card__body p-5 flex flex-col flex-1 justify-between gap-4">
+                    <div>
+                      <h3 class="text-xl font-bold text-primary group-hover:text-secondary transition-colors">Luyện thi tuyển sinh 10</h3>
+                      <p class="text-xs text-on-surface-variant mt-1.5 leading-relaxed">Hệ thống kiến thức trọng tâm và luyện đề bám sát kỳ thi vào lớp 10.</p>
+                      <div class="catalog-card__facts flex flex-wrap gap-2 mt-3 text-xs text-on-surface-variant">
+                        <span class="bg-surface-container px-2.5 py-1 rounded-md font-medium">Ôn trọng tâm</span>
+                        <span class="bg-secondary-fixed text-on-secondary-fixed px-2.5 py-1 rounded-md font-bold">24 kết quả đã lưu</span>
+                      </div>
+                    </div>
+                    <div class="catalog-card__actions pt-2 border-t border-line flex items-center justify-between">
+                      <button class="result-action text-xs font-bold text-secondary hover:underline cursor-pointer flex items-center gap-1" type="button" data-results="ts10">
+                        <span class="material-symbols-outlined text-[16px]">verified</span> Xem thành tích
+                      </button>
+                      <a class="text-action text-xs font-bold text-primary hover:text-secondary flex items-center gap-1 transition-colors" href="course.html?course=tuyen-sinh-10">
+                        Xem chi tiết <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Course 11: Luyện thi đại học -->
+              <article class="catalog-card reveal" data-filter-item="exam" data-course="dai-hoc">
+                <div class="group bg-surface-container-lowest rounded-2xl shadow-md overflow-hidden hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col border border-line h-full">
+                  <div class="catalog-card__media relative h-48 w-full overflow-hidden">
+                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="images/course-ielts.jpg" alt="Nhóm học viên trung học phổ thông ôn tập tiếng Anh" width="1280" height="960" loading="lazy" decoding="async" />
+                    <span class="catalog-card__meta absolute top-3 left-3 bg-tertiary text-on-primary text-xs font-bold px-3 py-1 rounded-md">Lớp 12</span>
+                  </div>
+                  <div class="catalog-card__body p-5 flex flex-col flex-1 justify-between gap-4">
+                    <div>
+                      <h3 class="text-xl font-bold text-primary group-hover:text-secondary transition-colors">Luyện thi đại học</h3>
+                      <p class="text-xs text-on-surface-variant mt-1.5 leading-relaxed">Củng cố ngữ pháp, đọc hiểu và chiến lược làm bài cho kỳ thi tốt nghiệp THPT.</p>
+                      <div class="catalog-card__facts flex flex-wrap gap-2 mt-3 text-xs text-on-surface-variant">
+                        <span class="bg-surface-container px-2.5 py-1 rounded-md font-medium">Đọc hiểu</span>
+                        <span class="bg-surface-container px-2.5 py-1 rounded-md font-medium">Chiến lược làm bài</span>
+                      </div>
+                    </div>
+                    <div class="catalog-card__actions pt-2 border-t border-line flex items-center justify-between">
+                      <a class="text-action text-xs font-bold text-primary hover:text-secondary flex items-center gap-1 transition-colors" href="course.html?course=dai-hoc">
+                        Xem chi tiết <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            </div>
           </div>
         </div>
       </section>
 
-      <section class="page-section page-section--soft" aria-labelledby="route-heading">
-        <div class="wrap">
-          <div class="page-section__head"><h2 class="h2" id="route-heading">Lộ trình Cambridge theo độ tuổi</h2><p class="lead">Mỗi chặng chuẩn bị kiến thức và kỹ năng cần thiết cho cấp độ tiếp theo.</p></div>
-          <ol class="route-map" aria-label="Lộ trình từ Happy Kids đến IELTS">
-            <li class="route-stop"><strong>Happy Kids</strong><span>Lớp 2 trở xuống</span></li>
-            <li class="route-stop"><strong>Starter</strong><span>Lớp 3</span></li>
-            <li class="route-stop"><strong>Movers</strong><span>Lớp 4</span></li>
-            <li class="route-stop"><strong>Flyers</strong><span>Lớp 5</span></li>
-            <li class="route-stop"><strong>KET</strong><span>Lớp 6-7</span></li>
-            <li class="route-stop"><strong>PET</strong><span>Lớp 8-9</span></li>
-            <li class="route-stop"><strong>IELTS</strong><span>Từ lớp 10</span></li>
+      <!-- Cambridge Pathway Roadmap -->
+      <section class="page-section page-section--soft w-full py-12 md:py-16 bg-surface" aria-labelledby="route-heading">
+        <div class="wrap max-w-container-max mx-auto px-4 md:px-margin-desktop">
+          <div class="page-section__head text-center max-w-2xl mx-auto mb-10">
+            <span class="section-label inline-flex items-center gap-2 text-secondary font-bold text-xs uppercase tracking-widest mb-1">Cột mốc chuyển tiếp</span>
+            <h2 class="h2 font-headline-lg text-[1.8rem] md:text-[2.2rem] text-primary font-bold" id="route-heading">Lộ trình Cambridge theo độ tuổi</h2>
+            <p class="lead font-body-lg text-on-surface-variant mt-1">Mỗi chặng chuẩn bị kiến thức và kỹ năng cần thiết cho cấp độ tiếp theo.</p>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
+            <div class="aspect-[16/9] rounded-2xl overflow-hidden shadow-md border border-line">
+              <img class="w-full h-full object-cover" src="images/course-movers.jpg" alt="Lộ trình học tập liên tục và hiệu quả" width="1279" height="583" loading="lazy" decoding="async" />
+            </div>
+            <div class="aspect-[16/9] rounded-2xl overflow-hidden shadow-md border border-line">
+              <img class="w-full h-full object-cover" src="images/about-program.jpg" alt="Phát triển tư duy và phản xạ tự nhiên cùng Cambridge" width="1280" height="960" loading="lazy" decoding="async" />
+            </div>
+          </div>
+          <ol class="route-map grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3" aria-label="Lộ trình từ Happy Kids đến IELTS">
+            <li class="route-stop bg-surface-container-low p-4 rounded-xl border border-line text-center flex flex-col justify-center">
+              <strong class="text-sm font-bold text-primary">Happy Kids</strong>
+              <span class="text-xs text-on-surface-variant mt-1">Lớp 2 trở xuống</span>
+            </li>
+            <li class="route-stop bg-surface-container-low p-4 rounded-xl border border-line text-center flex flex-col justify-center">
+              <strong class="text-sm font-bold text-primary">Starter</strong>
+              <span class="text-xs text-on-surface-variant mt-1">Lớp 3</span>
+            </li>
+            <li class="route-stop bg-surface-container-low p-4 rounded-xl border border-line text-center flex flex-col justify-center">
+              <strong class="text-sm font-bold text-primary">Movers</strong>
+              <span class="text-xs text-on-surface-variant mt-1">Lớp 4</span>
+            </li>
+            <li class="route-stop bg-surface-container-low p-4 rounded-xl border border-line text-center flex flex-col justify-center">
+              <strong class="text-sm font-bold text-primary">Flyers</strong>
+              <span class="text-xs text-on-surface-variant mt-1">Lớp 5</span>
+            </li>
+            <li class="route-stop bg-surface-container-low p-4 rounded-xl border border-line text-center flex flex-col justify-center">
+              <strong class="text-sm font-bold text-primary">KET</strong>
+              <span class="text-xs text-on-surface-variant mt-1">Lớp 6-7</span>
+            </li>
+            <li class="route-stop bg-surface-container-low p-4 rounded-xl border border-line text-center flex flex-col justify-center">
+              <strong class="text-sm font-bold text-primary">PET</strong>
+              <span class="text-xs text-on-surface-variant mt-1">Lớp 8-9</span>
+            </li>
+            <li class="route-stop bg-surface-container-low p-4 rounded-xl border border-line text-center flex flex-col justify-center">
+              <strong class="text-sm font-bold text-secondary font-bold">IELTS</strong>
+              <span class="text-xs text-on-surface-variant mt-1">Từ lớp 10</span>
+            </li>
           </ol>
         </div>
       </section>
 
-      <section class="page-cta">
-        <div class="wrap page-cta__inner">
-          <div><h2 class="h2">Chưa chắc con phù hợp lớp nào?</h2><p>Đăng ký bài kiểm tra ngắn để giáo viên xác định đúng điểm bắt đầu.</p></div>
-          <div class="page-cta__actions"><a class="btn btn-accent btn-lg" href="contact.html#register">Kiểm tra trình độ miễn phí</a><a class="btn btn-ghost btn-lg" href="tel:0866169569">Gọi 0866 169 569</a></div>
+      <!-- CTA Banner -->
+      <section class="page-cta w-full py-12 md:py-16 bg-primary text-on-primary">
+        <div class="wrap page-cta__inner max-w-container-max mx-auto px-4 md:px-margin-desktop flex flex-col md:flex-row items-center justify-between gap-6">
+          <div>
+            <h2 class="h2 font-display-lg text-[1.8rem] md:text-[2.2rem] font-bold text-on-primary">Chưa chắc con phù hợp lớp nào?</h2>
+            <p class="text-primary-fixed-dim text-sm md:text-base mt-1">Đăng ký bài kiểm tra ngắn để giáo viên xác định đúng điểm bắt đầu.</p>
+          </div>
+          <div class="page-cta__actions flex flex-wrap items-center gap-3">
+            <a class="btn btn-accent btn-lg bg-secondary text-on-secondary px-7 py-3.5 rounded-full font-button-text text-sm hover:bg-secondary-container transition-all shadow-md" href="contact.html#register">Kiểm tra trình độ miễn phí</a>
+            <a class="btn btn-ghost btn-lg bg-white/10 text-on-primary px-6 py-3.5 rounded-full font-button-text text-sm hover:bg-white/20 transition-all" href="tel:0866169569">Gọi 0866 169 569</a>
+          </div>
         </div>
       </section>
     </main>
 
+    <!-- Mobile Action Bar -->
     <nav class="mobile-action-bar" aria-label="Hành động nhanh">
       <a class="mobile-action-bar__phone" href="tel:0866169569">Gọi tư vấn</a>
       <a class="mobile-action-bar__register" href="contact.html#register">Kiểm tra trình độ miễn phí</a>
     </nav>
 
-    <footer class="site-footer">
-      <div class="wrap footer-grid">
-        <div class="foot-brand">
-          <div class="foot-logo"><img src="images/logo.png" alt="" width="46" height="46" class="foot-logo-img" /><span class="foot-name">THIEN UY ENGLISH CENTER</span></div>
-          <p class="foot-tag">Tiếng Anh vững vàng, tương lai tươi sáng.</p>
-          <div class="socials" aria-label="Mạng xã hội">
-            <a href="https://www.facebook.com/anhngunancyanphu?locale=vi_VN" target="_blank" rel="noopener" aria-label="Facebook của Thien Uy English Center"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H7.5v-3H10V9.5C10 7.01 11.49 5.6 13.78 5.6c1.1 0 2.25.2 2.25.2v2.47h-1.27c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.45 3H13.13v6.8c4.56-.93 8-4.96 8-9.8z" /></svg></a>
-            <a href="https://zalo.me/1175234011658712481" target="_blank" rel="noopener" aria-label="Zalo của Thien Uy English Center"><img src="images/zalo-icon.png" alt="" width="20" height="20" /></a>
+    <!-- Stitch Footer -->
+    <footer class="site-footer w-full bg-surface-container-high pt-12 pb-6 border-t border-outline-variant/30">
+      <div class="wrap footer-grid max-w-container-max mx-auto px-4 md:px-margin-desktop grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+        <div class="foot-brand flex flex-col gap-3">
+          <div class="foot-logo flex items-center gap-2.5">
+            <img src="images/logo.png" alt="" width="42" height="42" class="foot-logo-img rounded-lg" />
+            <span class="foot-name font-headline-md font-bold text-primary text-base">THIEN UY ENGLISH CENTER</span>
+          </div>
+          <p class="foot-tag text-sm text-on-surface-variant">Tiếng Anh vững vàng, tương lai tươi sáng.</p>
+          <div class="socials flex items-center gap-3 pt-1" aria-label="Mạng xã hội">
+            <a class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-primary hover:bg-primary hover:text-on-primary transition-all" href="https://www.facebook.com/anhngunancyanphu?locale=vi_VN" target="_blank" rel="noopener" aria-label="Facebook của trung tâm">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H7.5v-3H10V9.5C10 7.01 11.49 5.6 13.78 5.6c1.1 0 2.25.2 2.25.2v2.47h-1.27c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.45 3H13.13v6.8c4.56-.93 8-4.96 8-9.8z" /></svg>
+            </a>
+            <a class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center hover:scale-105 transition-transform" href="https://zalo.me/1175234011658712481" target="_blank" rel="noopener" aria-label="Zalo của trung tâm">
+              <img src="images/zalo-icon.png" alt="" width="18" height="18" />
+            </a>
           </div>
         </div>
-        <nav class="foot-col" aria-label="Khám phá website"><h3>Khám phá</h3><a href="index.html">Trang chủ</a><a href="about.html">Giới thiệu</a><a href="teachers.html">Đội ngũ giáo viên</a><a href="courses.html">Khóa học</a><a href="learning-path.html">Lộ trình học</a><a href="achievements.html">Thành tích học viên</a><a href="activities.html">Hoạt động</a><a href="knowledge.html">Kiến thức</a><a href="faq.html">Hỏi đáp</a></nav>
-        <div class="foot-col foot-col--contact"><h3>Liên hệ</h3><p><a href="tel:0866169569">0866 169 569</a></p><p><a href="mailto:thienuy@gmail.com">thienuy@gmail.com</a></p><p>Đường Nguyễn Văn Trỗi, An Phú, Hồ Chí Minh 75256</p><p>Thứ Hai đến Chủ Nhật, 08:00-19:30</p></div>
+
+        <nav class="foot-col flex flex-col gap-2" aria-label="Khám phá website">
+          <h3 class="font-label-md text-xs font-bold text-on-surface uppercase tracking-widest mb-1">Khám phá</h3>
+          <div class="grid grid-cols-2 gap-2 text-sm">
+            <a class="text-on-surface-variant hover:text-primary transition-colors" href="about.html">Giới thiệu</a>
+            <a class="text-on-surface-variant hover:text-primary transition-colors" href="teachers.html">Đội ngũ giáo viên</a>
+            <a class="text-on-surface-variant hover:text-primary transition-colors" href="courses.html">Khóa học</a>
+            <a class="text-on-surface-variant hover:text-primary transition-colors" href="learning-path.html">Lộ trình học</a>
+            <a class="text-on-surface-variant hover:text-primary transition-colors" href="achievements.html">Thành tích</a>
+            <a class="text-on-surface-variant hover:text-primary transition-colors" href="activities.html">Hoạt động</a>
+            <a class="text-on-surface-variant hover:text-primary transition-colors" href="knowledge.html">Kiến thức</a>
+            <a class="text-on-surface-variant hover:text-primary transition-colors" href="faq.html">Hỏi đáp</a>
+          </div>
+        </nav>
+
+        <div class="foot-col foot-col--contact flex flex-col gap-2 text-sm text-on-surface-variant">
+          <h3 class="font-label-md text-xs font-bold text-on-surface uppercase tracking-widest mb-1">Liên hệ</h3>
+          <p><a class="text-primary font-bold hover:underline" href="tel:0866169569">0866 169 569</a></p>
+          <p><a class="hover:underline" href="mailto:thienuy@gmail.com">thienuy@gmail.com</a></p>
+          <p>Đường Nguyễn Văn Trỗi, An Phú, Hồ Chí Minh 75256</p>
+          <p>Thứ Hai đến Chủ Nhật, 08:00-19:30</p>
+          <p><a class="text-secondary font-bold hover:underline" href="contact.html">Bản đồ và đăng ký</a></p>
+        </div>
       </div>
-      <div class="foot-bottom"><div class="wrap">© 2026 Thien Uy English Center.</div></div>
+      <div class="foot-bottom border-t border-outline-variant/30 pt-4 text-center text-xs text-on-surface-variant">
+        <div class="wrap max-w-container-max mx-auto px-4">© 2026 Thien Uy English Center. All rights reserved.</div>
+      </div>
     </footer>
 
     <div id="results-modal" class="results-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Thành tích học viên"></div>

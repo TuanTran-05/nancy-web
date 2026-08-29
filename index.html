@@ -14,128 +14,486 @@
     <link rel="preload" as="font" type="font/woff2" href="fonts/bevietnampro-400-vietnamese.woff2" crossorigin />
     <link rel="preload" as="font" type="font/woff2" href="fonts/bevietnampro-700-vietnamese.woff2" crossorigin />
     <link rel="preload" as="image" href="images/hero.jpg" fetchpriority="high" />
-    <meta name="theme-color" content="#0E4EA1" />
+    <meta name="theme-color" content="#002d54" />
+
+    <!-- Google Stitch Tailwind CSS & Typography -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#002d54",
+              "on-primary": "#ffffff",
+              "primary-container": "#00437a",
+              "on-primary-container": "#83b1ef",
+              "primary-fixed": "#d3e3ff",
+              "primary-fixed-dim": "#a3c9ff",
+              "on-primary-fixed": "#001c39",
+              "on-primary-fixed-variant": "#0b487f",
+              "secondary": "#a04100",
+              "on-secondary": "#ffffff",
+              "secondary-container": "#fd7629",
+              "on-secondary-container": "#5e2300",
+              "secondary-fixed": "#ffdbcc",
+              "secondary-fixed-dim": "#ffb693",
+              "on-secondary-fixed": "#351000",
+              "on-secondary-fixed-variant": "#7a3000",
+              "tertiary": "#002d53",
+              "on-tertiary": "#ffffff",
+              "tertiary-container": "#004378",
+              "on-tertiary-container": "#78b1f8",
+              "tertiary-fixed": "#d3e4ff",
+              "tertiary-fixed-dim": "#a2c9ff",
+              "on-tertiary-fixed": "#001c38",
+              "on-tertiary-fixed-variant": "#004881",
+              "surface": "#f8f9fa",
+              "on-surface": "#191c1d",
+              "surface-variant": "#e1e3e4",
+              "on-surface-variant": "#424750",
+              "surface-container-lowest": "#ffffff",
+              "surface-container-low": "#f3f4f5",
+              "surface-container": "#edeeef",
+              "surface-container-high": "#e7e8e9",
+              "surface-container-highest": "#e1e3e4",
+              "surface-dim": "#d9dadb",
+              "surface-bright": "#f8f9fa",
+              "background": "#f8f9fa",
+              "on-background": "#191c1d",
+              "outline": "#727781",
+              "outline-variant": "#c2c6d1",
+              "inverse-surface": "#2e3132",
+              "inverse-on-surface": "#f0f1f2",
+              "inverse-primary": "#a3c9ff",
+              "error": "#ba1a1a",
+              "on-error": "#ffffff",
+              "error-container": "#ffdad6",
+              "on-error-container": "#93000a",
+              "surface-tint": "#2e6099"
+            },
+            borderRadius: {
+              "DEFAULT": "0.25rem",
+              "lg": "0.5rem",
+              "xl": "0.75rem",
+              "full": "9999px"
+            },
+            spacing: {
+              "stack-sm": "8px",
+              "stack-md": "16px",
+              "stack-lg": "24px",
+              "gutter": "24px",
+              "margin-mobile": "16px",
+              "margin-desktop": "40px",
+              "container-max": "1280px",
+              "section-gap": "60px"
+            },
+            fontFamily: {
+              "body-md": ["Hanken Grotesk", "Be Vietnam Pro", "sans-serif"],
+              "display-lg": ["Manrope", "Baloo 2", "sans-serif"],
+              "headline-lg-mobile": ["Manrope", "Baloo 2", "sans-serif"],
+              "headline-md": ["Manrope", "Baloo 2", "sans-serif"],
+              "headline-lg": ["Manrope", "Baloo 2", "sans-serif"],
+              "button-text": ["Hanken Grotesk", "Be Vietnam Pro", "sans-serif"],
+              "label-md": ["Hanken Grotesk", "Be Vietnam Pro", "sans-serif"],
+              "body-lg": ["Hanken Grotesk", "Be Vietnam Pro", "sans-serif"]
+            }
+          }
+        }
+      };
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+
     <link rel="stylesheet" href="styles.css?v=20260828-professional-compact" />
     <link rel="stylesheet" href="pages.css?v=20260828-professional-compact" />
     <script>document.documentElement.classList.add("js");</script>
   </head>
-  <body>
+  <body class="bg-surface font-body-md text-body-md text-on-surface">
     <a class="skip-link" href="#main">Bỏ qua và tới nội dung chính</a>
-    <header class="site-header" id="top">
-      <div class="wrap header-inner">
-        <a class="brand" href="index.html" aria-label="Thien Uy English Center - Trang chủ"><img src="images/logo.png" alt="" width="52" height="52" class="brand-logo" /><span class="brand-text"><strong>THIEN UY ENGLISH CENTER</strong><em>thienuy.edu.vn</em></span></a>
-        <nav class="main-nav" id="main-nav" aria-label="Điều hướng chính"><a href="about.html">Giới thiệu</a><a href="courses.html">Khóa học</a><a href="learning-path.html">Lộ trình</a><a href="achievements.html">Thành tích</a><a href="contact.html">Liên hệ</a></nav>
-        <div class="header-cta"><a class="header-phone" href="tel:0866169569">0866 169 569</a><a class="btn btn-accent" href="#register">Kiểm tra trình độ miễn phí</a></div>
-        <button class="nav-toggle" type="button" aria-label="Mở menu" aria-expanded="false" aria-controls="main-nav"><span></span><span></span><span></span></button>
+
+    <!-- Header Navigation (Stitch Glassmorphism Bar) -->
+    <header class="site-header fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-md shadow-[0_4px_20px_rgba(0,67,122,0.08)] border-b border-outline-variant/30" id="top">
+      <div class="wrap header-inner max-w-container-max mx-auto px-4 md:px-margin-desktop h-18 flex items-center justify-between">
+        <a class="brand flex items-center gap-3 group" href="index.html" aria-label="Thien Uy English Center - Trang chủ">
+          <img src="images/logo.png" alt="" width="48" height="48" class="brand-logo rounded-lg transition-transform group-hover:scale-105" />
+          <span class="brand-text flex flex-col">
+            <strong>THIEN UY ENGLISH CENTER</strong>
+            <em class="text-[0.75rem] text-secondary font-medium tracking-wide not-italic">thienuy.edu.vn</em>
+          </span>
+        </a>
+        <nav class="main-nav" id="main-nav" aria-label="Điều hướng chính">
+          <a href="about.html">Giới thiệu</a>
+          <a href="courses.html">Khóa học</a>
+          <a href="learning-path.html">Lộ trình</a>
+          <a href="achievements.html">Thành tích</a>
+          <a href="contact.html">Liên hệ</a>
+        </nav>
+        <div class="header-cta">
+          <a class="btn btn-ghost" href="tel:0866169569">
+            <span class="material-symbols-outlined text-[18px]">call</span>
+            <span>0866 169 569</span>
+          </a>
+          <a class="btn btn-accent" href="#register">Kiểm tra trình độ miễn phí</a>
+        </div>
+        <button class="nav-toggle" type="button" aria-label="Mở menu" aria-expanded="false" aria-controls="main-nav">
+          <span></span><span></span><span></span>
+        </button>
       </div>
     </header>
 
-    <main class="home-main" id="main">
-      <section class="home-hero home-hero--a2" aria-labelledby="home-heading">
-        <div class="wrap home-hero__grid">
-          <div class="home-hero__copy">
-            <h1 class="home-title" id="home-heading">
+    <main class="home-main w-full pt-20 bg-surface" id="main">
+      <!-- Stitch Hero Section -->
+      <section class="home-hero home-hero--a2 relative w-full max-w-container-max mx-auto px-4 md:px-margin-desktop py-8 md:py-14" aria-labelledby="home-heading">
+        <div class="wrap home-hero__grid grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div class="home-hero__copy lg:col-span-6 flex flex-col gap-5 z-10">
+            <div class="inline-flex items-center gap-2 bg-tertiary-container/10 text-primary px-4 py-1.5 rounded-full self-start border border-primary/15">
+              <span class="material-symbols-outlined text-[18px] text-secondary">auto_awesome</span>
+              <span class="font-label-md text-xs uppercase tracking-wider font-bold">Thien Uy English Center</span>
+            </div>
+            <h1 class="home-title font-display-lg text-[2.2rem] sm:text-[2.8rem] lg:text-[3.2rem] text-primary font-extrabold leading-[1.12]" id="home-heading">
               TIẾNG ANH VỮNG VÀNG -<br />
               <span>TƯƠNG LAI TƯƠI SÁNG</span>
             </h1>
-            <p>Hơn 10 năm đồng hành cùng học viên từ nền tảng đầu đời đến Cambridge, IELTS và các kỳ thi chuyển cấp.</p>
-            <div class="page-actions">
-              <a class="btn btn-accent btn-lg" href="#register">Kiểm tra trình độ miễn phí</a>
-              <a class="btn btn-ghost btn-lg" href="courses.html">Khám phá khóa học</a>
+            <p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl">
+              Hơn 10 năm đồng hành cùng học viên từ nền tảng đầu đời đến Cambridge, IELTS và các kỳ thi chuyển cấp tại An Phú.
+            </p>
+            <div class="page-actions flex flex-wrap items-center gap-3 pt-2">
+              <a class="btn btn-accent btn-lg bg-secondary text-on-secondary font-button-text px-7 py-3.5 rounded-full shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all" href="#register">Kiểm tra trình độ miễn phí</a>
+              <a class="btn btn-ghost btn-lg bg-surface-container-high text-primary font-button-text px-6 py-3.5 rounded-full shadow-sm hover:bg-surface-container-highest transition-all flex items-center gap-2" href="courses.html">
+                Khám phá khóa học
+                <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+              </a>
             </div>
           </div>
-          <figure class="home-hero__visual reveal">
-            <img src="images/hero.jpg" alt="Giáo viên Thien Uy hướng dẫn học viên trong lớp tiếng Anh" width="1279" height="720" fetchpriority="high" decoding="async" />
+
+          <div class="home-hero__visual lg:col-span-6 relative">
+            <div class="relative w-full aspect-[16/10] rounded-xl overflow-hidden shadow-xl border border-primary/10">
+              <img class="w-full h-full object-cover" src="images/hero.jpg" alt="Giáo viên Thien Uy hướng dẫn học viên trong lớp tiếng Anh" width="1279" height="720" fetchpriority="high" decoding="async" />
+            </div>
+            <!-- Floating Accent Badge -->
+            <div class="absolute -bottom-4 -left-4 bg-surface-container-lowest p-3.5 rounded-lg shadow-xl border border-line flex items-center gap-3 z-20">
+              <div class="w-10 h-10 rounded-full bg-secondary-container text-on-secondary flex items-center justify-center font-bold">
+                <span class="material-symbols-outlined text-[22px]">verified</span>
+              </div>
+              <div>
+                <p class="text-[0.7rem] text-on-surface-variant uppercase font-bold tracking-wider">Cam kết</p>
+                <p class="text-sm font-bold text-primary">Tiến bộ rõ ràng</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Stitch Statistics Bar -->
+      <section class="home-trust w-full bg-primary text-on-primary py-10 relative" id="trust" aria-label="Thông tin tổng quan">
+        <div class="max-w-container-max mx-auto px-4 md:px-margin-desktop">
+          <p class="home-trust__legacy text-center text-xs uppercase tracking-widest text-primary-fixed-dim mb-6 font-semibold">Tiền thân là Nancy English Center tại An Phú</p>
+          <div class="wrap home-facts grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+            <div class="home-fact flex flex-col items-center justify-center p-4 bg-primary-container/60 text-on-primary rounded-xl border border-white/10 shadow-sm hover:-translate-y-1 transition-transform">
+              <span class="material-symbols-outlined text-[32px] text-tertiary-fixed mb-1">history_edu</span>
+              <strong class="font-display-lg text-[2rem] md:text-[2.4rem] font-bold text-on-primary">10+</strong>
+              <span class="text-xs uppercase tracking-wider text-primary-fixed-dim font-medium mt-1">Năm đồng hành</span>
+            </div>
+            <div class="home-fact flex flex-col items-center justify-center p-4 bg-primary-container/60 text-on-primary rounded-xl border border-white/10 shadow-sm hover:-translate-y-1 transition-transform">
+              <span class="material-symbols-outlined text-[32px] text-tertiary-fixed mb-1">groups</span>
+              <strong class="font-display-lg text-[2rem] md:text-[2.4rem] font-bold text-on-primary">1.000+</strong>
+              <span class="text-xs uppercase tracking-wider text-primary-fixed-dim font-medium mt-1">Học viên đã học</span>
+            </div>
+            <div class="home-fact flex flex-col items-center justify-center p-4 bg-primary-container/60 text-on-primary rounded-xl border border-white/10 shadow-sm hover:-translate-y-1 transition-transform">
+              <span class="material-symbols-outlined text-[32px] text-tertiary-fixed mb-1">auto_stories</span>
+              <strong class="font-display-lg text-[2rem] md:text-[2.4rem] font-bold text-on-primary">11</strong>
+              <span class="text-xs uppercase tracking-wider text-primary-fixed-dim font-medium mt-1">Khóa học chuyên biệt</span>
+            </div>
+            <div class="home-fact flex flex-col items-center justify-center p-4 bg-primary-container/60 text-on-primary rounded-xl border border-white/10 shadow-sm hover:-translate-y-1 transition-transform">
+              <span class="material-symbols-outlined text-[32px] text-tertiary-fixed mb-1">verified_user</span>
+              <strong class="font-display-lg text-[2rem] md:text-[2.4rem] font-bold text-on-primary">71</strong>
+              <span class="text-xs uppercase tracking-wider text-primary-fixed-dim font-medium mt-1">Phiếu điểm xác thực</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Stitch Programs Overview -->
+      <section class="page-section page-section--soft w-full py-12 md:py-16 bg-surface-container-low" id="featured-courses" aria-labelledby="courses-heading">
+        <div class="wrap max-w-container-max mx-auto px-4 md:px-margin-desktop">
+          <div class="page-section__head text-center max-w-2xl mx-auto mb-10">
+            <span class="section-label inline-flex items-center gap-2 text-secondary font-bold text-xs uppercase tracking-widest mb-2">Chương trình học</span>
+            <h2 class="h2 font-headline-lg text-[1.8rem] md:text-[2.2rem] text-primary font-bold" id="courses-heading">Lộ trình đúng cho từng mục tiêu</h2>
+            <p class="lead font-body-lg text-on-surface-variant mt-2">Ba nhóm chương trình nối tiếp từ nền tảng đầu đời đến học thuật và các kỳ thi quan trọng.</p>
+          </div>
+          <div class="home-programs grid grid-cols-1 md:grid-cols-3 gap-6">
+            <a class="home-program-card home-program-card--primary group bg-surface-container-lowest rounded-xl shadow-md overflow-hidden hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col border border-outline-variant/30" href="course.html?course=happy-kids">
+              <figure class="relative h-48 w-full overflow-hidden m-0">
+                <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="images/course-happy-kids.jpg" alt="Học viên nhỏ tuổi trong lớp Happy Kids" width="1280" height="960" loading="lazy" decoding="async" />
+                <span class="absolute top-3 left-3 bg-primary/90 text-on-primary text-xs font-bold px-2.5 py-1 rounded-md">Mầm non & Tiểu học</span>
+              </figure>
+              <div class="home-program-copy p-5 flex flex-col flex-1 justify-between">
+                <div>
+                  <small class="text-xs text-secondary font-bold uppercase tracking-wide block mb-1">Nền tảng đầu đời</small>
+                  <strong class="text-xl text-primary font-bold block mb-2 group-hover:text-secondary transition-colors">Happy Kids</strong>
+                  <p class="text-sm text-on-surface-variant line-clamp-2">Phát triển phản xạ tự nhiên qua trò chơi, bài hát và tương tác đa giác quan.</p>
+                </div>
+                <em class="text-sm font-bold text-primary not-italic flex items-center gap-1 mt-4 group-hover:translate-x-1 transition-transform">
+                  Xem chương trình <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                </em>
+              </div>
+            </a>
+
+            <a class="home-program-card group bg-surface-container-lowest rounded-xl shadow-md overflow-hidden hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col border border-outline-variant/30" href="courses.html#catalog">
+              <figure class="relative h-48 w-full overflow-hidden m-0">
+                <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="images/course-movers.jpg" alt="Học viên tham gia chương trình Cambridge" width="1279" height="583" loading="lazy" decoding="async" />
+                <span class="absolute top-3 left-3 bg-secondary/90 text-on-secondary text-xs font-bold px-2.5 py-1 rounded-md">Tiểu học & THCS</span>
+              </figure>
+              <div class="home-program-copy p-5 flex flex-col flex-1 justify-between">
+                <div>
+                  <small class="text-xs text-secondary font-bold uppercase tracking-wide block mb-1">Starter đến PET</small>
+                  <strong class="text-xl text-primary font-bold block mb-2 group-hover:text-secondary transition-colors">Lộ trình Cambridge</strong>
+                  <p class="text-sm text-on-surface-variant line-clamp-2">Từng bước chinh phục Starter, Movers, Flyers, KET và PET theo chuẩn quốc tế.</p>
+                </div>
+                <em class="text-sm font-bold text-primary not-italic flex items-center gap-1 mt-4 group-hover:translate-x-1 transition-transform">
+                  Khám phá lộ trình <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                </em>
+              </div>
+            </a>
+
+            <a class="home-program-card home-program-card--compact group bg-surface-container-lowest rounded-xl shadow-md overflow-hidden hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col border border-outline-variant/30" href="courses.html#catalog">
+              <figure class="relative h-48 w-full overflow-hidden m-0">
+                <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="images/course-ielts.jpg" alt="Học viên trong lớp luyện thi học thuật" width="1280" height="960" loading="lazy" decoding="async" />
+                <span class="absolute top-3 left-3 bg-tertiary/90 text-on-primary text-xs font-bold px-2.5 py-1 rounded-md">THCS & THPT</span>
+              </figure>
+              <div class="home-program-copy p-5 flex flex-col flex-1 justify-between">
+                <div>
+                  <small class="text-xs text-secondary font-bold uppercase tracking-wide block mb-1">Học thuật và luyện thi</small>
+                  <strong class="text-xl text-primary font-bold block mb-2 group-hover:text-secondary transition-colors">IELTS & Tuyển sinh</strong>
+                  <p class="text-sm text-on-surface-variant line-clamp-2">Chiến thuật làm bài bứt phá điểm số vào lớp 6, lớp 10 chuyên và IELTS 7.0+.</p>
+                </div>
+                <em class="text-sm font-bold text-primary not-italic flex items-center gap-1 mt-4 group-hover:translate-x-1 transition-transform">
+                  Xem các khóa học <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                </em>
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Stitch 3-Card Method Section -->
+      <section class="page-section w-full py-12 md:py-16 bg-surface" id="method" aria-labelledby="method-heading">
+        <div class="wrap home-method max-w-container-max mx-auto px-4 md:px-margin-desktop grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <figure class="home-method__visual lg:col-span-5 relative m-0">
+            <div class="aspect-[4/3] rounded-xl overflow-hidden shadow-xl border border-outline-variant/30">
+              <img class="w-full h-full object-cover" src="images/about-program.jpg" alt="Giáo viên tương tác cùng nhóm học viên trong giờ học" width="1280" height="960" loading="lazy" decoding="async" />
+            </div>
+          </figure>
+          <div class="home-method__copy lg:col-span-7 flex flex-col gap-4">
+            <span class="inline-flex items-center gap-2 text-secondary font-bold text-xs uppercase tracking-widest">Phương pháp giảng dạy</span>
+            <h2 class="h2 font-headline-lg text-[1.8rem] md:text-[2.2rem] text-primary font-bold leading-tight" id="method-heading">Hiểu, thực hành, nhận phản hồi và tiến bộ</h2>
+            <p class="lead font-body-lg text-on-surface-variant">Mỗi buổi học kết nối kiến thức với tình huống sử dụng, để học viên hiểu rõ và tự tin hơn qua từng giai đoạn.</p>
+            <ol class="principles-list space-y-4 pt-2">
+              <li class="principle flex items-start gap-4 p-4 rounded-xl bg-surface-container-low border border-line">
+                <span class="principle-index w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold text-base shrink-0">01</span>
+                <div>
+                  <h3 class="text-base font-bold text-primary">Kiểm tra điểm bắt đầu</h3>
+                  <p class="text-sm text-on-surface-variant mt-1">Tư vấn lộ trình dựa trên năng lực thực tế và mục tiêu học tập của học viên.</p>
+                </div>
+              </li>
+              <li class="principle flex items-start gap-4 p-4 rounded-xl bg-surface-container-low border border-line">
+                <span class="principle-index w-10 h-10 rounded-full bg-secondary text-on-secondary flex items-center justify-center font-bold text-base shrink-0">02</span>
+                <div>
+                  <h3 class="text-base font-bold text-primary">Học qua tương tác</h3>
+                  <p class="text-sm text-on-surface-variant mt-1">Kết hợp 4 kỹ năng Nghe - Nói - Đọc - Viết với hoạt động thực hành chủ động.</p>
+                </div>
+              </li>
+              <li class="principle flex items-start gap-4 p-4 rounded-xl bg-surface-container-low border border-line">
+                <span class="principle-index w-10 h-10 rounded-full bg-primary-container text-on-primary flex items-center justify-center font-bold text-base shrink-0">03</span>
+                <div>
+                  <h3 class="text-base font-bold text-primary">Theo dõi từng giai đoạn</h3>
+                  <p class="text-sm text-on-surface-variant mt-1">Quan sát tiến độ để hỗ trợ đúng lúc và đánh giá sự tiến bộ rõ nét.</p>
+                </div>
+              </li>
+            </ol>
+            <a class="text-action inline-flex items-center gap-1.5 font-bold text-secondary hover:text-secondary-container transition-colors pt-2" href="about.html">
+              Tìm hiểu phương pháp chi tiết <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Stitch Evidence Section -->
+      <section class="page-section page-section--soft w-full py-12 md:py-16 bg-surface-container-low" id="results" aria-labelledby="results-heading">
+        <div class="wrap home-evidence max-w-container-max mx-auto px-4 md:px-margin-desktop grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div class="home-evidence__copy lg:col-span-6 flex flex-col gap-4">
+            <span class="section-label inline-flex items-center gap-2 text-secondary font-bold text-xs uppercase tracking-widest">Minh chứng kết quả</span>
+            <h2 class="h2 font-headline-lg text-[1.8rem] md:text-[2.2rem] text-primary font-bold leading-tight" id="results-heading">Kết quả được nhìn thấy bằng dữ liệu thật</h2>
+            <p class="lead font-body-lg text-on-surface-variant">71 phiếu điểm đã được tổng hợp theo từng kỳ thi và ẩn thông tin cá nhân trước khi công bố công khai.</p>
+            <dl class="home-evidence__stats grid grid-cols-2 sm:grid-cols-4 gap-3 py-3">
+              <div class="p-3.5 bg-surface-container-lowest rounded-xl shadow-sm border border-line text-center">
+                <dt class="font-display-lg text-2xl font-bold text-primary">28</dt>
+                <dd class="text-xs text-on-surface-variant font-medium mt-1">Kết quả KET</dd>
+              </div>
+              <div class="p-3.5 bg-surface-container-lowest rounded-xl shadow-sm border border-line text-center">
+                <dt class="font-display-lg text-2xl font-bold text-primary">11</dt>
+                <dd class="text-xs text-on-surface-variant font-medium mt-1">Kết quả PET</dd>
+              </div>
+              <div class="p-3.5 bg-surface-container-lowest rounded-xl shadow-sm border border-line text-center">
+                <dt class="font-display-lg text-2xl font-bold text-primary">8</dt>
+                <dd class="text-xs text-on-surface-variant font-medium mt-1">Kết quả IELTS</dd>
+              </div>
+              <div class="p-3.5 bg-surface-container-lowest rounded-xl shadow-sm border border-line text-center">
+                <dt class="font-display-lg text-2xl font-bold text-primary">24</dt>
+                <dd class="text-xs text-on-surface-variant font-medium mt-1">Tuyển sinh 10</dd>
+              </div>
+            </dl>
+            <div class="page-actions pt-2">
+              <a class="btn btn-accent bg-secondary text-on-secondary px-6 py-3 rounded-full font-button-text text-sm hover:bg-secondary-container transition-all shadow-md inline-flex items-center gap-2" href="achievements.html">
+                Xem thành tích học viên <span class="material-symbols-outlined text-[18px]">verified</span>
+              </a>
+            </div>
+          </div>
+          <figure class="home-evidence__visual lg:col-span-6 relative m-0">
+            <div class="aspect-[4/3] rounded-xl overflow-hidden shadow-xl border border-line">
+              <img class="w-full h-full object-cover" src="images/IMG_20260803_171902.jpg" alt="Lễ vinh danh và chứng nhận kết quả của học viên" width="841" height="1075" loading="lazy" decoding="async" />
+            </div>
           </figure>
         </div>
       </section>
 
-      <section class="home-trust" id="trust" aria-label="Thông tin tổng quan">
-        <p class="wrap home-trust__legacy">Tiền thân là Nancy English Center tại An Phú</p>
-        <div class="wrap home-facts">
-          <div class="home-fact"><strong>10+</strong><span>Năm đồng hành</span></div>
-          <div class="home-fact"><strong>1.000+</strong><span>Học viên đã học</span></div>
-          <div class="home-fact"><strong>11</strong><span>Khóa học chuyên biệt</span></div>
-          <div class="home-fact"><strong>71</strong><span>Phiếu điểm xác thực</span></div>
+      <!-- Stitch CTA Registration Form (2-Column Modern) -->
+      <section class="page-section home-register w-full bg-surface-container-high py-14 md:py-20 relative overflow-hidden" id="register" aria-labelledby="register-heading">
+        <div class="max-w-container-max mx-auto px-4 md:px-margin-desktop relative z-10">
+          <div class="contact-form-shell grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-transparent border-0 shadow-none p-0">
+            <div class="lg:col-span-5 flex flex-col gap-4">
+              <span class="inline-flex items-center gap-2 text-secondary font-bold text-xs uppercase tracking-widest">Đăng ký tư vấn</span>
+              <h2 class="h2 font-display-lg text-[2rem] md:text-[2.6rem] text-primary font-bold leading-tight" id="register-heading">Kiểm tra trình độ miễn phí</h2>
+              <p class="lead font-body-lg text-on-surface-variant">Để lại thông tin, đội ngũ học thuật của Thien Uy sẽ liên hệ trong giờ làm việc để tư vấn lộ trình phù hợp.</p>
+              <div class="space-y-2.5 pt-2">
+                <div class="flex items-center gap-2.5 text-primary font-medium text-sm">
+                  <span class="material-symbols-outlined text-[20px] text-secondary">verified</span>
+                  <span>Tư vấn lộ trình học cá nhân hóa</span>
+                </div>
+                <div class="flex items-center gap-2.5 text-primary font-medium text-sm">
+                  <span class="material-symbols-outlined text-[20px] text-secondary">verified</span>
+                  <span>Kiểm tra đầu vào 4 kỹ năng miễn phí</span>
+                </div>
+                <div class="flex items-center gap-2.5 text-primary font-medium text-sm">
+                  <span class="material-symbols-outlined text-[20px] text-secondary">verified</span>
+                  <span>Cam kết chất lượng và theo sát tiến độ</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="lg:col-span-7 bg-surface-container-lowest p-6 sm:p-8 rounded-2xl shadow-xl border border-outline-variant/30">
+              <h3 class="font-headline-md text-xl text-primary font-bold mb-4">Gửi thông tin đăng ký</h3>
+              <form class="reg-form space-y-4" data-reg-form data-mode="google-form" data-endpoint="https://docs.google.com/forms/d/e/1FAIpQLScZ61EKmEnvKekNxQALbSdPsFqJ7B7WB7fUYYF63QL_F_7sKg/formResponse" novalidate>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div class="field flex flex-col gap-1.5">
+                    <label class="font-label-md text-xs font-bold text-on-surface" for="reg-name">Họ và tên phụ huynh *</label>
+                    <input class="bg-surface-container px-3.5 py-2.5 rounded-lg text-sm text-on-surface border border-outline-variant focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all" id="reg-name" name="name" data-entry="entry.380148302" type="text" autocomplete="name" placeholder="Ví dụ: Nguyễn Văn A" required aria-describedby="reg-name-error" />
+                    <p class="field-error text-xs text-danger" id="reg-name-error" hidden></p>
+                  </div>
+                  <div class="field flex flex-col gap-1.5">
+                    <label class="font-label-md text-xs font-bold text-on-surface" for="reg-phone">Số điện thoại *</label>
+                    <input class="bg-surface-container px-3.5 py-2.5 rounded-lg text-sm text-on-surface border border-outline-variant focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all" id="reg-phone" name="phone" data-entry="entry.1988606558" type="tel" inputmode="tel" autocomplete="tel" placeholder="0866 169 569" required aria-describedby="reg-phone-hint reg-phone-error" />
+                    <p class="field-hint text-[0.75rem] text-text-3" id="reg-phone-hint">Chỉ dùng để liên hệ tư vấn.</p>
+                    <p class="field-error text-xs text-danger" id="reg-phone-error" hidden></p>
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div class="field flex flex-col gap-1.5">
+                    <label class="font-label-md text-xs font-bold text-on-surface" for="reg-child">Tên của con *</label>
+                    <input class="bg-surface-container px-3.5 py-2.5 rounded-lg text-sm text-on-surface border border-outline-variant focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all" id="reg-child" name="child" data-entry="entry.1215349974" type="text" placeholder="Tên học viên" required aria-describedby="reg-child-error" />
+                    <p class="field-error text-xs text-danger" id="reg-child-error" hidden></p>
+                  </div>
+                  <div class="field flex flex-col gap-1.5">
+                    <label class="font-label-md text-xs font-bold text-on-surface" for="reg-grade">Lớp của con *</label>
+                    <select class="bg-surface-container px-3.5 py-2.5 rounded-lg text-sm text-on-surface border border-outline-variant focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all cursor-pointer" id="reg-grade" name="grade" data-entry="entry.1485252148" required aria-describedby="reg-grade-error">
+                      <option value="">Chọn cấp lớp</option>
+                      <option>Lớp 2 trở xuống</option>
+                      <option>Lớp 3</option>
+                      <option>Lớp 4</option>
+                      <option>Lớp 5</option>
+                      <option>Lớp 6-7</option>
+                      <option>Lớp 8-9</option>
+                      <option>Lớp 10 trở lên</option>
+                    </select>
+                    <p class="field-error text-xs text-danger" id="reg-grade-error" hidden></p>
+                  </div>
+                </div>
+
+                <div class="field-trap" aria-hidden="true"><label for="reg-website">Website</label><input id="reg-website" name="website" type="text" tabindex="-1" autocomplete="off" /></div>
+
+                <div class="field field--full flex flex-col gap-1.5">
+                  <label class="font-label-md text-xs font-bold text-on-surface" for="reg-note">Ghi chú <span class="field-optional font-normal text-text-3">(không bắt buộc)</span></label>
+                  <textarea class="bg-surface-container px-3.5 py-2.5 rounded-lg text-sm text-on-surface border border-outline-variant focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all resize-none" id="reg-note" name="note" data-entry="entry.153390468" rows="2" placeholder="Ví dụ: con học lớp 4, muốn học buổi tối trong tuần."></textarea>
+                </div>
+
+                <div class="field field--full reg-form__submit pt-2 flex flex-col sm:flex-row items-center gap-3">
+                  <button class="btn btn-accent btn-lg w-full sm:w-auto bg-secondary text-on-secondary font-button-text px-8 py-3.5 rounded-full shadow-md hover:bg-secondary-container transition-all flex items-center justify-center gap-2" type="submit">
+                    <span>Gửi đăng ký</span>
+                    <span class="material-symbols-outlined text-[18px]">send</span>
+                  </button>
+                  <p class="reg-form__aside text-xs text-on-surface-variant">Hoặc gọi <a class="text-primary font-bold hover:underline" href="tel:0866169569">0866 169 569</a></p>
+                </div>
+                <p class="form-status" data-form-status role="status" aria-live="polite"></p>
+              </form>
+            </div>
+          </div>
         </div>
       </section>
-
-      <section class="page-section page-section--soft" id="featured-courses" aria-labelledby="courses-heading">
-        <div class="wrap">
-          <div class="page-section__head">
-            <h2 class="h2" id="courses-heading">Lộ trình đúng cho từng mục tiêu</h2>
-            <p class="lead">Ba nhóm chương trình nối tiếp từ nền tảng đầu đời đến học thuật và các kỳ thi quan trọng.</p>
-          </div>
-          <div class="home-programs">
-            <a class="home-program-card home-program-card--primary reveal" href="course.html?course=happy-kids">
-              <figure><img src="images/course-happy-kids.jpg" alt="Học viên nhỏ tuổi trong lớp Happy Kids" width="1280" height="960" loading="lazy" decoding="async" /></figure>
-              <span class="home-program-copy"><small>Nền tảng đầu đời</small><strong>Happy Kids</strong><em>Xem chương trình</em></span>
-            </a>
-            <a class="home-program-card reveal" href="courses.html#catalog" style="--d: 60ms">
-              <figure><img src="images/course-movers.jpg" alt="Học viên tham gia chương trình Cambridge" width="1279" height="583" loading="lazy" decoding="async" /></figure>
-              <span class="home-program-copy"><small>Starter đến PET</small><strong>Cambridge</strong><em>Khám phá lộ trình</em></span>
-            </a>
-            <a class="home-program-card home-program-card--compact reveal" href="courses.html#catalog" style="--d: 100ms">
-              <figure><img src="images/course-ielts.jpg" alt="Học viên trong lớp luyện thi học thuật" width="1280" height="960" loading="lazy" decoding="async" /></figure>
-              <span class="home-program-copy"><small>Học thuật và luyện thi</small><strong>IELTS, chuyển cấp, đại học</strong><em>Xem các khóa học</em></span>
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <section class="page-section" id="method" aria-labelledby="method-heading">
-        <div class="wrap home-method">
-          <figure class="home-method__visual reveal"><img src="images/about-program.jpg" alt="Giáo viên tương tác cùng nhóm học viên trong giờ học" width="1280" height="960" loading="lazy" decoding="async" /></figure>
-          <div class="home-method__copy">
-            <h2 class="h2" id="method-heading">Hiểu, thực hành, nhận phản hồi và tiến bộ</h2>
-            <p class="lead">Mỗi buổi học kết nối kiến thức với tình huống sử dụng, để học viên hiểu rõ và tự tin hơn qua từng giai đoạn.</p>
-            <ol class="principles-list">
-              <li class="principle"><span class="principle-index">01</span><div><h3>Kiểm tra điểm bắt đầu</h3><p>Tư vấn lộ trình dựa trên năng lực hiện tại và mục tiêu học tập.</p></div></li>
-              <li class="principle"><span class="principle-index">02</span><div><h3>Học qua tương tác</h3><p>Kết hợp bốn kỹ năng với hoạt động giúp học viên chủ động sử dụng.</p></div></li>
-              <li class="principle"><span class="principle-index">03</span><div><h3>Theo dõi từng giai đoạn</h3><p>Quan sát tiến độ để hỗ trợ phần cần ưu tiên tiếp theo.</p></div></li>
-            </ol>
-            <a class="text-action" href="about.html">Tìm hiểu phương pháp</a>
-          </div>
-        </div>
-      </section>
-
-      <section class="page-section page-section--soft" id="results" aria-labelledby="results-heading">
-        <div class="wrap home-evidence">
-          <div class="home-evidence__copy">
-            <h2 class="h2" id="results-heading">Kết quả được nhìn thấy bằng dữ liệu thật</h2>
-            <p class="lead">71 phiếu điểm đã được tổng hợp theo từng kỳ thi và ẩn thông tin cá nhân trước khi công bố.</p>
-            <dl class="home-evidence__stats">
-              <div><dt>28</dt><dd>Kết quả KET</dd></div>
-              <div><dt>11</dt><dd>Kết quả PET</dd></div>
-              <div><dt>8</dt><dd>Kết quả IELTS</dd></div>
-              <div><dt>24</dt><dd>Kết quả tuyển sinh 10</dd></div>
-            </dl>
-            <div class="page-actions"><a class="btn btn-accent" href="achievements.html">Xem thành tích học viên</a></div>
-          </div>
-          <figure class="home-evidence__visual reveal"><img src="images/IMG_20260803_171902.jpg" alt="Lễ vinh danh và chứng nhận kết quả của học viên" width="841" height="1075" loading="lazy" decoding="async" /></figure>
-        </div>
-      </section>
-
-      <section class="page-section home-register" id="register" aria-labelledby="register-heading"><div class="wrap"><div class="contact-form-shell"><span class="section-label">Đăng ký tư vấn</span><h2 class="h2" id="register-heading">Kiểm tra trình độ miễn phí</h2><p class="lead">Để lại thông tin, trung tâm sẽ gọi lại trong giờ làm việc để trao đổi và xếp lịch.</p>
-        <form class="reg-form" data-reg-form data-mode="google-form" data-endpoint="https://docs.google.com/forms/d/e/1FAIpQLScZ61EKmEnvKekNxQALbSdPsFqJ7B7WB7fUYYF63QL_F_7sKg/formResponse" novalidate>
-          <div class="field"><label for="reg-name">Họ và tên phụ huynh</label><input id="reg-name" name="name" data-entry="entry.380148302" type="text" autocomplete="name" required aria-describedby="reg-name-error" /><p class="field-error" id="reg-name-error" hidden></p></div>
-          <div class="field"><label for="reg-phone">Số điện thoại</label><input id="reg-phone" name="phone" data-entry="entry.1988606558" type="tel" inputmode="tel" autocomplete="tel" required aria-describedby="reg-phone-hint reg-phone-error" /><p class="field-hint" id="reg-phone-hint">Chỉ dùng để liên hệ tư vấn.</p><p class="field-error" id="reg-phone-error" hidden></p></div>
-          <div class="field"><label for="reg-child">Tên của con</label><input id="reg-child" name="child" data-entry="entry.1215349974" type="text" required aria-describedby="reg-child-error" /><p class="field-error" id="reg-child-error" hidden></p></div>
-          <div class="field"><label for="reg-grade">Lớp của con</label><select id="reg-grade" name="grade" data-entry="entry.1485252148" required aria-describedby="reg-grade-error"><option value="">Chọn cấp lớp</option><option>Lớp 2 trở xuống</option><option>Lớp 3</option><option>Lớp 4</option><option>Lớp 5</option><option>Lớp 6-7</option><option>Lớp 8-9</option><option>Lớp 10 trở lên</option></select><p class="field-error" id="reg-grade-error" hidden></p></div>
-          <div class="field-trap" aria-hidden="true"><label for="reg-website">Website</label><input id="reg-website" name="website" type="text" tabindex="-1" autocomplete="off" /></div>
-          <div class="field field--full"><label for="reg-note">Ghi chú <span class="field-optional">(không bắt buộc)</span></label><textarea id="reg-note" name="note" data-entry="entry.153390468" rows="3" placeholder="Ví dụ: con học lớp 4, muốn học buổi tối trong tuần."></textarea></div>
-          <div class="field field--full reg-form__submit"><button class="btn btn-accent btn-lg" type="submit">Gửi đăng ký</button><p class="reg-form__aside">Hoặc gọi <a href="tel:0866169569">0866 169 569</a></p></div><p class="form-status" data-form-status role="status" aria-live="polite"></p>
-        </form>
-      </div></div></section>
-
     </main>
 
+    <!-- Mobile Action Bar -->
     <nav class="mobile-action-bar" aria-label="Hành động nhanh">
       <a class="mobile-action-bar__phone" href="tel:0866169569">Gọi tư vấn</a>
       <a class="mobile-action-bar__register" href="#register">Kiểm tra trình độ miễn phí</a>
     </nav>
 
-    <footer class="site-footer"><div class="wrap footer-grid"><div class="foot-brand"><div class="foot-logo"><img src="images/logo.png" alt="" width="46" height="46" class="foot-logo-img" /><span class="foot-name">THIEN UY ENGLISH CENTER</span></div><p class="foot-tag">Tiếng Anh vững vàng, tương lai tươi sáng.</p><div class="socials" aria-label="Mạng xã hội"><a href="https://www.facebook.com/anhngunancyanphu?locale=vi_VN" target="_blank" rel="noopener" aria-label="Facebook của trung tâm">f</a><a href="https://zalo.me/1175234011658712481" target="_blank" rel="noopener" aria-label="Zalo của trung tâm"><img src="images/zalo-icon.png" alt="" width="20" height="20" /></a></div></div><nav class="foot-col" aria-label="Khám phá website"><h3>Khám phá</h3><a href="about.html">Giới thiệu</a><a href="teachers.html">Đội ngũ giáo viên</a><a href="courses.html">Khóa học</a><a href="learning-path.html">Lộ trình học</a><a href="achievements.html">Thành tích</a><a href="activities.html">Hoạt động</a><a href="knowledge.html">Kiến thức</a><a href="faq.html">Hỏi đáp</a></nav><div class="foot-col foot-col--contact"><h3>Liên hệ</h3><p><a href="tel:0866169569">0866 169 569</a></p><p><a href="mailto:thienuy@gmail.com">thienuy@gmail.com</a></p><p>Đường Nguyễn Văn Trỗi, An Phú, Hồ Chí Minh 75256</p><p>Thứ Hai đến Chủ Nhật, 08:00-19:30</p><p><a href="contact.html">Bản đồ và đăng ký</a></p></div></div><div class="foot-bottom"><div class="wrap">© 2026 Thien Uy English Center.</div></div></footer>
+    <!-- Stitch Footer -->
+    <footer class="site-footer w-full bg-surface-container-high pt-12 pb-6 border-t border-outline-variant/30">
+      <div class="wrap footer-grid max-w-container-max mx-auto px-4 md:px-margin-desktop grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+        <div class="foot-brand flex flex-col gap-3">
+          <div class="foot-logo flex items-center gap-2.5">
+            <img src="images/logo.png" alt="" width="42" height="42" class="foot-logo-img rounded-lg" />
+            <span class="foot-name font-headline-md font-bold text-primary text-base">THIEN UY ENGLISH CENTER</span>
+          </div>
+          <p class="foot-tag text-sm text-on-surface-variant">Tiếng Anh vững vàng, tương lai tươi sáng.</p>
+          <div class="socials flex items-center gap-3 pt-1" aria-label="Mạng xã hội">
+            <a class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-primary hover:bg-primary hover:text-on-primary transition-all" href="https://www.facebook.com/anhngunancyanphu?locale=vi_VN" target="_blank" rel="noopener" aria-label="Facebook của trung tâm">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H7.5v-3H10V9.5C10 7.01 11.49 5.6 13.78 5.6c1.1 0 2.25.2 2.25.2v2.47h-1.27c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.45 3H13.13v6.8c4.56-.93 8-4.96 8-9.8z" /></svg>
+            </a>
+            <a class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center hover:scale-105 transition-transform" href="https://zalo.me/1175234011658712481" target="_blank" rel="noopener" aria-label="Zalo của trung tâm">
+              <img src="images/zalo-icon.png" alt="" width="18" height="18" />
+            </a>
+          </div>
+        </div>
+
+        <nav class="foot-col flex flex-col gap-2" aria-label="Khám phá website">
+          <h3 class="font-label-md text-xs font-bold text-on-surface uppercase tracking-widest mb-1">Khám phá</h3>
+          <div class="grid grid-cols-2 gap-2 text-sm">
+            <a class="text-on-surface-variant hover:text-primary transition-colors" href="about.html">Giới thiệu</a>
+            <a class="text-on-surface-variant hover:text-primary transition-colors" href="teachers.html">Đội ngũ giáo viên</a>
+            <a class="text-on-surface-variant hover:text-primary transition-colors" href="courses.html">Khóa học</a>
+            <a class="text-on-surface-variant hover:text-primary transition-colors" href="learning-path.html">Lộ trình học</a>
+            <a class="text-on-surface-variant hover:text-primary transition-colors" href="achievements.html">Thành tích</a>
+            <a class="text-on-surface-variant hover:text-primary transition-colors" href="activities.html">Hoạt động</a>
+            <a class="text-on-surface-variant hover:text-primary transition-colors" href="knowledge.html">Kiến thức</a>
+            <a class="text-on-surface-variant hover:text-primary transition-colors" href="faq.html">Hỏi đáp</a>
+          </div>
+        </nav>
+
+        <div class="foot-col foot-col--contact flex flex-col gap-2 text-sm text-on-surface-variant">
+          <h3 class="font-label-md text-xs font-bold text-on-surface uppercase tracking-widest mb-1">Liên hệ</h3>
+          <p><a class="text-primary font-bold hover:underline" href="tel:0866169569">0866 169 569</a></p>
+          <p><a class="hover:underline" href="mailto:thienuy@gmail.com">thienuy@gmail.com</a></p>
+          <p>Đường Nguyễn Văn Trỗi, An Phú, Hồ Chí Minh 75256</p>
+          <p>Thứ Hai đến Chủ Nhật, 08:00-19:30</p>
+          <p><a class="text-secondary font-bold hover:underline" href="contact.html">Bản đồ và đăng ký</a></p>
+        </div>
+      </div>
+      <div class="foot-bottom border-t border-outline-variant/30 pt-4 text-center text-xs text-on-surface-variant">
+        <div class="wrap max-w-container-max mx-auto px-4">© 2026 Thien Uy English Center. All rights reserved.</div>
+      </div>
+    </footer>
     <script src="script.js?v=20260828-professional-compact" defer></script>
   </body>
 </html>
