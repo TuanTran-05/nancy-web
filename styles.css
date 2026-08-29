@@ -1139,17 +1139,18 @@ textarea {
 
 .reg-form {
   margin-top: clamp(14px, 1.8vw, 20px);
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
 }
 .field {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 5px;
-  align-content: start;
 }
 .field--full {
-  grid-column: 1 / -1;
+  width: 100%;
 }
 .field label {
   color: var(--text);
@@ -1868,10 +1869,6 @@ a.contact-card:hover {
   .mobile-action-bar__register {
     background: var(--accent);
     color: #fff;
-  }
-
-  .reg-form {
-    grid-template-columns: 1fr;
   }
   .contact-cards,
   .contact-actions {
