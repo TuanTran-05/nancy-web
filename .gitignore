@@ -11,3 +11,5 @@ _private/
 # Tạm
 *.zip
 __pycache__/
+.claude/
+.codegraph/
