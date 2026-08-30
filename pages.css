@@ -173,6 +173,14 @@
   margin-bottom: clamp(18px, 2.4vw, 32px);
 }
 
+.page-section__head.flex,
+.page-section__head.max-w-full,
+.page-section__head.w-full,
+.page-section__head--full {
+  max-width: 100%;
+  width: 100%;
+}
+
 .page-section__head .lead {
   max-width: 62ch;
   margin-top: 8px;
