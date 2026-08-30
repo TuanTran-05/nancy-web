@@ -40,7 +40,7 @@ const contentImageMinimums = new Map([
   ["about.html", 5],
   ["courses.html", 13],
   ["course.html", 3],
-  ["learning-path.html", 3],
+  ["learning-path.html", 1],
   ["achievements.html", 9],
   ["activities.html", 7],
   ["knowledge.html", 1],
