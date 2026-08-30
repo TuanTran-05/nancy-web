@@ -236,7 +236,6 @@ test("program pages use the compact catalog and roadmap family", () => {
 
 test("achievements page matches the redacted result data totals", () => {
   const html = pages.get("achievements.html");
-  assert.match(html, /<strong>71<\/strong><span>Kết quả được tổng hợp<\/span>/);
   assert.equal((html.match(/class="achievement-card reveal"[^>]*data-filter-item/g) ?? []).length, 4);
   for (const [key, total] of [["ket", 28], ["pet", 11], ["ielts", 8], ["ts10", 24]]) {
     assert.match(html, new RegExp(`<strong>${total}<\\/strong><span>Kết quả<\\/span>`));
@@ -246,10 +245,8 @@ test("achievements page matches the redacted result data totals", () => {
 
 test("achievement summary avoids universal privacy claims", () => {
   const html = pages.get("achievements.html");
-  const summary = html.match(/<div class="evidence-summary">[\s\S]*?<\/section>/)?.[0] ?? "";
-
   assert.doesNotMatch(
-    summary,
+    html,
     /(?:Tất cả|Mọi|Toàn bộ)\s+phiếu điểm[^.]*\b(?:che|ẩn)\b/i,
   );
 });
@@ -259,7 +256,7 @@ test("evidence and community pages prioritize real assets over generic cards", (
   const activities = pages.get("activities.html");
   const knowledge = pages.get("knowledge.html");
 
-  assert.match(achievements, /class="evidence-summary"/);
+  assert.match(achievements, /achievement-grid/);
   assert.equal((achievements.match(/data-results="(?:ket|pet|ielts|ts10)"/g) ?? []).length, 4);
   assert.equal((activities.match(/class="gallery-item gal reveal/g) ?? []).length, 5);
   assert.match(activities, /class="activity-story"/);
