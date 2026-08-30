@@ -291,6 +291,7 @@
   display: grid;
   grid-template-columns: minmax(280px, 0.72fr) minmax(0, 1.28fr);
   gap: clamp(24px, 4vw, 56px);
+  align-items: start;
 }
 
 .principles-intro {
@@ -300,7 +301,7 @@
 }
 
 .principles-intro .h2 {
-  max-width: 12ch;
+  max-width: 20ch;
 }
 
 .principles-intro .lead {
@@ -309,35 +310,18 @@
 
 .principles-list {
   display: grid;
+  gap: 12px;
 }
 
 .principle {
-  display: grid;
-  grid-template-columns: 70px minmax(0, 1fr);
-  gap: 20px;
-  padding: 18px 0;
-  border-top: 1px solid var(--line);
-}
-
-.principle:last-child {
-  border-bottom: 1px solid var(--line);
-}
-
-.principle-index {
-  font-family: "Baloo 2", "Be Vietnam Pro", sans-serif;
-  color: var(--accent-ink);
-  font-size: 1.55rem;
-  font-weight: 800;
+  display: block;
 }
 
 .principle h3 {
-  font-size: var(--fs-h3);
   color: var(--brand-ink);
 }
 
 .principle p {
-  max-width: 56ch;
-  margin-top: 6px;
   color: var(--text-2);
   line-height: 1.6;
 }
