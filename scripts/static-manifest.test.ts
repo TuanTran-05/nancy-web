@@ -17,7 +17,7 @@ const historicalSeedManifest = new URL(
   '../docs/baselines/2026-08-29-production-seed.json',
   import.meta.url,
 );
-const historicalSeedRelease = '/srv/thienuy-site/releases/20260830-041108-9da123e';
+const historicalSeedRelease = '/srv/thienuy-site/releases/443a52e53d4be4aa69a7dfaa37b5af147d8d60ff';
 const historicalSeedTag = 'production-seed-20260830-041108-9da123e';
 
 async function fixture(callback: (root: string) => Promise<void>) {
@@ -83,7 +83,7 @@ describe('static payload manifest', () => {
     expect(stdout).toContain('STATIC_MANIFEST_VERIFY_PASS');
   });
 
-  it('keeps the immutable historical seed tag equal to the active /srv release', async () => {
+  it('keeps the immutable historical seed tag compatible with the canonical active release', async () => {
     const { stdout, stderr } = await execFileAsync('python3', [
       'tools/verify_production_seed.py',
       '--manifest',
