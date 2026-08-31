@@ -1,5 +1,5 @@
 import { chmod, lstat, mkdir, realpath } from 'node:fs/promises';
-import { dirname, resolve } from 'node:path';
+import { dirname, resolve, sep } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import {
   assertFreshDestination,
@@ -13,6 +13,25 @@ function fail(message) {
 
 function manifestsMatch(left, right) {
   return JSON.stringify(left) === JSON.stringify(right);
+}
+
+function isWithin(root, candidate) {
+  return candidate === root || candidate.startsWith(`${root}${sep}`);
+}
+
+async function secureDestinationRoot(sourceRoot, outputDir) {
+  const output = assertFreshDestination(sourceRoot, outputDir);
+  const parent = resolve(dirname(output));
+  const parentReal = await realpath(parent);
+  if (isWithin(sourceRoot.real, parentReal)) {
+    fail('destination parent resolves inside the source root');
+  }
+  if (parentReal !== parent) fail('destination parent chain must not contain symlinks');
+  const parentStat = await lstat(parent);
+  if (parentStat.isSymbolicLink() || !parentStat.isDirectory()) {
+    fail('destination parent must be a non-symlink directory');
+  }
+  return output;
 }
 
 function modesMatch(left, right) {
@@ -29,9 +48,7 @@ function modesMatch(left, right) {
 
 export async function buildStaticSite({ sourceDir, outputDir }) {
   const source = await inspectStaticTree(sourceDir);
-  const output = assertFreshDestination(source.root, outputDir);
-  const parent = resolve(dirname(output));
-  await realpath(parent);
+  const output = await secureDestinationRoot(source.root, outputDir);
   const existing = await lstat(output).catch((error) => (error.code === 'ENOENT' ? null : Promise.reject(error)));
   if (existing) fail(`destination already exists: ${outputDir}`);
 
