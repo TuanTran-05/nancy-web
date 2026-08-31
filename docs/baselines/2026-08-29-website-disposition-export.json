@@ -1,0 +1,1146 @@
+{
+  "schemaVersion": 1,
+  "kind": "canonical-disposition-export",
+  "payloadSha256": "09421ec7def0abbac9e1624d4c8c559edb3ce495f80abfd6abd3265535fa499d",
+  "payload": {
+    "schemaVersion": 1,
+    "surface": "website",
+    "candidate": {
+      "repository": "thienuy-website",
+      "gitSha": "53128492b2010f1a51020f22b56ad6abb848e2f2",
+      "treeSha": "796724d3c4b9362bfc5560e9bc1e66c6b542806e",
+      "manifestSha256": "218f620ffe5e75903e2cdd4296570388fb7c728cc3cb30802bd6aea44f3bbc70"
+    },
+    "ledger": {
+      "bytesSha256": "cf59163f29e91b28d77ee51835f86e7fa407a8ca6c0b7e4e92b4fb745ba16125",
+      "entryCount": 125
+    },
+    "entries": [
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "e63c73173ca4ff0842016e7c0d0bf8639715d0f16faf245ee44419c1b6ce06df",
+        "sourceContentSha256": "f8102bcd252d77ad93a1be58b217c40b13c7db676e679a11ead02aab65eddc41",
+        "disposition": "superseded",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "0eac2e11e2c52234884d15166b6d3fc3784b64f72340ec56f6d59a85be991918",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "1514341dcdc85803c9c27b13e81cf9dbe15e7346b5e7dbbf9c95f77c11dba98f",
+        "sourceContentSha256": "912f648b7a0cbbd3df91336d77be4597fd6a57f74125d51ff7f75f12daefd890",
+        "disposition": "superseded",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "93bc5ce09463165f41f927638afe2404ca82891435c66ba879293293d77ba7c6",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "213b4592d2cd4f8fdcd6662af74d8b724be72ed39cdeb5fe7ddd80bc437265f0",
+        "sourceContentSha256": "6c6cca5c442c13b2df8befe5fa2f4f735ff17ef4a5c28e9e79a096c628fef9e1",
+        "disposition": "superseded",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "3191e5cecd656011bca8173a4c1c9050b5e3ac3abdbb05811cdc66d770981c10",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "8abb16d7f563972fc72ca8b9357fecf77e3f9e4c676a1cb7d702139aa40683be",
+        "sourceContentSha256": "af6dea16067e2254339336baafd976cabcb0f5515a88013fe6637c30d476e15f",
+        "disposition": "superseded",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "5e4d3ebeb6ee0a64f450bc1352ce42930078966b5fba869fcf9d2218eacc1f65",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "ffb3a1a68d1d7a977849872ac42878257f42e4715feedb385a61e591886604d4",
+        "sourceContentSha256": "986ed2e2afc23ddf3f39bb3573edb05fc9cc93edaaabb9986744f975f6fd8004",
+        "disposition": "superseded",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "1b9e875f5f8cbade3a170e24f135f93c86ea11b605b74557c1882948a47bc53a",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "b99bed2126ae0e033a28a901b4a242f0c0b9f9f438ed3b91781c78ae54cd07aa",
+        "sourceContentSha256": "e333089a6d3c44347f5cae71b220141ff82d638894ac5a666daa64a105c424fa",
+        "disposition": "superseded",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "62202f77c945ea40d4d23af20d76cd5f1b479a3cb34c9ed25af141e766e78db6",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "dea0b2bf446c497df3e25965e1bbaff586c3dbe8e9b08bbf04fb44df9771266a",
+        "sourceContentSha256": "c0a6a28ee8002aa3142d201c0433e67dbba7d556ef40cddd32af770dba1aeff6",
+        "disposition": "superseded",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "92e9f34821f54d6bc987b37571d0a58677b855551c38da62a6c40f245b131b6b",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "bd054e67c3d246d825c5b4cebdfdc9cddc66ec3878003e878078eec48f935492",
+        "sourceContentSha256": "6face3004908e585aecff69cbd657c6ecfe83dc5b92fc75ba56ec14ecaeade00",
+        "disposition": "superseded",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "b9a0bea6477bc7173dea132516bca67ca8d291d58ef53ec60021012fdb505e99",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "0eb7558aa0e2ad8d9aae0305d0d2291c2dcaacf51be59ebfa0657cbe9f9cdee5",
+        "sourceContentSha256": "26fb4610d4bc976d2584ca15e66c11465dbc1f267a10dca668fcb3080dfe59c1",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "7b9c3601ddeb1730af628fd8607751dbe7a32f5b5f5943caf847ac7177fa79f7",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "2d3e8c5c53d096ad58931ee4f8ca211eadbcc01404d659a850977e89d4c17b13",
+        "sourceContentSha256": "fb54af34d6ce6b7c4211b20052150a7a01567cfa75818ac9cdd125e056fe861c",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "7100cf080a430dde06620e5048a729ac8af2f305355b98e50ef623a28a41076e",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "5e5575e99284550eafc9fc2c62f8b7cf2e8b06c7ca05fb3456589b661f7c6067",
+        "sourceContentSha256": "03d1b589cff172e1a670b3573e731d3380bc326f80cf83b0d3504e3188e2e074",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "cfac1e888c2ee44067d7b402c72074faf0361210f0c9ca70454a7f24b953a12a",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "121eedb2be7f1b1e47b01786b1527cb6327378acaf9aa1c161f3de907b3bf1bf",
+        "sourceContentSha256": "dc085e2fba3414e5c5bf1e6172f921a9f81c5859946a4ed3d63c1e470d96a9e2",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "1311b3a7bdffd22d7202f8e16f71f10ed946f8ed7f72d0cb5e4c63d2c2fe5123",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "77932168fd091d8b2f44642a30b2f512af27870279918bcc2e96fd6deb3e538c",
+        "sourceContentSha256": "b621f77d35f777023aa11ca524462d511b4b28a813adbc0e9d15a10fc61dfe4e",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "ef6b98c40c63c1dbaf2dcb1fcb2e6360ed165c5e0ddc125ec01868eba0d9b3aa",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "ce91feb0af8238585ad520725ca085279e40697cc72f39578c0c68099ee8a0a9",
+        "sourceContentSha256": "86341610cbe907eecf461c9159c168d5efb52bb1a33963813a08f520555d8e66",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "1297b3cfffb961fb3cfaec37132ccceadc5e2bb2283ef578cfe04c2becabadaa",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "7c9ba3afddd8dbff4a5ef4440fb889c7dd99c70f305d411ce461845131333c94",
+        "sourceContentSha256": "9503dec2a7c532c8331e9600bcafea287a4fd208573b8668d85ab8d8de1863c7",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "1a4a188d4ce80a73bfaec0918493a3edf4abd59be44c4cee36088786ead03ab9",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "1626494b394d22d0d1ec4fa36e3a36f440110ac80a1a08d60a4110f70bd3b1e4",
+        "sourceContentSha256": "97658c6f9a384f29a3005c3d96e2a0d1c810192cf68979071c290f5a377a9f99",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "88657939d551594ccab6a35370d2bcbdf358b81948b4e03232e472697de06f2d",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "d9f31f0e1a77c3a800e659d8be9b58e01ea9a2e9ddb0c0f01eddb0e14d006d6e",
+        "sourceContentSha256": "a193dd87699bd2e18ddf72dc271493ea82a23dad9f5c334d9f2a257b1e05fc30",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "78debf85e17ea42ff17ba7ce9908e8d71305797410b4168a32a9b1a1d75471fb",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "8c9b2eebf8963daedc83e7964fdaca9ddfcdcfa65679b90612b25fed41662928",
+        "sourceContentSha256": "4f58af2d1c3e28a9ba14c51c82db2751d78344b75bdcb34de24a1031ebe59da6",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "2313c6488be4a0d228b3404cb8693decf8663974173803306d97d07ab2ae7b88",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "fbba02208605d8db53bc84bfdf3b349f9467377e3806970c0794686a79d34870",
+        "sourceContentSha256": "7c5d0871188c09339a6eb46948420ed9b11f3d06ea3ff1c5d1cf41b06a3504e7",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "9e52c01d17cf56a5ebc5c9e30eca3c84241a0eedc793e3335ead73ce45e12ff9",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "5e1355de7cf1b8c2f7b5cb6029069c2b157d4fb50f9b1ee9c927d39b258e24cb",
+        "sourceContentSha256": "26b241d1d5f489c8a65c1a3c4cdcdb48dd114a9ed7e0c0180182191f087cbe96",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "5ad7ba8071bfdecae4069010749cc1242fb0a0c6d708472e2256fd39bdee9886",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "8075df2a4ff954d14f258491e531b4203c351cbb2d2c7699f2be5d5245dd8f42",
+        "sourceContentSha256": "e9b4630b6b4288a227a856a1dc54d185728b794e792c2074ffc5fe3a6204a58d",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "5549f368c8a3206c8ee916e6a6c8f988f5a29e29731ee65db093ff961cf8d5b1",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "1844b862b5ee28784937d481ba75d4181cc28e0adc7e9c59f855e64c5a8fe91d",
+        "sourceContentSha256": "9e7a80b54402c5cef36512d5015360bcc49bfbdf4ac9c4c280a75a4e8f405c28",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "406b78f9a7c3759171fe79490058334446a1795e03e410607bc42aa60f0569f8",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "f17740f73dff8fa6f85d8f7e09e3019adc339e632044907c713b5c79dcc8c0d4",
+        "sourceContentSha256": "73e0ccdfe178f1f7470536c275d6824de950ec4c84aa3d6353d6ab2b654dbadc",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "277fb255113b6fc46322e541af249ea0fa06bc681f08dce24d8ba03feb1924c2",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "fe12590438b844ec988076aa6454e1df3fa34b7817c4e6cf22bd645cd7e2585b",
+        "sourceContentSha256": "8a73d8eee1a4148ffa313d7f42a89bb65c04835de60237ce5f17c68b90b79ea9",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "eb8bed9566e3883e110ff56964d83bbe50e8905d67126ad8afd69d3c89a989a0",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "b0a3fdc6ebb3766d0a44eaadee85bfebdf4fc61d50beae22f18b4023e52bf601",
+        "sourceContentSha256": "69d1fcfb77016558aa79386efd577f7067b7d29bd0537d9860e48d45befc695d",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "6567d42617a3a654b5fc36d7f967ac1f8bc433af4d8a2a0270c3029fb154f80d",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "953a8cde936024df1db08f391c3bdcf7c4a21a6a9a4fad0c9720ca1ec7416ce9",
+        "sourceContentSha256": "93e634fdf498d03845d5977809912c32a9f717b66db41de26870f16567d3afc9",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "a4d6f52acab20b19ab5b0b4e2b6a0e6e2c3321b7c20e8872a7f3c6c3ecf9beb4",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "7e624935bc03744660f059cbb31d166e2e35b24cfd4242fba63fa888233f50b3",
+        "sourceContentSha256": "aaf3d4aebd1c5fbf166bc100362143c7c639bad3284ab441266dbaed030144df",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "a6359fc764a60fa8f73fcd45928b0dc991265744c5daaf5a6cfd02d251bcb85d",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "c1322be2b5e900708d7df94e32a95e468f1a6c30f1d8ecfe64174f2d89a9ccbb",
+        "sourceContentSha256": "3465abcaafb7bb93d50624678d9e8fafe8b8371182b0440d7049021ed4c00cd4",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "f088eef0b15bf290cc735496d0dba5d8013d1b98e16eb77437c28dd2b98e671a",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "8f50156bc839db356f2d4883952987aaf64bf1efb8bc7d80397a56064c115e02",
+        "sourceContentSha256": "35ddbb80fa5a3f159c192c0d33a37404be3c6e5baed2fc463a94bf1ff3114fce",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "5956e95f3ba4519e7ebf13be7800b94d84e3ac0e392754ce5c74693d6c9e54e7",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "49ec26dcefc61e8622d9555ba5fe3684844bb8314e867771d4df1f5f9ad92398",
+        "sourceContentSha256": "938a6aff4bdc00b51a2aecb25e1c5f587b091f531477388351dd3a6e4440ed06",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "9be8be686a648e5a8cd3a0c292bc9c2c5a2ae3dddb2433619646865ec00a35c4",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "ff7fd78175b4da6101d3ff02335b289bad235cba4916c4ff8748fb4cd289d5de",
+        "sourceContentSha256": "0e219ca8ed61ddfd8d62133a9e56c3547c2626423a66999995f50d4d89613f5c",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "1aa68bfa98ec7608cabbf302bce5b6cd9b9a8b17626f5232e50dcd7dffaeab7e",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "09c128e51e4b8e42b9bade1e949fa4c8fd8ac6ac1c2a0a72691b2b1f119601d8",
+        "sourceContentSha256": "1a5bf73827b4b8c0a0633472aed54e26c8a59b8896d1d29e3242e11af69d0181",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "ce848e54d25d8604a7be369a7ee834c4c11d02a7e0020adbbe491a6e5534a3cf",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "46d6ba42f8c60ba84184c5d010a0106c131c30c6566561c74d4c67e3b2490c40",
+        "sourceContentSha256": "3465abcaafb7bb93d50624678d9e8fafe8b8371182b0440d7049021ed4c00cd4",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "84caf29a969fb0f2ab15eb73183b4145e3e03b53709df0ef0eb0cf720844b685",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "d165e0ed724d401797dbb143195a8209fce33b232cdcea182dbe592ed7335c79",
+        "sourceContentSha256": "ea93dea9a2303b1e951a9d3002ca9884eeb4ccef68abbb8106814c91dd368010",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "9bfc2f0956124cb7e8a3e5811cc1224b94d31be240e47b823abb5364e386572b",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "7917271d7b76ae147f78b82777e5f6932b6d234b796b63e3394c5b21694a25b4",
+        "sourceContentSha256": "71ccf93134b7d36e596380cc797fabeedddca35338335711e17da247f3d08cd1",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "091c54a51559d63dd7668bfead87b22f22e5dbcfbd68d90fe7a7face1c8a2c4a",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "69467eb41be6bcccd26725102d264b7a6531d4655efc4eb1e2d50d0384737d45",
+        "sourceContentSha256": "4db2727e25a04b451dbf142c9e2fcb305f83dceb141d01042ed8e7edf003e9f3",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "cc26133237d894ec271d13c77f8f670f0773d99b9107db42bf5f60187b70ec56",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "b00284a3ed6fd1b26b1796aa421e17c670be58f4b6fa84cab3e65aced44dc287",
+        "sourceContentSha256": "bb4da81bc4e1c6646925dc6bec75fe747eec03c0ee7ace91caddb01b2ec3f326",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "4a915b9bb3a80357867d393ddd82eff4c0e42d6f22ef0280abf3ce9c6cd185f0",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "dbe0b54358a3a9c4564d411ec5feb1c0c683dcb05f2104a91ba3a3b7225647a7",
+        "sourceContentSha256": "ccc329a830b9422225a38cebb5a5c5c7670487abebbb8c239f1650410ac49870",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "e4cac6d62af5fd7ca87f295fd130942cfb7d502fdfeb5bc0d13370d7590fe789",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "e21a656cefe316107a92464ec6091375ea4420f7ee860946c183d9fcce6640f7",
+        "sourceContentSha256": "aa7a97875623f8fe8de44bc1cf62424010f8e2ae36306d7802f724a38eb7d523",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "4c99841e1a875b82623de958371ba02dd8c058db5166ee22ac93434115c56924",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "101757d1d197b5b0191d203bc94837431e0036ef183abdcd37fe113dbf51e354",
+        "sourceContentSha256": "c36ba0ebd583f90c31f86726776e69647dadd61548edb1469d47038614a8c640",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "4365994e3a0c873f6668c56fb838f3c44534593196813f74742bdc6cf58a1814",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "1443246e001776625932c139947fa074596b8a8c7ee5cfe0cf1f7b63f4be2cfb",
+        "sourceContentSha256": "a6469a99bc21be50ff8a99df9e35ccf340da33ecda0564dc7004b9607ceeee2f",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "e8cb9e245e4de8c10336e96d9e7be62e785e13106949d24d3049291e1b54e961",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "af861845cbe831924bd6f49c92b245726be567acdb9990d02c9a9f7e68884916",
+        "sourceContentSha256": "5495d2f86e7d757733d9037614879e783703a857df321237c253975af4f140de",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "29d15f96011feb680fe402c453eedbf2545ce8e0b86267450767188e040c75d3",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "c62d1abd98b0e9338fb949b25c7a52c5090f51d138556a00e3893a2b7120f6dc",
+        "sourceContentSha256": "c868a91c6eac6edad8ca4fc3ab8e11da080ff249690a4c7df500b0d904e44cdc",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "a30240e3f7039c475e49279c5169b48337a05fa5557e11bd284053962b2c513a",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "991ee392f515fa90da11a354800655f71d8805e65c7c8a629e22767e211f1a84",
+        "sourceContentSha256": "54b0d930f3bf965cdc9997878e6be5954652aab1d7551e1613dd63acf797b62a",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "aba8b2f8ff61b4b1cb327bbd93f94d401f44c31fd535d6b1e48da37778032022",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "2871023b998ee50842391073c479205823165f29663bfac90da3c007c90764b4",
+        "sourceContentSha256": "acfb834c1e1448891831eb585b4c4f205495d95112fd6e25c5f5116a97f299d5",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "3cc4816063e5d048490a0361b125d6215b3f2d4ef9c4995d88488de68d5d3126",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "c9a1833a54cd45616c8a5d1bc7d1ca93044d6f0727b464f040a3d2d499dfc1c4",
+        "sourceContentSha256": "99b1b2e797ae536bbddcb7b9b5f33d09c81e10d8dd6dae609c3447fdccb5799a",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "2cd158a8b645979dc709965e6d0bc449b79a44aabbe6dcae94d974c107a07f1a",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "191f4f079ebc9d6ce6ea52c010175a074c554463ecf0a23a25ee04fbe2964a5d",
+        "sourceContentSha256": "4ffb290141d996180eb992f938cc50b79b3f4685053c3ee4c9b78fcaf3945a6e",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "df1587c697e19ab26329cc2d36f4202f47a15458c8ea62fe1e52ff3222845498",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "9116db6f760351b97cae9e6579062d8d71bec06924e45b0f9c0bf30a094588bd",
+        "sourceContentSha256": "1a3918cb131a6256430b0cc72e34f48e094402507805372408638469d18f984d",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "8fef8352453f0294b39c72d3b1aca47fdcc1d72bc3137693c613915f546ac429",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "f34691e6a7ede9dc6acee640323d2b0e58c93115cbd9c4be1b82e19282273ea6",
+        "sourceContentSha256": "97a60d7a9f5b9990463e0aec4a62acbee2fbd417bbb876e833b699e7c0a22d91",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "516c6e8b6e70a09d2f007da6a98201aa3b371f932986b5ab9bcd8f9f367d9be1",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "6f1456e8c0cfce7bddbccac974e36d9221e60b596fc4da404dd70e6072acb0a1",
+        "sourceContentSha256": "bd932fff3e0a0c9fcd90a28e941b8d62c85526b43c43919935799f421338cdfd",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "2377fa35e007fa8a295fae3642d779af4addc1d12463a8595238966db9bbc017",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "08c9fb466972a42a1b2d2e8bce0ceddecec6a173774bf9bd2da1a24da15410ba",
+        "sourceContentSha256": "4105563cd3bc5cbce82a1ab62b45e29f0a6b14a2b042d6ed88bc76cb63764381",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "552a905f398d655618d7d4638aed39ac4e80a09957455bf5cfee2fdea9599af5",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "cca76a6124dbe2d657d86afbeb61508899e1e9d11ca4986b4b4bf557f0565811",
+        "sourceContentSha256": "f2f79e9ebf676c416e659200d2e3a50622ad252efbb744d3fdd03b947cb10d44",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "39db73f36a30873a12e6dd3e3de34360062e1dd2296fdc009a21ebea13ee7475",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "01279b0d7fb21e58fa5dac53ca9b415cc7c612146cd57ea9de2a1450c6826b87",
+        "sourceContentSha256": "a27b8be25346bf2ca290db6bbb7228eabfa98d32095fc61b235c850b1e3b2985",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "db5a83c3e81a927c236a65871b2dec7172aba9afece6c674ef2d1cf9cdb16fd7",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "39ee512662d4a05d302c051c2a8651f3d3bc6727bc1be5643ebb34ded78faeba",
+        "sourceContentSha256": "ae8dc2c729554a731b086c6c268c20843cfbca346ac9b3cf8a5e24db9d277249",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "eca103c6d93c6144d5a651cf27b17d644a26d247b6d042cd6fabe0d942ca26d5",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "9a35fe1390f88c44f30873fcf3a720432c551df04a551d01896b71a53f1a92cd",
+        "sourceContentSha256": "44677d580776b710aa149bd35cd8cbf25b66c464d55c2ec6b3ec4b88a7931845",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "36e71be32d9d945205211f4710c794a34d1fc90a95af42888aedc5d26b7ff963",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "9e99f967fa1c14295cfe4fb669abf35df3ff4e1ec5e905dfcfc7bb0da2f76596",
+        "sourceContentSha256": "4dd92b68373ccaac5288ea368cc4aed4b6a58b7f52364cf7d3ce43227faf7b1e",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "208bdb487103c6a2616a0719f20fa43985d295702d3696cac72c30510fe00b08",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "50bf92a8734606474a8e9f193b942b864cd4d205adfc19befe8f98e9448c9261",
+        "sourceContentSha256": "de53117141067e1f480bdc830a76ab6a10c77fb718a80a8f65b794f5508e74c4",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "142d7a63455ef833318dfeb5eb70b11d402c8f14613bc3abb92206dd6f79ff19",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "e6e3d9e0947be60efab3afcfcda10dd316948c40cba2ea45c99d759603f760b5",
+        "sourceContentSha256": "7e8616729e4984bd45c444df20b7a02879d79291bbc9797d650087035cbbddce",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "d3ec8eb35a34765f2cde22866e872fbd68c2a043845b61e806ce304a51dea016",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "2c506bc72c11ce3c4bcf40e7fd2736c9df1433c982c9e14160eb8058d1bc7c4f",
+        "sourceContentSha256": "1087f207cda074dc14c58b256c803ef29740898a427943283c695124939e05cc",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "27022bb89004dce333dbdf75352fda9648dfc06f572f10ef9c13dc0ef5ea9759",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "85cf69edfde0f1b88e5c38fb86f76dd222c2ebaad6e39b7d3aee39348646ad53",
+        "sourceContentSha256": "440b2831bc4de2fc3b46073f89fa2fa023dfd2efffcb35ff093f2cd140d475e9",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "21ce96a90f60a397e1c2d7a408ca464a8e6ec454843965dc165ac739f3ea2dc9",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "e22cc5f6510736138074f7c277294533ee7d24b8d4b7053ee97319935fa4eb05",
+        "sourceContentSha256": "a203144e4ff2e5d24b71715e0d425d75e66d741bb7253728c54cbeb5f49881e5",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "ecc9dc7b481f37118e17909c60d2c126d2b104ec6610b3dd19cac3f4d9c9c0e2",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "c5a085052d392e65e85f239ce066338c41ce04307a881ef7a4397ed282189441",
+        "sourceContentSha256": "62f6a71c48e9b81ea9193800cc1abac2920ba042e31578a1041afc2ed41e4395",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "7d6a7191e247ab150aa6d711e04ce4a7210ec20177eb6431175624792cad6758",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "70723c30c88e3538d427d95f994f5c9626917d383553ae4bb5048ed7c6602ecc",
+        "sourceContentSha256": "903d5f805119c654fb2d55b80893114fe48e048e7640b29e640ebdb8923d671f",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "f74b449ac1371f5c4efc1cca14f198ddbea032b0287feb620a9c88ab7100ab38",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "49c2c1eda62a767d79132b493e2711574dd3563fb79edd8d86e2f7417583ced1",
+        "sourceContentSha256": "f677c35212a13ecca40d38b2a2de07489ca8724b3965dd376d0b6d8e7d11ad1f",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "dcfd414f423a3f78dd30f422c568ddaaf8928ae9389dfd1d725e2b6cb6cd3995",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "0eed8a7c6bac974f0f9406c41920e40f7056ee2db25a91e80669652b134042b9",
+        "sourceContentSha256": "a0d419af3c7e820492db9442600965dcc90eb5c789819e855b175223e1f1a80f",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "6b66a0b4273453081dfaba8d7f48fbea939e61c68ac6bbcb8bdbeed7d144120a",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "30866639d1a3b2819c5d835ff85b705de4e19147f302d21e8aa8cc10e3f91689",
+        "sourceContentSha256": "9650035a553b84a8c8a97bfc5d827aacafe3465bff47744f6adab1616cca9ca2",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "0f05aed729badac2e7929808e4981acf7e03e56745c77c20c0d70430cbf79bac",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "64424f1dcba29257ed01bca9162a78156668a6137ddb9d01409f9a126f72841f",
+        "sourceContentSha256": "9b010e6e75224ee6f91b5b15990777ef5b19c3f426866b18da96b8497b6b8c6f",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "147fe8b22e5db30af7bcb33ebd98e55e60a1d1ec482a23dcd0cbb62d2bfe9571",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "d06eec369b9c7cb8bc632af7ba7476903520dd4a1599e9a7ff50865206f8577c",
+        "sourceContentSha256": "331d88557554c115fcb73d36a42a2306e04ff03e6f36fa21f1d7dacec3b57f07",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "9884d9d2fbecc28e3a537d6c973684cbcb733b06153cbf33d02cdf9a6b997304",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "95426f0cd6861309eccf6abd372eb95bad616fb09c6d0fcaeba7d4a9800bfed6",
+        "sourceContentSha256": "1de047b1f775291d1b77fb4ebed927a5497ec4c4dac1eb89aef09ccbbca3374e",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "804968a748f2602803fd3aa6cb95a67de949a20f4f0786bb259fdeb58c2607f9",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "78ebb1b85c7c0cfe67064f6e9cd2ce73f8387399376d8c1f121f3c8cb33f64d0",
+        "sourceContentSha256": "e24e32f2a59fee565af8056171a7a0ddff26e9fc7b052b5ca2266e2a989bd8fe",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "f30ef85d6c4210d6820554e47a5d4f4b52ed24598d26c5c118ef6582d6781f4a",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "795c65d21cd0265a63e3641ebdb3cf5ea7122bc7ab32b1fce6c9bd12648e9658",
+        "sourceContentSha256": "0e32c6aae9ccb038a30333810c2a834f6919b88a0caf93457ebcb31ed0d92ed9",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "e52e11df20d39b6f49028d9cbddfed2f48b201ba9fd62b3181fa955b6555675a",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "88e145f342aa7674cd3e566ee11a363193fb9eeace19feb7442379719038f5b2",
+        "sourceContentSha256": "b27fa182679283b91be3fc6a5301b3de3460fed0bbd58178820fccab8e56a65c",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "d9dc1ee0b1538b3a28224c0fdf3643a24eff2c87d1ab74db00da0f06a9a6cbda",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "72a501a6f2c7e15091e5b179cda978ffd2bdbcbeb9d0cf7de5b6f0ba0cd3c202",
+        "sourceContentSha256": "5ca7383b7b09f65267c6a442a65789519814999183aacdbb8cc2a2e5bc4c3e37",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "1e041201184aab1ca1407ad74a0bd3f08e02ad43b32276cc54c97cc76c98a69b",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "0aff14050b6c4504e3c690e16c0b30599df225c7ac07d2ea69d19fcaab38ea31",
+        "sourceContentSha256": "6ef76601664a23cd480d91a371ec2bd3d179c13b907eea2c2a52c98d227b914a",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "0754df35bad7cd5c92831d311dffce3bc80d810d41af5fdd100c02771ed3b8e2",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "dbedeb98677b53602327900539485d85fad015c838c54f4d85e2093d79e537d1",
+        "sourceContentSha256": "bc316aedf3981dc4c259e96e19e35a6aa300d186a7c03209973d9bacdcc2c5e0",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "b5c1b300b79ce68fdc9c1c1a54d4e952ebaac17abb7c5eca5f3b4cb345251a9b",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "6002f5a5e4147ef29f812601eb99c52bccf57381183e2ddc620f6d67d5925f53",
+        "sourceContentSha256": "968568fc976b0bff613a03920985fccae2e261165a974b896806875577c50280",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "638d0f2ba554a44d88f67c40c6398e737c658804f055eb3ff41d036a61b8293c",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "59c0d6e752ddc9a103729023b1072120d6b114d339a30861d0899c53188a6ab0",
+        "sourceContentSha256": "78241f8d3f509bdab4a831ce9e0a19de6a8e190bbfd4cab0a6e5cef11463fe0a",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "6b32d240c0bd06d7eca2680b367cb6c6cba38d19edc1659dce24ed63d84da98f",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "c1cb9e4931a728ed95d0f5371e3c01bbc118edfbba64bf47043b2e62b81ef7c7",
+        "sourceContentSha256": "79c41517574e11f90c42c02efefbbcb691bf58bd873aa2884370a2db22b330bf",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "bf6b6efd3ce19ce84c246e152141704cbb6c793b16456097854a9955c8103dbd",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "62e8023a942a27c379fbfd67a671cd74f0342c1ecf3d13e0383d98f0f2844823",
+        "sourceContentSha256": "2aa36b66375d2bd48723ad934a2ed7d2452f854bdbdcb6a73932f49d76c7f1c7",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "9630f8b57368b62957a44dbecbde76241c748a281e16e8bf065d541a6181d1ec",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "34fad10c600f7d3a2dfc40df48dfd4f1e7936d0081dd1f970a1b9b46a5bb6491",
+        "sourceContentSha256": "60f3d6f9a56410c8d5c46a180688571f59faf7d851a160d393cb6cf6c490f832",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "cc93392e71891288291f4db8bbf2ab85ea296d34fc427371388556a7277ee293",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "979babed823a9f312c03aea3e89f6c4cd96c6a4e961227d81532d2e38b12ac47",
+        "sourceContentSha256": "62237d238e7f5dfc7a4778c6f5af03deb494f3000f269d47dd54c3c5aeb739e3",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "df028d30350db7e6e1528947bfd64403381dd4c926b2344590fd319bec132f6c",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "554f476fcc727a4f4505a23edc0ded2df1299084ce9c9f739de9cd0ab63bc25f",
+        "sourceContentSha256": "5b2c1418e4c503065779b11b861626352df7cb64359c584bc95c08d991cc65b9",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "b39ed65c8ca9e44ed56a784156e16339c9d8a5f48560990d9514a3d6816fb501",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "6b6a4907ded4fbdb77db11ec7af6bb2249cada81ff393367ed1c7f5675813c58",
+        "sourceContentSha256": "8980c2bf70aa2305e4732a0aebf6ae30108b6d41a47bda103224a69497d0d41d",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "1b7261bba30ece1857c481363973a1ebc6eaf98cdb63ead26ea916bdea83fb6b",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "664d6ae46f0bfcbaf423f5a4e3db961ad22f314ef16e232e24b77a5a1c722644",
+        "sourceContentSha256": "93427ac30279bfbda2a901f504453e3e72515648fd4fab28b0cdab1c71b837ba",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "f9c760a0ea9fc5e1e1d4b12c514390b0d8a8af56b45549ce1808e2d0e3011355",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "c3a4589f37d4654ce156bd007acf179245cffb7f57c721b28f43f3ee9454646c",
+        "sourceContentSha256": "8d01e94d90cde8714acc7fe2673fd1cd94baec49e52b7a5bb0c8bb344d346935",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "253f70ab65eb1ffaa74b9106a0660c18b06bdf592e983a4e534a84a945be98d3",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "b6ec83b7cd30ea0bc7d7602ee14f9d4277582073b9963aa1da27a79358ce25b8",
+        "sourceContentSha256": "a5ed66ffe7405a894f7d98a62001fef8aabb9a53340871cd00e8cbebff834dec",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "17a550482bbda77b8ca4d8fc81ee1b9ba98ca5c05422737abb5299af265f8043",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "bfd3199886d27e672b0a88b2ef78bdd636eed7cdabe94f67e76b4c2d7901f126",
+        "sourceContentSha256": "736eb10b487cd7d2819a32c0e420187d17d7567b10ed04d0aad2cdde1fa088bc",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "0e1211e41f1d120ce7ab5cf5ac12d259351d80fb5cae3fdb110bb2ec654febc5",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "625baadb98097043be34ae95275e5d7892c9779a3a432c59e8c366facc62f3b8",
+        "sourceContentSha256": "1a25b9d7bf615d06ee8f7441f813c89ccb3381f4d550b1a7ebc76d08a9974e5f",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "fac0fa531f742109c1ed7c851438091d9d46c23334a4fbddb0b7acbf559580d4",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "5d63bea48d3f5f4ae3814bda34b25b949b0cacd77f69a08d9cd0ee5868349c2a",
+        "sourceContentSha256": "4d30533e9b9824b9d2b6d6e0c507ee284593678a40ef9f560f1fa8427d23c856",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "b4ca1678aa1a2acb38c87e4669f8747b5cf7ab4e7aa466ebcd5d515797a39be5",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "7db8a6d4d14795974f341c31e848e6b6595943f0bd656ac2f02889f1b18f39fe",
+        "sourceContentSha256": "f3f089b7b14b9a6d749935450789847fb7fb3a33684a4ab21389a2d699e0fb4e",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "0d098f0780570cea6faf557bb66bea73be497875f66b71bf055c90e7795dd00c",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "8f78f56fbf2480d492ac10fc4c52ee6685b7fdd498d4a8c4a1998b600289f77d",
+        "sourceContentSha256": "d1845daa239c2949587afa395f52a5e875f3cf358dad7d7abf976223092307b2",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "840ce25e68bd47840fe4144a6d3e63ab58e41c6fee7a2479de8a1a684c9eb5f0",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "c135b0c96ee9ec637a8fe04a83d4c9435bf260c88183d00640de4c7db805752d",
+        "sourceContentSha256": "692049e7e66b542e8e4679c82591e0d03d8ccd51c73c2e7765e0e516dcf5876f",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "c379d3e4dfd73442939413f7dac9e7066b74581e9ed6f2f0adefa48eb3026385",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "2de1e6080c9f38aee97c27b3fb9c0246fb5176dbaef120ac46e7b73cc894769c",
+        "sourceContentSha256": "1a25b9d7bf615d06ee8f7441f813c89ccb3381f4d550b1a7ebc76d08a9974e5f",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "94f1faf8cc0081491fb19cbcee40690cdde48ec14c77e8d458944090cf31033d",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "2ff845f7286b77905e1e31c32ed8996e5cee33b33a64b5e27bc2149e7e016269",
+        "sourceContentSha256": "6ef8d48201759c05d54e872b24aaa2ede942b6fa5e5b210ab5dc06b061cf3377",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "34767d27268e58f6564f1eee64f8a4a6b7def247c5aac7384a0a3fd01ec74b75",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "cc1809889d56e33d0928ddee120d7ffaedb62dedc2036e9011505e81ab2a0d1b",
+        "sourceContentSha256": "b4d79fa0721170997ce8a2883f8906557e514c77ab75d1c3251c05425e74274c",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "d005265b80c1e4c65a0021564b45d37f5e22490fb92811382e09f5091f8dfe07",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "388c177c111533860efb68d41766b344be5e7eb318ccb89bafc296c98b3105fa",
+        "sourceContentSha256": "af925a0e2ea7ce2e3b3f68e37ca51bcaf1338a547fb541c28d42802d1d0ffdb8",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "944d07f273cbcd0a736529c206fcaadf92ac719f2700fcacee119f748b6d9dda",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "115ff0e755d171d6a02de882b43aac8ce790676930f606a00da29809cc68f406",
+        "sourceContentSha256": "eedc5161cc47e894c02e06cd3fd278a4b5298cfb0e4f93e441bbe8eb9e35bd56",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "bdce85b84b2a552c213b077439854f30cc27338a20decd03f13f595d0c5d90d9",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "23b56b9986123d13f1cd02541081667910c4b4bfdc293129ef8ecb34639cb6aa",
+        "sourceContentSha256": "65fffe6c1588627a64109a67f606b8c85d56c2587764ee59463f237886e7a1e6",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "8c1c632df1e802814e15e2a85b3a7b747e2d564797f784e5c56fbbdb22b9e063",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "3aa3b9a7bfc887db10afa372d62705023a568b0f2d2d7d82a843df2a7a923eb6",
+        "sourceContentSha256": "72a6227f1567faca47aecf1195ca8f4b08604f6bb6e6f2906b2afffb3ab32a6a",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "13b81d793806700fc0ccd2ce2b068c8c447c896288c8f72b519a2fa71b677f79",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "af7ef0f82014f5796a1cf2d83545a194eab1a1c3b2883d8478bd27a603bd2eab",
+        "sourceContentSha256": "ac8368f5d298524c147b763137d43b94e372b0fbc29fe359fc7b641265f4ccd3",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "93c51c0c9aa3726fc16a72baa4f378c9864f9731ac39a61d38b47addf1ebc4ae",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "3f228ac98155ec93f7cc467b0014e59a7904da2472a091c3aed82ce8984cf999",
+        "sourceContentSha256": "b4d79fa0721170997ce8a2883f8906557e514c77ab75d1c3251c05425e74274c",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "47097e6d155753906fa008eceaf90389a58c5518d68712f6cce2ab4354a4662e",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "1385481ff3b60653ff7861af184ee29c079eb1d81bd364acba4f434b5bbc94a4",
+        "sourceContentSha256": "6758bb430a04d1dd6676d9a791bf65b75fa48df61522ed783f72073ad73ab443",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "3004c3dc992e4693c36dc36cc4f052b0e41e05a3baeece002610c041578b5556",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "c07a0bc5a52ab3465688ec11863bb8aa21d2dd2d1e3904198c7e7cb6f92c3130",
+        "sourceContentSha256": "e874f0eef272e9d53740ff8ace4014a99399bb6ebad3cfe1adb7d37ea1af513a",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "3ca95672c5401a7242d976d31205c16c4544f58ecbfa63f10dd6920d44cf66be",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "04c70d20854a7d831e65fbe88d443622a89c3e5195e25cde9e2e22858a5b421d",
+        "sourceContentSha256": "4627da297124ea8398bc46d3d2ae1eeb406a40e4f3e50c038251738ee6b21589",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "49f6be816376190f96af4192fed3d0dbdc3b3cd17d6faa99011050a5c6ce1dc8",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "c2b4819df78295bc94653f31d1f1a9004960a47af55527e883bf5c4f65938aa1",
+        "sourceContentSha256": "7a6a0e37afce90d122610866e616d0cd999e4bf5f3949bb86f534d7cbb7cb94c",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "40083bd5f354cb76d30976580695b653fca24b0a6c30d2db30b41d2fe53246a2",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "e40d75daa2f81a0ec1e0c9d3da62b9d087aabaf68c95296e6a0da036baad9c2a",
+        "sourceContentSha256": "472b440ffa4533a420ee91277a90f0652f1043b2ba32ac02231ea096156723d6",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "fa6f0467369bfb5a0fc62270518e290eeef23d2d9c0a2fb1e9638c515ae55413",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "580813ca5173e511e429b8291132758eaf263e1a15fc5ee7e722ddf5dbc81dd3",
+        "sourceContentSha256": "d2a1f7cad3dbffca6f534227d06650d0ddaafcd89cd8db80ef2867ba25d3da09",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "9809f4e839480f342a5c3279c1066cb9856254f07edf18783c816c7cf36b1b27",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "e59e9284666b2bba3cef6703b9e8eb0348c3dbce284bf9a3eb9578c5792c02e9",
+        "sourceContentSha256": "0e2d0b5faf27aa7ec01d9fbd972e0b5c7cc7c8bd201c55f8d7eae570960d2811",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "5972b7dc106e6b8152bb8f5a8547adf36bdefc86242e6b0325bd4d6cc3845639",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "2827bc805f14b39438f7eeebaf74e012fb2ccee6fbb655723d9edccdaa9bddbd",
+        "sourceContentSha256": "2b812dbd6cc0bfb8f8934cdfd7c1fa3db29fca5e72b496dba9981eacbde31365",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "472fb81fdf0e78ee67d0a719e741c92a434aea674ff2cfea5ee12c221961e937",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "5b5f9553c4bb477f3fc13dde69ba1849be27a0267d0b02b16fad4c45979039d3",
+        "sourceContentSha256": "6758bb430a04d1dd6676d9a791bf65b75fa48df61522ed783f72073ad73ab443",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "08280d3fffea46262244821ba42e5d31abf247e99f48e97cdfe3851f40d9dc13",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "7f459e68e7749b49bc7db73c270933394811befa06e4f2fae833db0498287d46",
+        "sourceContentSha256": "e37e31f5a4719ad7316fa83442217c4c977cb5f8d1fba7fe3b2cd2c03f147a26",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "aadde9f19d66da216337ace4678d7dbace68b4b25dd99407648fbb65e597bba9",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "5a07bb38968f3b6740e6fd67f8bc28155ad321391895218aefaedbca4fdbd2e8",
+        "sourceContentSha256": "5408458475a1165797d56ae674a8ef85e30264f40f906b88997d4193c1c63280",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "a11932c3627f7b408dbb17f79eb80745be2b3cc0eeec08389695c983f51e6dd7",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "ddc09707fa80c209522d860e8785b24f4be5005d4bc2cb72b299b6cf92fe160a",
+        "sourceContentSha256": "74a15627378a9b3dd7f1e7a791bb4f0ea7d3535aed85b0a7e8900662f546f7d7",
+        "disposition": "superseded",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "8d888b692c3baadc26189459e9a04f44436283afba17b56278ff40c4ed010542",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "a7a67140927927dd0a58a009a21e435f61e2f443cfa0ff2a17dedcde9f8f69de",
+        "sourceContentSha256": "8aaa0203254975822bcae6be8f653b0656671c9f3471e753060dde9a54bab418",
+        "disposition": "superseded",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "c6fdd9e4c507cac229fd47628ca9f466dd35a07464cb36d0aa7c52bcd335d60c",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "4af9bd59c2f9254fe3e42c9033e489a9897746cd0b9835bd5a66570f6a3f91de",
+        "sourceContentSha256": "d03cb3e21ea74042acd5c3824f7aa3303a9672dab7648b7220f87be06f41b31f",
+        "disposition": "superseded",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "8ac298f03f2e2da9c432e65756905b5be8b8414d67c7f1e6050667ac24180174",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "2cd7a2f5d346b1cd62341f85ac3f2234b7df6fb067ecec2cd219962a8d5ebc26",
+        "sourceContentSha256": "f49b378e0ffbf37afece30152361aa515cc63f8d9be620d54a53cbd7f49c6e6e",
+        "disposition": "superseded",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "fedc07fc704147eb7c31700ae168d071096a171b49f746468bd0b5ed023b20c9",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "29f58117eed8ccb81e4ce824dc68077f92a495a57b34db2abfc66848606be66b",
+        "sourceContentSha256": "317dffb3faa8801f690f126ef92f70edcf695be7b641fe1004a24e0a6297ecc6",
+        "disposition": "superseded",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "ec1ed337aba824bbe327feec72b8d882cf5600e5423cbf896231e1f964bf8f4c",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "bbcc1bdb8c61a61998287a7cba85ae03bef0ff2fa13d4c93dec7699caa7704a7",
+        "sourceContentSha256": "f79d639ddf88ea1b6441e6a9ae5b2463633df75d0a69caf3ea8bbf0463041860",
+        "disposition": "superseded",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "8bacbc2d8fc29c07fab6b93e7f9f9b65a957233dae09eebc7a90535b5e1ce5d8",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "48c427e308d53e106e4895105e4e9d6e31abe02e83650385e2cf6606e6af14b7",
+        "sourceContentSha256": "98c13bea924f6ebf39dddcf5a0a1e87c872fe9b724043bb9ca82a468b85c9f3d",
+        "disposition": "superseded",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "efb7008513f8b600e0773c93bc87538be2edac71ca01a3cbd2488c9e2aee7d6a",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "c2fe56f232b74e01cf503ff95c5b3b1704746d4bf97c38c865abeaa98d351462",
+        "sourceContentSha256": "fe0dee3320423c417a8c1e940e2e51fc14272500708ddf6dfa8657fd9c5edfbc",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "21933686d6fb19840170d8b8d8724243e73c4a666f38391ffc968d6e0a69fc79",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "9b0b4c23c8db595d2d59c1889f10549fda045c983e9ab5d0691df9258e1d8523",
+        "sourceContentSha256": "bcfe0cf0e55937acda3cfb59f762790364a17830fc7b2faa7dcbb06ef0ba8961",
+        "disposition": "superseded",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "76fdd1624547cbc77f71ca7a0dcc1e672be43a17e128b7ecef686471267c41a9",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "4dc0baa0bc814775f93cb7abe6b35b9763d71c0c89d55aea55bbcd0b8dd838ed",
+        "sourceContentSha256": "b7e58bdef799d915a4a928eb9d23116b33eb862df3c070a0559df140bd7d939c",
+        "disposition": "integrate",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "23bd3316e202584e8f4add49f8289728d1714e68165ba8afc4449c2aaf4edce8",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "a0c7a33263ecd66f47b051d8cd7fad0fcd0198fcf3170038ff8e08e0ef1a6221",
+        "sourceContentSha256": "464545e966ad3c1d93885f5945a9ee0cab74193fbc8c82a3b38e7ffc7805e4f7",
+        "disposition": "superseded",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "b7360fd696ea39aa50b0d8a6c52c6bd2edc40232498f55de170d75c02e34fc21",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-production-seed",
+        "sourceIdentitySha256": "690bacab1f331df645f52c939101194a80b1f5717e94bdb6414df4e441a1c419",
+        "sourceContentSha256": "41834bc1c65b5be1a1c046ed86f06dc506cac7c86039359a50b5b67a54f9ca45",
+        "disposition": "superseded",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "2d7818757bb255b9e90846e3b9922bd24a075f821f1f36ee708764f2ce242fe4",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      },
+      {
+        "sourceAlias": "website-candidate",
+        "sourceIdentitySha256": "697b677ba04da6ea45a7df9b3f2b6d634d3a3be90cb096186bc9d443f48fd354",
+        "sourceContentSha256": "7a996a62905fa35cda58faa095b710ef1290d644804aeed761d2e6dcb5d5889a",
+        "disposition": "generated",
+        "targetRepository": "thienuy-website",
+        "targetIdentitySha256": "c5bfc2fbfc81ec51ab0868674cfbb58057e860a0bd860260cdbf7357ec63fd5f",
+        "replacementSha": "53128492b2010f1a51020f22b56ad6abb848e2f2"
+      }
+    ]
+  }
+}
