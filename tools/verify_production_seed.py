@@ -22,10 +22,61 @@ def parse_mode(value):
 
 
 def safe_relative_path(value):
+    if not isinstance(value, str):
+        raise ValueError("path must be a safe relative path")
     path = PurePosixPath(value)
-    if not isinstance(value, str) or path.is_absolute() or ".." in path.parts:
+    if path == PurePosixPath(".") or path.is_absolute() or ".." in path.parts:
         raise ValueError("path must be a safe relative path")
     return path
+
+
+def is_within(root, candidate):
+    try:
+        return Path(os.path.commonpath((str(root), str(candidate)))) == root
+    except ValueError:
+        return False
+
+
+def secure_manifest_file(site_root, relative):
+    target = site_root / relative
+    if not is_within(site_root, target):
+        raise ValueError(f"lexical path escapes site root: {relative}")
+
+    try:
+        target_stat = target.lstat()
+        real_target = target.resolve(strict=True)
+    except FileNotFoundError:
+        raise ValueError(f"missing regular file: {relative}")
+
+    if not is_within(site_root, real_target):
+        if stat.S_ISLNK(target_stat.st_mode):
+            raise ValueError(f"symlink rejected; real path escapes site root: {relative}")
+        raise ValueError(f"real path escapes site root: {relative}")
+    if stat.S_ISLNK(target_stat.st_mode):
+        raise ValueError(f"symlink rejected: {relative}")
+    if not stat.S_ISREG(target_stat.st_mode):
+        raise ValueError(f"non-regular file rejected: {relative}")
+    return target, target_stat
+
+
+def reapply_mode(target, expected_mode, expected_stat):
+    if not hasattr(os, "O_NOFOLLOW"):
+        raise RuntimeError("safe no-follow mode reapplication is unavailable")
+    descriptor = os.open(target, os.O_RDONLY | os.O_NOFOLLOW)
+    try:
+        current_stat = os.fstat(descriptor)
+        if not stat.S_ISREG(current_stat.st_mode):
+            raise RuntimeError(f"non-regular file rejected during reapply: {target}")
+        if (current_stat.st_dev, current_stat.st_ino) != (
+            expected_stat.st_dev,
+            expected_stat.st_ino,
+        ):
+            raise RuntimeError(f"file changed during reapply: {target}")
+        os.fchmod(descriptor, expected_mode)
+        if stat.S_IMODE(os.fstat(descriptor).st_mode) != expected_mode:
+            raise RuntimeError(f"mode reapply failed: {target}")
+    finally:
+        os.close(descriptor)
 
 
 def git_tree_modes(repo, git_ref, git_prefix):
@@ -50,26 +101,34 @@ def verify(manifest_path, site, repo, git_ref, git_prefix, reapply):
     if not isinstance(entries, list) or manifest.get("entry_count") != len(entries):
         raise ValueError("manifest entry_count does not match entries")
 
+    try:
+        site_stat = site.lstat()
+    except FileNotFoundError:
+        raise ValueError("site root is missing")
+    if stat.S_ISLNK(site_stat.st_mode) or not stat.S_ISDIR(site_stat.st_mode):
+        raise ValueError("site root must be a non-symlink directory")
+    site_root = site.resolve(strict=True)
+
     expected_paths = set()
+    validated_files = []
     problems = []
     for entry in entries:
-        relative = safe_relative_path(entry.get("path"))
+        try:
+            relative = safe_relative_path(entry.get("path"))
+            expected_mode = parse_mode(entry.get("mode"))
+        except ValueError as error:
+            problems.append(str(error))
+            continue
         if relative.as_posix() in expected_paths:
             problems.append(f"duplicate manifest path: {relative}")
             continue
         expected_paths.add(relative.as_posix())
-        expected_mode = parse_mode(entry.get("mode"))
-        target = site / relative
-        if not target.is_file():
-            problems.append(f"missing regular file: {relative}")
+        try:
+            target, target_stat = secure_manifest_file(site_root, relative)
+        except ValueError as error:
+            problems.append(str(error))
             continue
-        if reapply:
-            os.chmod(target, expected_mode)
-        actual_mode = stat.S_IMODE(target.stat().st_mode)
-        if actual_mode != expected_mode:
-            problems.append(
-                f"mode mismatch: {relative}: expected {expected_mode:04o}, got {actual_mode:04o}"
-            )
+        validated_files.append((relative, target, target_stat, expected_mode))
 
     tree_modes = git_tree_modes(repo, git_ref, git_prefix)
     prefix = f"{git_prefix.rstrip('/')}/"
@@ -81,6 +140,19 @@ def verify(manifest_path, site, repo, git_ref, git_prefix, reapply):
                 f"Git mode mismatch: {git_path}: expected {GIT_REGULAR_FILE_MODE}, got {git_mode}"
             )
 
+    if problems:
+        print("\n".join(problems), file=sys.stderr)
+        return 1
+    if reapply:
+        for _, target, target_stat, expected_mode in validated_files:
+            reapply_mode(target, expected_mode, target_stat)
+    else:
+        for relative, _, target_stat, expected_mode in validated_files:
+            actual_mode = stat.S_IMODE(target_stat.st_mode)
+            if actual_mode != expected_mode:
+                problems.append(
+                    f"mode mismatch: {relative}: expected {expected_mode:04o}, got {actual_mode:04o}"
+                )
     if problems:
         print("\n".join(problems), file=sys.stderr)
         return 1

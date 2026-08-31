@@ -39,9 +39,13 @@ python3 tools/verify_production_seed.py \
   --git-ref production-seed-20260830-041108-9da123e
 ```
 
-The `--reapply` invocation changes only the manifest-listed regular files to
-their recorded modes. It is a release-boundary action, never a reason to alter
-the production source or move the seed tag.
+The verifier uses `lstat`, lexical and resolved-path containment checks, and a
+no-follow file descriptor before it can reapply a mode. It rejects path
+traversal, symlinks, and non-regular files; it validates every manifest path
+and Git tree mode before changing any file. The `--reapply` invocation changes
+only manifest-listed regular files to their recorded modes. It is a
+release-boundary action, never a reason to alter the production source or move
+the seed tag.
 
 ## CRLF byte-identity waiver
 

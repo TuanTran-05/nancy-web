@@ -95,6 +95,40 @@ class ProductionSeedVerifierTest(unittest.TestCase):
             self.assertNotEqual(result.returncode, 0)
             self.assertIn("mode mismatch", result.stderr)
 
+    def test_reapply_rejects_symlink_without_changing_an_outside_target(self):
+        with tempfile.TemporaryDirectory() as temporary, tempfile.TemporaryDirectory() as outside_temporary:
+            root = Path(temporary)
+            site, manifest = self.make_fixture(root, 0o644)
+            outside = Path(outside_temporary) / "outside.txt"
+            outside.write_bytes(b"outside target must not change\n")
+            os.chmod(outside, 0o600)
+            outside_mode = outside.stat().st_mode & 0o777
+            outside_content = outside.read_bytes()
+            (site / "index.html").unlink()
+            (site / "index.html").symlink_to(outside)
+
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    str(VERIFIER),
+                    "--manifest",
+                    str(manifest),
+                    "--site",
+                    str(site),
+                    "--repo",
+                    str(root),
+                    "--reapply",
+                ],
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+
+            self.assertNotEqual(result.returncode, 0)
+            self.assertIn("symlink", result.stderr)
+            self.assertEqual(outside.stat().st_mode & 0o777, outside_mode)
+            self.assertEqual(outside.read_bytes(), outside_content)
+
 
 if __name__ == "__main__":
     unittest.main()
