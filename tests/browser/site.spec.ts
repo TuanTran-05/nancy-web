@@ -1,54 +1,18 @@
-import { createReadStream } from 'node:fs';
 import { lstat } from 'node:fs/promises';
-import { createServer, type Server } from 'node:http';
-import { extname, resolve, sep } from 'node:path';
+import { type Server } from 'node:http';
+import { resolve } from 'node:path';
 import { test, expect } from '@playwright/test';
+import { createStaticServer } from '../../scripts/serve-built-site.mjs';
 
 const distRoot = resolve(process.cwd(), 'dist');
-const MIME_TYPES: Record<string, string> = {
-  '.css': 'text/css; charset=utf-8',
-  '.html': 'text/html; charset=utf-8',
-  '.js': 'text/javascript; charset=utf-8',
-  '.jpg': 'image/jpeg',
-  '.jpeg': 'image/jpeg',
-  '.png': 'image/png',
-  '.svg': 'image/svg+xml',
-  '.woff2': 'font/woff2',
-};
 
 let server: Server;
 let origin = '';
 
-function isWithin(root: string, candidate: string) {
-  return candidate === root || candidate.startsWith(`${root}${sep}`);
-}
-
-async function serveBuiltSite(request: Parameters<Server['emit']>[1], response: Parameters<Server['emit']>[2]) {
-  const requestUrl = new URL(request.url ?? '/', 'http://127.0.0.1');
-  const decodedPath = decodeURIComponent(requestUrl.pathname);
-  const candidate = resolve(distRoot, `.${decodedPath === '/' ? '/index.html' : decodedPath}`);
-  if (decodedPath.includes('\\') || !isWithin(distRoot, candidate)) {
-    response.writeHead(404).end('Not found');
-    return;
-  }
-  const stat = await lstat(candidate).catch(() => null);
-  if (!stat?.isFile()) {
-    response.writeHead(404).end('Not found');
-    return;
-  }
-  response.writeHead(200, {
-    'cache-control': 'no-store',
-    'content-type': MIME_TYPES[extname(candidate).toLowerCase()] ?? 'application/octet-stream',
-  });
-  createReadStream(candidate).pipe(response);
-}
-
 test.beforeAll(async () => {
   const stat = await lstat(distRoot).catch(() => null);
   if (!stat?.isDirectory()) throw new Error('dist/ is required; run npm run build before browser tests');
-  server = createServer((request, response) => {
-    void serveBuiltSite(request, response).catch(() => response.writeHead(500).end('Internal server error'));
-  });
+  server = createStaticServer(distRoot);
   await new Promise<void>((done) => server.listen(0, '127.0.0.1', done));
   const address = server.address();
   if (!address || typeof address === 'string') throw new Error('static test server did not bind a TCP port');

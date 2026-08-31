@@ -91,6 +91,84 @@ describe('static site integrity check', () => {
     });
   });
 
+  it('does not let unquoted HTML reference attributes bypass local checks', async () => {
+    await fixture(async (root) => {
+      await writeValidMetadata(root);
+      await writeFile(join(root, 'index.html'), page(`
+        <img src=missing.png alt=missing>
+        <script src=http://example.test/app.js></script>
+        <a href=../outside.txt>escape</a>
+      `, '<meta name="description" content="fixture"><meta name="viewport" content="width=device-width"><link rel="canonical" href="https://thienuy.edu.vn/">'));
+
+      const result = await checkStaticSite(root);
+
+      expect(result.issues.map((entry) => entry.code)).toEqual(expect.arrayContaining([
+        'LOCAL_REFERENCE_MISSING',
+        'INSECURE_EXTERNAL_RESOURCE',
+        'LOCAL_REFERENCE_TRAVERSAL',
+      ]));
+    });
+  });
+
+  it('reports duplicate unquoted HTML id attributes', async () => {
+    await fixture(async (root) => {
+      await writeValidMetadata(root);
+      await writeFile(join(root, 'index.html'), page('<main id=duplicate></main><aside id=duplicate></aside>', '<meta name="description" content="fixture"><meta name="viewport" content="width=device-width"><link rel="canonical" href="https://thienuy.edu.vn/">'));
+
+      const result = await checkStaticSite(root);
+
+      expect(result.issues).toEqual(expect.arrayContaining([
+        expect.objectContaining({ code: 'DUPLICATE_ID', path: 'index.html' }),
+      ]));
+    });
+  });
+
+  it('validates same-origin HTTPS resource paths as local files', async () => {
+    await fixture(async (root) => {
+      await writeValidMetadata(root);
+      await writeFile(join(root, 'Asset.PNG'), 'image');
+      await writeFile(join(root, 'index.html'), page(`
+        <img src="https://thienuy.edu.vn/missing.png" alt="missing">
+        <img src="https://thienuy.edu.vn/asset.png" alt="case mismatch">
+      `, '<meta name="description" content="fixture"><meta name="viewport" content="width=device-width"><link rel="canonical" href="https://thienuy.edu.vn/">'));
+
+      const result = await checkStaticSite(root);
+
+      expect(result.issues.map((entry) => entry.code)).toEqual(expect.arrayContaining([
+        'LOCAL_REFERENCE_MISSING',
+        'LOCAL_REFERENCE_CASE_MISMATCH',
+      ]));
+    });
+  });
+
+  it('reports malformed HTTPS references instead of aborting validation', async () => {
+    await fixture(async (root) => {
+      await writeValidMetadata(root);
+      await writeFile(join(root, 'index.html'), page('<img src="https://[not-an-ipv6" alt="malformed">', '<meta name="description" content="fixture"><meta name="viewport" content="width=device-width"><link rel="canonical" href="https://thienuy.edu.vn/">'));
+
+      await expect(checkStaticSite(root)).resolves.toMatchObject({
+        valid: false,
+        issues: expect.arrayContaining([
+          expect.objectContaining({ code: 'LOCAL_REFERENCE_INVALID', path: 'index.html' }),
+        ]),
+      });
+    });
+  });
+
+  it('rejects literal and URL-encoded backslash traversal', async () => {
+    await fixture(async (root) => {
+      await writeValidMetadata(root);
+      await writeFile(join(root, 'index.html'), page(`
+        <a href="..\\outside.txt">literal escape</a>
+        <a href="%2e%2e%5coutside.txt">encoded escape</a>
+      `, '<meta name="description" content="fixture"><meta name="viewport" content="width=device-width"><link rel="canonical" href="https://thienuy.edu.vn/">'));
+
+      const result = await checkStaticSite(root);
+
+      expect(result.issues.filter((entry) => entry.code === 'LOCAL_REFERENCE_TRAVERSAL')).toHaveLength(2);
+    });
+  });
+
   it('requires the canonical robots sitemap and canonical sitemap URLs', async () => {
     await fixture(async (root) => {
       await writeFile(join(root, 'index.html'), page('<main id="main"></main>', '<link rel="canonical" href="https://thienuy.edu.vn/">'));
@@ -102,6 +180,24 @@ describe('static site integrity check', () => {
       expect(result.issues.map((issue) => issue.code)).toEqual(expect.arrayContaining([
         'ROBOTS_SITEMAP_INVALID',
         'SITEMAP_URL_INVALID',
+      ]));
+    });
+  });
+
+  it('rejects a valid robots sitemap directive when another sitemap directive is invalid', async () => {
+    await fixture(async (root) => {
+      await writeFile(join(root, 'index.html'), page('<main id="main"></main>', '<meta name="description" content="fixture"><meta name="viewport" content="width=device-width"><link rel="canonical" href="https://thienuy.edu.vn/">'));
+      await writeFile(join(root, 'robots.txt'), [
+        'User-agent: *',
+        'Sitemap: https://thienuy.edu.vn/sitemap.xml',
+        'Sitemap: http://example.test/sitemap.xml',
+      ].join('\n'));
+      await writeFile(join(root, 'sitemap.xml'), '<?xml version="1.0"?><urlset><url><loc>https://thienuy.edu.vn/</loc></url></urlset>');
+
+      const result = await checkStaticSite(root);
+
+      expect(result.issues).toEqual(expect.arrayContaining([
+        expect.objectContaining({ code: 'ROBOTS_SITEMAP_INVALID' }),
       ]));
     });
   });

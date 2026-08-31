@@ -97,11 +97,14 @@ async function collectFiles(rootPath, issues) {
 
 function referencesInHtml(content) {
   const values = [];
-  for (const match of content.matchAll(/\b(?:href|src|poster|action)\s*=\s*(["'])(.*?)\1/gi)) values.push(match[2]);
-  for (const match of content.matchAll(/\bsrcset\s*=\s*(["'])(.*?)\1/gi)) {
-    for (const candidate of match[2].split(',')) values.push(candidate.trim().split(/\s+/)[0]);
+  for (const match of content.matchAll(/\b(?:href|src|poster|action)\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'`=<>]+))/gi)) {
+    values.push(match[1] ?? match[2] ?? match[3]);
   }
-  for (const match of content.matchAll(/\bstyle\s*=\s*(["'])(.*?)\1/gi)) values.push(...referencesInCss(match[2]));
+  for (const match of content.matchAll(/\bsrcset\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'`=<>]+))/gi)) {
+    const value = match[1] ?? match[2] ?? match[3];
+    for (const candidate of value.split(',')) values.push(candidate.trim().split(/\s+/)[0]);
+  }
+  for (const match of content.matchAll(/\bstyle\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'`=<>]+))/gi)) values.push(...referencesInCss(match[1] ?? match[2] ?? match[3]));
   for (const match of content.matchAll(/<style\b[^>]*>([\s\S]*?)<\/style>/gi)) values.push(...referencesInCss(match[1]));
   return values;
 }
@@ -119,7 +122,7 @@ function referencesInJavaScript(content) {
 }
 
 function idsInHtml(content) {
-  return [...content.matchAll(/\bid\s*=\s*(["'])(.*?)\1/gi)].map((match) => match[2]);
+  return [...content.matchAll(/\bid\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'`=<>]+))/gi)].map((match) => match[1] ?? match[2] ?? match[3]);
 }
 
 function hrefParts(value) {
@@ -127,11 +130,21 @@ function hrefParts(value) {
   if (decoded === null) return { invalid: true };
   if (!decoded || decoded.startsWith('data:') || decoded.startsWith('mailto:') || decoded.startsWith('tel:') || decoded.startsWith('javascript:')) return { ignored: true };
   if (/^http:\/\//i.test(decoded)) return { insecure: true };
-  if (/^(https:)?\/\//i.test(decoded)) return { external: true };
+  if (/^https:\/\//i.test(decoded)) {
+    let url;
+    try {
+      url = new URL(decoded);
+    } catch {
+      return { invalid: true };
+    }
+    if (url.origin !== CANONICAL_ORIGIN) return { external: true };
+    return { path: url.pathname.replace(/\\/g, '/'), fragment: url.hash.slice(1) };
+  }
+  if (/^\/\//i.test(decoded)) return { external: true };
   const hash = decoded.indexOf('#');
   const withoutFragment = hash === -1 ? decoded : decoded.slice(0, hash);
   const fragment = hash === -1 ? '' : decoded.slice(hash + 1);
-  const path = withoutFragment.split('?')[0];
+  const path = withoutFragment.split('?')[0].replace(/\\/g, '/');
   return { path, fragment };
 }
 
@@ -142,7 +155,7 @@ function localTarget(currentPath, path) {
 }
 
 function traverses(path) {
-  return path.split('/').some((segment) => segment === '..');
+  return path.replace(/\\/g, '/').split('/').some((segment) => segment === '..');
 }
 
 function canonicalIsValid(value, currentPath) {
@@ -170,7 +183,10 @@ function validateCanonicalAndSeo(path, content, issues) {
 
 function validateRobotsAndSitemap(files, issues) {
   const robots = files.get('robots.txt')?.content;
-  if (!robots || !/^Sitemap:\s*https:\/\/thienuy\.edu\.vn\/sitemap\.xml\s*$/im.test(robots)) {
+  const sitemapDirectives = robots
+    ? robots.split(/\r?\n/).filter((line) => /^\s*sitemap\s*:/i.test(line))
+    : [];
+  if (sitemapDirectives.length !== 1 || !/^\s*sitemap\s*:\s*https:\/\/thienuy\.edu\.vn\/sitemap\.xml\s*$/i.test(sitemapDirectives[0] ?? '')) {
     issue(issues, 'ROBOTS_SITEMAP_INVALID', 'robots.txt', 'robots.txt must publish the HTTPS canonical sitemap');
   }
   const sitemap = files.get('sitemap.xml')?.content;
