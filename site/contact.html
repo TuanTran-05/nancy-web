@@ -160,123 +160,125 @@
       <section class="page-section w-full py-12 md:py-16 bg-surface-container-low" id="register" aria-labelledby="register-heading">
         <div class="wrap max-w-container-max mx-auto px-4 md:px-margin-desktop">
           <div class="contact-conversion">
-            <!-- Left: Google Forms Registration -->
-            <div class="contact-form-shell lg:col-span-7 bg-surface-container-lowest p-6 sm:p-8 rounded-2xl shadow-xl border border-line">
-              <span class="section-label inline-flex items-center gap-2 text-secondary font-bold text-xs uppercase tracking-widest mb-1">Gửi thông tin</span>
-              <h2 class="h2 font-headline-lg text-[1.6rem] sm:text-[1.9rem] text-primary font-bold mb-2" id="register-heading">Đăng ký kiểm tra trình độ miễn phí</h2>
-              <p class="lead font-body-md text-on-surface-variant text-sm mb-6">Trung tâm sẽ gọi lại trong giờ làm việc để trao đổi và xếp lịch cho học viên.</p>
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+              <!-- Left: Google Forms Registration -->
+              <div class="contact-form-shell lg:col-span-7 bg-surface-container-lowest p-6 sm:p-8 rounded-2xl shadow-xl border border-line">
+                <span class="section-label inline-flex items-center gap-2 text-secondary font-bold text-xs uppercase tracking-widest mb-1">Gửi thông tin</span>
+                <h2 class="h2 font-headline-lg text-[1.6rem] sm:text-[1.9rem] text-primary font-bold mb-2" id="register-heading">Đăng ký kiểm tra trình độ miễn phí</h2>
+                <p class="lead font-body-md text-on-surface-variant text-sm mb-6">Trung tâm sẽ gọi lại trong giờ làm việc để trao đổi và xếp lịch cho học viên.</p>
 
-              <form class="reg-form space-y-4" data-reg-form data-mode="google-form" data-endpoint="https://docs.google.com/forms/d/e/1FAIpQLScZ61EKmEnvKekNxQALbSdPsFqJ7B7WB7fUYYF63QL_F_7sKg/formResponse" novalidate>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div class="field flex flex-col gap-1.5">
-                    <label class="font-label-md text-xs font-bold text-on-surface" for="reg-name">Họ và tên phụ huynh *</label>
-                    <input class="bg-surface-container px-3.5 py-2.5 rounded-lg text-sm text-on-surface border border-outline-variant focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all" id="reg-name" name="name" data-entry="entry.380148302" type="text" autocomplete="name" placeholder="Ví dụ: Nguyễn Văn A" required aria-describedby="reg-name-error" />
-                    <p class="field-error text-xs text-danger" id="reg-name-error" hidden></p>
+                <form class="reg-form space-y-4" data-reg-form data-mode="google-form" data-endpoint="https://docs.google.com/forms/d/e/1FAIpQLScZ61EKmEnvKekNxQALbSdPsFqJ7B7WB7fUYYF63QL_F_7sKg/formResponse" novalidate>
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="field flex flex-col gap-1.5">
+                      <label class="font-label-md text-xs font-bold text-on-surface" for="reg-name">Họ và tên phụ huynh *</label>
+                      <input class="bg-surface-container px-3.5 py-2.5 rounded-lg text-sm text-on-surface border border-outline-variant focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all" id="reg-name" name="name" data-entry="entry.380148302" type="text" autocomplete="name" placeholder="Ví dụ: Nguyễn Văn A" required aria-describedby="reg-name-error" />
+                      <p class="field-error text-xs text-danger" id="reg-name-error" hidden></p>
+                    </div>
+                    <div class="field flex flex-col gap-1.5">
+                      <label class="font-label-md text-xs font-bold text-on-surface" for="reg-phone">Số điện thoại *</label>
+                      <input class="bg-surface-container px-3.5 py-2.5 rounded-lg text-sm text-on-surface border border-outline-variant focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all" id="reg-phone" name="phone" data-entry="entry.1988606558" type="tel" inputmode="tel" autocomplete="tel" placeholder="0866 169 569" required aria-describedby="reg-phone-hint reg-phone-error" />
+                      <p class="field-hint text-[0.75rem] text-text-3" id="reg-phone-hint">Chỉ dùng để liên hệ tư vấn.</p>
+                      <p class="field-error text-xs text-danger" id="reg-phone-error" hidden></p>
+                    </div>
                   </div>
+
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="field flex flex-col gap-1.5">
+                      <label class="font-label-md text-xs font-bold text-on-surface" for="reg-child">Tên của con *</label>
+                      <input class="bg-surface-container px-3.5 py-2.5 rounded-lg text-sm text-on-surface border border-outline-variant focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all" id="reg-child" name="child" data-entry="entry.1215349974" type="text" placeholder="Tên học viên" required aria-describedby="reg-child-error" />
+                      <p class="field-error text-xs text-danger" id="reg-child-error" hidden></p>
+                    </div>
+                    <div class="field flex flex-col gap-1.5">
+                      <label class="font-label-md text-xs font-bold text-on-surface" for="reg-grade">Lớp của con *</label>
+                      <select class="bg-surface-container px-3.5 py-2.5 rounded-lg text-sm text-on-surface border border-outline-variant focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all cursor-pointer" id="reg-grade" name="grade" data-entry="entry.1485252148" required aria-describedby="reg-grade-error">
+                        <option value="">Chọn cấp lớp</option>
+                        <option>Lớp 2 trở xuống</option>
+                        <option>Lớp 3</option>
+                        <option>Lớp 4</option>
+                        <option>Lớp 5</option>
+                        <option>Lớp 6-7</option>
+                        <option>Lớp 8-9</option>
+                        <option>Lớp 10 trở lên</option>
+                      </select>
+                      <p class="field-error text-xs text-danger" id="reg-grade-error" hidden></p>
+                    </div>
+                  </div>
+
+                  <div class="field-trap" aria-hidden="true"><label for="reg-website">Website</label><input id="reg-website" name="website" type="text" tabindex="-1" autocomplete="off" /></div>
+
                   <div class="field flex flex-col gap-1.5">
-                    <label class="font-label-md text-xs font-bold text-on-surface" for="reg-phone">Số điện thoại *</label>
-                    <input class="bg-surface-container px-3.5 py-2.5 rounded-lg text-sm text-on-surface border border-outline-variant focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all" id="reg-phone" name="phone" data-entry="entry.1988606558" type="tel" inputmode="tel" autocomplete="tel" placeholder="0866 169 569" required aria-describedby="reg-phone-hint reg-phone-error" />
-                    <p class="field-hint text-[0.75rem] text-text-3" id="reg-phone-hint">Chỉ dùng để liên hệ tư vấn.</p>
-                    <p class="field-error text-xs text-danger" id="reg-phone-error" hidden></p>
+                    <label class="font-label-md text-xs font-bold text-on-surface" for="reg-note">Ghi chú thêm</label>
+                    <textarea class="bg-surface-container px-3.5 py-2.5 rounded-lg text-sm text-on-surface border border-outline-variant focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all resize-y min-h-[90px]" id="reg-note" name="note" data-entry="entry.153390468" placeholder="Ví dụ: Khung giờ phụ huynh tiện nghe máy, tình hình học hiện tại của con..."></textarea>
+                  </div>
+
+                  <div class="pt-2">
+                    <button class="btn btn-accent btn-lg w-full bg-secondary text-on-secondary py-3.5 rounded-xl font-button-text text-sm hover:bg-secondary-container transition-all shadow-md flex items-center justify-center gap-2" type="submit">
+                      <span>Gửi đăng ký tư vấn</span>
+                      <span class="material-symbols-outlined text-[18px]">send</span>
+                    </button>
+                  </div>
+                  <p class="form-status" data-form-status role="status" aria-live="polite"></p>
+                </form>
+              </div>
+
+              <!-- Right: Contact Information Channels -->
+              <aside class="contact-channels lg:col-span-5 flex flex-col gap-4" aria-label="Kênh tư vấn">
+                <div class="page-section__head mb-1">
+                  <span class="inline-flex items-center gap-2 text-secondary font-bold text-xs uppercase tracking-widest mb-1">Thông tin liên hệ</span>
+                  <h2 class="h2 font-headline-lg text-[1.5rem] text-primary font-bold">Liên hệ theo cách thuận tiện nhất</h2>
+                </div>
+
+                <div class="contact-card p-4 rounded-xl bg-surface-container-lowest border border-line shadow-sm flex items-center gap-3.5 group hover:shadow-md transition-all">
+                  <div class="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0">
+                    <span class="material-symbols-outlined text-[22px]">call</span>
+                  </div>
+                  <div>
+                    <span class="text-xs text-on-surface-variant font-medium block">Hotline tư vấn</span>
+                    <a class="text-sm font-bold text-primary hover:text-secondary transition-colors" href="tel:0866169569">0866 169 569</a>
                   </div>
                 </div>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div class="field flex flex-col gap-1.5">
-                    <label class="font-label-md text-xs font-bold text-on-surface" for="reg-child">Tên của con *</label>
-                    <input class="bg-surface-container px-3.5 py-2.5 rounded-lg text-sm text-on-surface border border-outline-variant focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all" id="reg-child" name="child" data-entry="entry.1215349974" type="text" placeholder="Tên học viên" required aria-describedby="reg-child-error" />
-                    <p class="field-error text-xs text-danger" id="reg-child-error" hidden></p>
+                <div class="contact-card p-4 rounded-xl bg-surface-container-lowest border border-line shadow-sm flex items-center gap-3.5 group hover:shadow-md transition-all">
+                  <div class="w-10 h-10 rounded-full bg-secondary/10 text-secondary flex items-center justify-center shrink-0">
+                    <span class="material-symbols-outlined text-[22px]">chat</span>
                   </div>
-                  <div class="field flex flex-col gap-1.5">
-                    <label class="font-label-md text-xs font-bold text-on-surface" for="reg-grade">Lớp của con *</label>
-                    <select class="bg-surface-container px-3.5 py-2.5 rounded-lg text-sm text-on-surface border border-outline-variant focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all cursor-pointer" id="reg-grade" name="grade" data-entry="entry.1485252148" required aria-describedby="reg-grade-error">
-                      <option value="">Chọn cấp lớp</option>
-                      <option>Lớp 2 trở xuống</option>
-                      <option>Lớp 3</option>
-                      <option>Lớp 4</option>
-                      <option>Lớp 5</option>
-                      <option>Lớp 6-7</option>
-                      <option>Lớp 8-9</option>
-                      <option>Lớp 10 trở lên</option>
-                    </select>
-                    <p class="field-error text-xs text-danger" id="reg-grade-error" hidden></p>
+                  <div>
+                    <span class="text-xs text-on-surface-variant font-medium block">Zalo chính thức</span>
+                    <a class="text-sm font-bold text-primary hover:text-secondary transition-colors" href="https://zalo.me/0866169569" target="_blank" rel="noopener">Zalo Thien Uy (0866 169 569)</a>
                   </div>
                 </div>
 
-                <div class="field-trap" aria-hidden="true"><label for="reg-website">Website</label><input id="reg-website" name="website" type="text" tabindex="-1" autocomplete="off" /></div>
-
-                <div class="field flex flex-col gap-1.5">
-                  <label class="font-label-md text-xs font-bold text-on-surface" for="reg-note">Ghi chú thêm</label>
-                  <textarea class="bg-surface-container px-3.5 py-2.5 rounded-lg text-sm text-on-surface border border-outline-variant focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all resize-y min-h-[90px]" id="reg-note" name="note" data-entry="entry.153390468" placeholder="Ví dụ: Khung giờ phụ huynh tiện nghe máy, tình hình học hiện tại của con..."></textarea>
+                <div class="contact-card p-4 rounded-xl bg-surface-container-lowest border border-line shadow-sm flex items-center gap-3.5 group hover:shadow-md transition-all">
+                  <div class="w-10 h-10 rounded-full bg-tertiary/10 text-tertiary flex items-center justify-center shrink-0">
+                    <span class="material-symbols-outlined text-[22px]">mail</span>
+                  </div>
+                  <div>
+                    <span class="text-xs text-on-surface-variant font-medium block">Email</span>
+                    <a class="text-sm font-bold text-primary hover:text-secondary transition-colors" href="mailto:thienuy@gmail.com">thienuy@gmail.com</a>
+                  </div>
                 </div>
 
-                <div class="pt-2">
-                  <button class="btn btn-accent btn-lg w-full bg-secondary text-on-secondary py-3.5 rounded-xl font-button-text text-sm hover:bg-secondary-container transition-all shadow-md flex items-center justify-center gap-2" type="submit">
-                    <span>Gửi đăng ký tư vấn</span>
-                    <span class="material-symbols-outlined text-[18px]">send</span>
-                  </button>
+                <div class="contact-card p-4 rounded-xl bg-surface-container-lowest border border-line shadow-sm flex items-start gap-3.5 group hover:shadow-md transition-all">
+                  <div class="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0 mt-0.5">
+                    <span class="material-symbols-outlined text-[22px]">location_on</span>
+                  </div>
+                  <div>
+                    <span class="text-xs text-on-surface-variant font-medium block">Địa chỉ</span>
+                    <strong class="text-sm font-bold text-primary block leading-snug">Đường Nguyễn Văn Trỗi, An Phú, Hồ Chí Minh 75256</strong>
+                  </div>
                 </div>
-                <p class="form-status" data-form-status role="status" aria-live="polite"></p>
-              </form>
+
+                <div class="contact-card p-4 rounded-xl bg-surface-container-lowest border border-line shadow-sm flex items-center gap-3.5 group hover:shadow-md transition-all">
+                  <div class="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0">
+                    <span class="material-symbols-outlined text-[22px]">schedule</span>
+                  </div>
+                  <div>
+                    <span class="text-xs text-on-surface-variant font-medium block">Giờ tư vấn</span>
+                    <strong class="text-sm font-bold text-primary block">Thứ Hai đến Chủ Nhật, 08:00-19:30</strong>
+                  </div>
+                </div>
+              </aside>
             </div>
-
-            <!-- Right: Contact Information Channels -->
-            <aside class="contact-channels lg:col-span-5 flex flex-col gap-4" aria-label="Kênh tư vấn">
-              <div class="page-section__head mb-1">
-                <span class="inline-flex items-center gap-2 text-secondary font-bold text-xs uppercase tracking-widest mb-1">Thông tin liên hệ</span>
-                <h2 class="h2 font-headline-lg text-[1.5rem] text-primary font-bold">Liên hệ theo cách thuận tiện nhất</h2>
-              </div>
-
-              <div class="contact-card p-4 rounded-xl bg-surface-container-lowest border border-line shadow-sm flex items-center gap-3.5 group hover:shadow-md transition-all">
-                <div class="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0">
-                  <span class="material-symbols-outlined text-[22px]">call</span>
-                </div>
-                <div>
-                  <span class="text-xs text-on-surface-variant font-medium block">Hotline tư vấn</span>
-                  <a class="text-sm font-bold text-primary hover:text-secondary transition-colors" href="tel:0866169569">0866 169 569</a>
-                </div>
-              </div>
-
-              <div class="contact-card p-4 rounded-xl bg-surface-container-lowest border border-line shadow-sm flex items-center gap-3.5 group hover:shadow-md transition-all">
-                <div class="w-10 h-10 rounded-full bg-secondary/10 text-secondary flex items-center justify-center shrink-0">
-                  <span class="material-symbols-outlined text-[22px]">chat</span>
-                </div>
-                <div>
-                  <span class="text-xs text-on-surface-variant font-medium block">Zalo chính thức</span>
-                  <a class="text-sm font-bold text-primary hover:text-secondary transition-colors" href="https://zalo.me/0866169569" target="_blank" rel="noopener">Zalo Thien Uy (0866 169 569)</a>
-                </div>
-              </div>
-
-              <div class="contact-card p-4 rounded-xl bg-surface-container-lowest border border-line shadow-sm flex items-center gap-3.5 group hover:shadow-md transition-all">
-                <div class="w-10 h-10 rounded-full bg-tertiary/10 text-tertiary flex items-center justify-center shrink-0">
-                  <span class="material-symbols-outlined text-[22px]">mail</span>
-                </div>
-                <div>
-                  <span class="text-xs text-on-surface-variant font-medium block">Email</span>
-                  <a class="text-sm font-bold text-primary hover:text-secondary transition-colors" href="mailto:thienuy@gmail.com">thienuy@gmail.com</a>
-                </div>
-              </div>
-
-              <div class="contact-card p-4 rounded-xl bg-surface-container-lowest border border-line shadow-sm flex items-start gap-3.5 group hover:shadow-md transition-all">
-                <div class="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0 mt-0.5">
-                  <span class="material-symbols-outlined text-[22px]">location_on</span>
-                </div>
-                <div>
-                  <span class="text-xs text-on-surface-variant font-medium block">Địa chỉ</span>
-                  <strong class="text-sm font-bold text-primary block leading-snug">Đường Nguyễn Văn Trỗi, An Phú, Hồ Chí Minh 75256</strong>
-                </div>
-              </div>
-
-              <div class="contact-card p-4 rounded-xl bg-surface-container-lowest border border-line shadow-sm flex items-center gap-3.5 group hover:shadow-md transition-all">
-                <div class="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0">
-                  <span class="material-symbols-outlined text-[22px]">schedule</span>
-                </div>
-                <div>
-                  <span class="text-xs text-on-surface-variant font-medium block">Giờ tư vấn</span>
-                  <strong class="text-sm font-bold text-primary block">Thứ Hai đến Chủ Nhật, 08:00-19:30</strong>
-                </div>
-              </div>
-            </aside>
           </div>
         </div>
       </section>

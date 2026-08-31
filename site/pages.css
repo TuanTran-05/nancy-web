@@ -173,14 +173,6 @@
   margin-bottom: clamp(18px, 2.4vw, 32px);
 }
 
-.page-section__head.flex,
-.page-section__head.max-w-full,
-.page-section__head.w-full,
-.page-section__head--full {
-  max-width: 100%;
-  width: 100%;
-}
-
 .page-section__head .lead {
   max-width: 62ch;
   margin-top: 8px;
@@ -291,7 +283,6 @@
   display: grid;
   grid-template-columns: minmax(280px, 0.72fr) minmax(0, 1.28fr);
   gap: clamp(24px, 4vw, 56px);
-  align-items: start;
 }
 
 .principles-intro {
@@ -301,7 +292,7 @@
 }
 
 .principles-intro .h2 {
-  max-width: 20ch;
+  max-width: 12ch;
 }
 
 .principles-intro .lead {
@@ -310,18 +301,35 @@
 
 .principles-list {
   display: grid;
-  gap: 12px;
 }
 
 .principle {
-  display: block;
+  display: grid;
+  grid-template-columns: 70px minmax(0, 1fr);
+  gap: 20px;
+  padding: 18px 0;
+  border-top: 1px solid var(--line);
+}
+
+.principle:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
+.principle-index {
+  font-family: "Baloo 2", "Be Vietnam Pro", sans-serif;
+  color: var(--accent-ink);
+  font-size: 1.55rem;
+  font-weight: 800;
 }
 
 .principle h3 {
+  font-size: var(--fs-h3);
   color: var(--brand-ink);
 }
 
 .principle p {
+  max-width: 56ch;
+  margin-top: 6px;
   color: var(--text-2);
   line-height: 1.6;
 }
@@ -1465,14 +1473,14 @@
 
 .contact-conversion {
   display: grid;
-  grid-template-columns: minmax(0, 1.3fr) minmax(280px, 0.85fr);
-  gap: clamp(24px, 3vw, 36px);
+  grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+  gap: 20px;
   align-items: start;
 }
 
 .contact-channels {
   display: grid;
-  gap: 12px;
+  gap: 10px;
 }
 
 .contact-faq {
@@ -1494,17 +1502,13 @@
   box-shadow: var(--sh-2);
 }
 
-.contact-card span:not(.material-symbols-outlined) {
+.contact-card span {
   display: block;
   color: var(--text-3);
   font-size: 0.82rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-}
-
-.contact-card .material-symbols-outlined {
-  text-transform: none !important;
 }
 
 .contact-card a,
