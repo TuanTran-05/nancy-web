@@ -222,4 +222,50 @@ describe('immutable release assets', () => {
       }
     });
   });
+
+  it('rejects a symlinked activation lock without changing its outside target', async () => {
+    await fixture(async (root) => {
+      const { repo, dist, sha } = await createFixtureRepository(root);
+      const runtime = join(root, 'runtime');
+      const previous = join(runtime, 'releases', 'previous');
+      const outside = join(root, 'outside-lock-target');
+      await mkdir(previous, { recursive: true });
+      await symlink(previous, join(runtime, 'current'));
+      expect((await prepare(root, repo, sha, dist)).code).toBe(0);
+      await writeFile(outside, 'outside file must not change\n');
+      await symlink(outside, join(runtime, '.activation.lock'));
+      const { nginx, systemctl } = await writeMockCommands(root);
+
+      const result = await command(activateScript, [sha], {
+        THIENUY_REPO_ROOT: repo,
+        THIENUY_RELEASE_ROOT: runtime,
+        THIENUY_NGINX_BIN: nginx,
+        THIENUY_SYSTEMCTL_BIN: systemctl,
+      });
+
+      expect(result.code).not.toBe(0);
+      expect(await readFile(outside, 'utf8')).toBe('outside file must not change\n');
+      expect(await readlink(join(runtime, 'current'))).toBe(previous);
+    });
+  });
+
+  it('rejects a requested commit whose verifier is encoded as a Git symlink', async () => {
+    await fixture(async (root) => {
+      const { repo, dist } = await createFixtureRepository(root);
+      await writeFile(
+        join(repo, 'scripts', 'build.mjs'),
+        "import { copyFile, mkdir, readFile } from 'node:fs/promises';\nimport { join } from 'node:path';\nexport async function buildStaticSite({ sourceDir, outputDir }) { await mkdir(outputDir); await copyFile(join(sourceDir, 'index.html'), join(outputDir, 'index.html')); }\nprocess.stdout.write(await readFile(new URL('../docs/baselines/2026-08-29-production-payload-manifest.json', import.meta.url), 'utf8'));\n",
+      );
+      await rm(join(repo, 'scripts', 'static-manifest.mjs'));
+      await symlink('build.mjs', join(repo, 'scripts', 'static-manifest.mjs'));
+      expect((await command('git', ['-C', repo, 'add', 'scripts'], {})).code).toBe(0);
+      expect((await command('git', ['-C', repo, 'commit', '--quiet', '-m', 'symlinked verifier'], {})).code).toBe(0);
+      const sha = (await command('git', ['-C', repo, 'rev-parse', 'HEAD'], {})).stdout.trim();
+
+      const result = await prepare(root, repo, sha, dist);
+
+      expect(result.code).not.toBe(0);
+      await expect(lstat(join(root, 'runtime', 'releases', sha))).rejects.toMatchObject({ code: 'ENOENT' });
+    });
+  });
 });

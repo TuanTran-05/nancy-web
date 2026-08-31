@@ -28,6 +28,23 @@ sha256_file() {
   sha256sum "$1" | awk '{print $1}'
 }
 
+extract_committed_tool() {
+  local source_path=$1
+  local destination_path=$2
+  local entry mode type object path
+  entry=$(git -C "$repo_root" ls-tree "$release_id" -- "$source_path") || die "could not inspect requested tool: $source_path"
+  [[ -n "$entry" ]] || die "requested commit does not contain tool: $source_path"
+  read -r mode type object path <<< "$entry"
+  [[ "$path" == "$source_path" && "$type" == 'blob' ]] || die "requested commit does not contain tool: $source_path"
+  case "$mode" in
+    100644|100755) ;;
+    *) die "requested commit tool must be a regular file: $source_path" ;;
+  esac
+  git -C "$repo_root" cat-file -e "${object}^{blob}" 2>/dev/null || die "requested commit tool is not a blob: $source_path"
+  git -C "$repo_root" show "${release_id}:${source_path}" > "$destination_path"
+  chmod 0600 "$destination_path"
+}
+
 if [[ $# -ne 2 ]]; then
   die 'usage: prepare-release.sh <full-git-sha> <dist-dir>'
 fi
@@ -43,7 +60,6 @@ release_root=${THIENUY_RELEASE_ROOT:-/srv/thienuy-site}
 [[ "$release_root" == /* ]] || die 'release root must be absolute'
 [[ ! -L "$repo_root" && -d "$repo_root" ]] || die 'repository root must be a non-symlink directory'
 repo_root=$(realpath -e "$repo_root")
-[[ -f "$repo_root/scripts/static-manifest.mjs" ]] || die 'static manifest tool is missing'
 
 resolved_id=$(git -C "$repo_root" rev-parse --verify "${release_id}^{commit}" 2>/dev/null) \
   || die 'release ID is not an available commit'
@@ -90,10 +106,10 @@ trap cleanup EXIT
 
 git -C "$repo_root" show "${release_id}:${manifest_path}" > "$expected_manifest"
 git -C "$repo_root" archive --format=tar "$release_id" -- site | tar -x -C "$committed_payload_root" --strip-components=1
-git -C "$repo_root" archive --format=tar "$release_id" -- scripts/static-manifest.mjs scripts/build.mjs | tar -x -C "$tool_root"
-static_manifest_tool="$tool_root/scripts/static-manifest.mjs"
-build_tool="$tool_root/scripts/build.mjs"
-[[ -f "$static_manifest_tool" && -f "$build_tool" ]] || die 'requested commit does not contain release verifier modules'
+static_manifest_tool="$tool_root/static-manifest.mjs"
+build_tool="$tool_root/build.mjs"
+extract_committed_tool 'scripts/static-manifest.mjs' "$static_manifest_tool"
+extract_committed_tool 'scripts/build.mjs' "$build_tool"
 node "$static_manifest_tool" "$committed_payload_root" > "$source_manifest" \
   || die 'committed site tree is not a safe regular-file payload'
 cmp --silent "$expected_manifest" "$source_manifest" \

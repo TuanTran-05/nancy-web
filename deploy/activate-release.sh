@@ -22,6 +22,23 @@ sha256_file() {
   sha256sum "$1" | awk '{print $1}'
 }
 
+extract_committed_tool() {
+  local source_path=$1
+  local destination_path=$2
+  local entry mode type object path
+  entry=$(git -C "$repo_root" ls-tree "$release_id" -- "$source_path") || die "could not inspect requested tool: $source_path"
+  [[ -n "$entry" ]] || die "requested commit does not contain tool: $source_path"
+  read -r mode type object path <<< "$entry"
+  [[ "$path" == "$source_path" && "$type" == 'blob' ]] || die "requested commit does not contain tool: $source_path"
+  case "$mode" in
+    100644|100755) ;;
+    *) die "requested commit tool must be a regular file: $source_path" ;;
+  esac
+  git -C "$repo_root" cat-file -e "${object}^{blob}" 2>/dev/null || die "requested commit tool is not a blob: $source_path"
+  git -C "$repo_root" show "${release_id}:${source_path}" > "$destination_path"
+  chmod 0600 "$destination_path"
+}
+
 if [[ $# -ne 1 ]]; then
   die 'usage: activate-release.sh <full-git-sha>'
 fi
@@ -39,7 +56,6 @@ systemctl_bin=${THIENUY_SYSTEMCTL_BIN:-systemctl}
 require_real_directory "$release_root"
 [[ ! -L "$repo_root" && -d "$repo_root" ]] || die 'repository root must be a non-symlink directory'
 repo_root=$(realpath -e "$repo_root")
-[[ -f "$repo_root/scripts/static-manifest.mjs" ]] || die 'static manifest tool is missing'
 
 releases_dir="$release_root/releases"
 metadata_dir="$release_root/release-metadata"
@@ -51,7 +67,15 @@ require_real_directory "$release_dir"
 require_real_directory "$metadata_release_dir"
 
 activation_lock="$release_root/.activation.lock"
-exec 9>"$activation_lock"
+if [[ -e "$activation_lock" || -L "$activation_lock" ]]; then
+  [[ ! -L "$activation_lock" && -f "$activation_lock" ]] || die 'activation lock must be a regular non-symlink file'
+  [[ "$(stat -c '%h' -- "$activation_lock")" == 1 ]] || die 'activation lock must not be hard-linked'
+else
+  (umask 077; set -C; : > "$activation_lock") 2>/dev/null || die 'could not safely create activation lock'
+fi
+[[ ! -L "$activation_lock" && -f "$activation_lock" ]] || die 'activation lock must be a regular non-symlink file'
+[[ "$(stat -c '%h' -- "$activation_lock")" == 1 ]] || die 'activation lock must not be hard-linked'
+exec 9>>"$activation_lock"
 flock -n 9 || die 'another activation already holds the runtime lock'
 
 resolved_id=$(git -C "$repo_root" rev-parse --verify "${release_id}^{commit}" 2>/dev/null) \
@@ -78,9 +102,8 @@ trap cleanup EXIT
 
 git -C "$repo_root" show "${release_id}:${manifest_path}" > "$expected_manifest"
 git -C "$repo_root" archive --format=tar "$release_id" -- site | tar -x -C "$committed_payload_root" --strip-components=1
-git -C "$repo_root" archive --format=tar "$release_id" -- scripts/static-manifest.mjs | tar -x -C "$tool_root"
-static_manifest_tool="$tool_root/scripts/static-manifest.mjs"
-[[ -f "$static_manifest_tool" ]] || die 'requested commit does not contain a static manifest verifier'
+static_manifest_tool="$tool_root/static-manifest.mjs"
+extract_committed_tool 'scripts/static-manifest.mjs' "$static_manifest_tool"
 node "$static_manifest_tool" "$committed_payload_root" > "$source_manifest" \
   || die 'committed site tree is not a safe regular-file payload'
 cmp --silent "$expected_manifest" "$source_manifest" \
