@@ -8,6 +8,10 @@ _private/
 # Worktree cô lập cho các nhánh tính năng
 .worktrees/
 
+# Reproducible local dependencies and copy-only build output
+node_modules/
+dist/
+
 # Tạm
 *.zip
 __pycache__/

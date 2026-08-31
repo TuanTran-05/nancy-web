@@ -1,0 +1,14 @@
+{
+  "name": "thienuy-website",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "manifest": "node scripts/static-manifest.mjs site",
+    "test": "vitest run scripts && node --test tests/*.test.mjs"
+  },
+  "devDependencies": {
+    "vitest": "^3.2.4"
+  }
+}
