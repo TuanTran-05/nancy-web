@@ -68,6 +68,21 @@ describe('static payload manifest', () => {
     expect(await createStaticManifest('site')).toEqual(expected);
   });
 
+  it('verifies a tree against a committed manifest through the CLI', async () => {
+    const { stdout, stderr } = await execFileAsync(
+      process.execPath,
+      [
+        'scripts/static-manifest.mjs',
+        '--verify',
+        currentPayloadManifest.pathname,
+        'site',
+      ],
+      { cwd: repoRoot },
+    );
+    expect(stderr).toBe('');
+    expect(stdout).toContain('STATIC_MANIFEST_VERIFY_PASS');
+  });
+
   it('keeps the immutable historical seed tag equal to the active /srv release', async () => {
     const { stdout, stderr } = await execFileAsync('python3', [
       'tools/verify_production_seed.py',

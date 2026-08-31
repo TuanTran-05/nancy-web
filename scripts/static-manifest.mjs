@@ -1,5 +1,5 @@
 import { constants } from 'node:fs';
-import { chmod, lstat, open, readdir, realpath, writeFile } from 'node:fs/promises';
+import { chmod, lstat, open, readFile, readdir, realpath, writeFile } from 'node:fs/promises';
 import { dirname, resolve, sep } from 'node:path';
 import { createHash } from 'node:crypto';
 import { pathToFileURL } from 'node:url';
@@ -185,6 +185,18 @@ export async function writeStaticManifest(root, destinationPath) {
 
 async function main() {
   const [root, option, manifestPath] = process.argv.slice(2);
+  if (root === '--verify' && option && manifestPath) {
+    let expected;
+    try {
+      expected = JSON.parse(await readFile(resolve(option), 'utf8'));
+    } catch {
+      fail('manifest verification input is invalid');
+    }
+    const actual = await createStaticManifest(manifestPath);
+    if (JSON.stringify(actual) !== JSON.stringify(expected)) fail('manifest verification mismatch');
+    process.stdout.write('STATIC_MANIFEST_VERIFY_PASS\n');
+    return;
+  }
   if (!root) fail('usage: node scripts/static-manifest.mjs <root> [--write <manifest-path>]');
   if (option === undefined) {
     process.stdout.write(`${JSON.stringify(await createStaticManifest(root), null, 2)}\n`);
