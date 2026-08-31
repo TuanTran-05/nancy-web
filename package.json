@@ -6,9 +6,13 @@
   "scripts": {
     "build": "node scripts/build.mjs",
     "manifest": "node scripts/static-manifest.mjs site",
-    "test": "vitest run scripts && node --test tests/*.test.mjs"
+    "test": "vitest run scripts && node --test tests/*.test.mjs",
+    "validate": "node scripts/check-static-site.mjs dist && html-validate \"dist/**/*.html\"",
+    "test:e2e": "playwright test"
   },
   "devDependencies": {
+    "@playwright/test": "1.55.0",
+    "html-validate": "10.17.0",
     "vitest": "^3.2.4"
   }
 }

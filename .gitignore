@@ -11,6 +11,8 @@ _private/
 # Reproducible local dependencies and copy-only build output
 node_modules/
 dist/
+test-results/
+playwright-report/
 
 # Tạm
 *.zip
