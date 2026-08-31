@@ -1,7 +1,7 @@
 import { createHash } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
 import { readFileSync, writeFileSync } from 'node:fs';
-import { basename, dirname, isAbsolute, resolve } from 'node:path';
+import { dirname, isAbsolute, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { isDeepStrictEqual } from 'node:util';
 
@@ -110,6 +110,41 @@ function git(repositoryRoot, ...args) {
   }
 }
 
+function gitBlob(repositoryRoot, sourceGitSha, relativePath) {
+  try {
+    return execFileSync('git', ['show', `${sourceGitSha}:${relativePath}`], {
+      cwd: repositoryRoot,
+      encoding: 'buffer',
+      maxBuffer: 64 * 1024 * 1024,
+      stdio: ['ignore', 'pipe', 'ignore'],
+    });
+  } catch {
+    fail('WEBSITE_CANDIDATE_GIT_INVALID');
+  }
+}
+
+function readCheckoutBlob(repositoryRoot, relativePath) {
+  try {
+    return readFileSync(resolve(repositoryRoot, relativePath));
+  } catch {
+    fail('WEBSITE_CANDIDATE_WORKTREE_DRIFT');
+  }
+}
+
+function assertCheckoutMatchesSource(repositoryRoot, relativePath, sourceBytes) {
+  if (!readCheckoutBlob(repositoryRoot, relativePath).equals(sourceBytes)) {
+    fail('WEBSITE_CANDIDATE_WORKTREE_DRIFT');
+  }
+}
+
+function parseJson(bytes, code) {
+  try {
+    return JSON.parse(bytes.toString('utf8'));
+  } catch {
+    fail(code);
+  }
+}
+
 function assertCommitIsReachable(repositoryRoot, commitSha, headSha = 'HEAD', code = 'WEBSITE_CANDIDATE_SOURCE_UNREACHABLE') {
   assertSha(commitSha, code, SHA40);
   try {
@@ -144,9 +179,11 @@ export function buildCandidateMetadata({ repositoryRoot, sourceGitSha = DEFAULT_
   assertCommitIsReachable(repositoryRoot, sourceGitSha);
   const sourceTreeSha = git(repositoryRoot, 'rev-parse', `${sourceGitSha}^{tree}`);
   assertSha(sourceTreeSha, 'WEBSITE_CANDIDATE_GIT_INVALID', SHA40);
-  const packageLockBytes = readFileSync(resolve(repositoryRoot, 'package-lock.json'));
-  const manifestBytes = readFileSync(resolve(repositoryRoot, MANIFEST_RELATIVE_PATH));
-  const manifest = assertManifest(JSON.parse(manifestBytes.toString('utf8')));
+  const packageLockBytes = gitBlob(repositoryRoot, sourceGitSha, 'package-lock.json');
+  const manifestBytes = gitBlob(repositoryRoot, sourceGitSha, MANIFEST_RELATIVE_PATH);
+  assertCheckoutMatchesSource(repositoryRoot, 'package-lock.json', packageLockBytes);
+  assertCheckoutMatchesSource(repositoryRoot, MANIFEST_RELATIVE_PATH, manifestBytes);
+  const manifest = assertManifest(parseJson(manifestBytes, 'WEBSITE_CANDIDATE_MANIFEST_INVALID'));
   const candidate = {
     schemaVersion: 1,
     sourceGitSha,
@@ -168,12 +205,14 @@ export function validateCandidateMetadata(value, { repositoryRoot, manifest, hea
     if (git(repositoryRoot, 'rev-parse', `${candidate.sourceGitSha}^{tree}`) !== candidate.sourceTreeSha) {
       fail('WEBSITE_CANDIDATE_TREE_MISMATCH');
     }
-    const lockBytes = readFileSync(resolve(repositoryRoot, 'package-lock.json'));
-    const manifestBytes = readFileSync(resolve(repositoryRoot, MANIFEST_RELATIVE_PATH));
+    const lockBytes = gitBlob(repositoryRoot, candidate.sourceGitSha, 'package-lock.json');
+    const manifestBytes = gitBlob(repositoryRoot, candidate.sourceGitSha, MANIFEST_RELATIVE_PATH);
+    assertCheckoutMatchesSource(repositoryRoot, 'package-lock.json', lockBytes);
+    assertCheckoutMatchesSource(repositoryRoot, MANIFEST_RELATIVE_PATH, manifestBytes);
     if (hash(lockBytes) !== candidate.packageLockSha256 || hash(manifestBytes) !== candidate.releaseManifestSha256) {
       fail('WEBSITE_CANDIDATE_DIGEST_MISMATCH');
     }
-    manifest = assertManifest(JSON.parse(manifestBytes.toString('utf8')));
+    manifest = assertManifest(parseJson(manifestBytes, 'WEBSITE_CANDIDATE_MANIFEST_INVALID'));
   }
   if (manifest) {
     assertManifest(manifest);
