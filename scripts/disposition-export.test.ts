@@ -29,7 +29,7 @@ const seedPath = fileURLToPath(
 const manifestPath = fileURLToPath(
   new URL('../docs/baselines/2026-08-29-production-payload-manifest.json', import.meta.url),
 );
-const testedSourceSha = '53128492b2010f1a51020f22b56ad6abb848e2f2';
+const testedSourceSha = '443a52e53d4be4aa69a7dfaa37b5af147d8d60ff';
 const seedAlias = 'website-production-seed';
 const candidateAlias = 'website-candidate';
 const platformImporterPath = process.env.EDUTRACK_PLATFORM_ROOT
@@ -52,7 +52,7 @@ describe('canonical website candidate', () => {
     expect(candidate).toMatchObject({
       schemaVersion: 1,
       sourceGitSha: testedSourceSha,
-      sourceTreeSha: '796724d3c4b9362bfc5560e9bc1e66c6b542806e',
+      sourceTreeSha: '627bf6f1fb1e67abf49d03627375073096689cf1',
       nodeVersion: process.version,
       packageLockSha256: digest(await readFile(`${repositoryRoot}/package-lock.json`)),
       releaseManifestSha256: digest(await readFile(manifestPath)),
