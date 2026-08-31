@@ -141,6 +141,16 @@ describe('static site integrity check', () => {
     });
   });
 
+  it('decodes same-origin percent-encoded local filenames before lookup', async () => {
+    await fixture(async (root) => {
+      await writeValidMetadata(root);
+      await writeFile(join(root, 'Asset Name.png'), 'image');
+      await writeFile(join(root, 'index.html'), page('<img src="https://thienuy.edu.vn/Asset%20Name.png" alt="space">', '<meta name="description" content="fixture"><meta name="viewport" content="width=device-width"><link rel="canonical" href="https://thienuy.edu.vn/">'));
+
+      await expect(checkStaticSite(root)).resolves.toEqual({ valid: true, issues: [] });
+    });
+  });
+
   it('reports malformed HTTPS references instead of aborting validation', async () => {
     await fixture(async (root) => {
       await writeValidMetadata(root);

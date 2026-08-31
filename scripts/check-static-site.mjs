@@ -138,7 +138,10 @@ function hrefParts(value) {
       return { invalid: true };
     }
     if (url.origin !== CANONICAL_ORIGIN) return { external: true };
-    return { path: url.pathname.replace(/\\/g, '/'), fragment: url.hash.slice(1) };
+    const path = decode(url.pathname);
+    const fragment = decode(url.hash.slice(1));
+    if (path === null || fragment === null) return { invalid: true };
+    return { path: path.replace(/\\/g, '/'), fragment };
   }
   if (/^\/\//i.test(decoded)) return { external: true };
   const hash = decoded.indexOf('#');
