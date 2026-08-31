@@ -18,7 +18,8 @@ describe('versioned production Nginx contract', () => {
     expect(config).toContain('ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;');
     expect(config).toContain('Strict-Transport-Security "max-age=31536000" always;');
     expect(config).toMatch(/location ~\* \\.html\$/);
-    expect(config).toContain('Cache-Control "no-cache" always;');
+    const htmlLocation = config.match(/location ~\* \\.html\$ \{([\s\S]*?)\n    \}/);
+    expect(htmlLocation?.[1]).not.toMatch(/\badd_header\b/);
     expect(config).toContain('location ~* \\.(?:css|js|jpg|jpeg|png|gif|webp|svg|ico|woff|woff2)$');
     expect(config).toContain('expires 30d;');
     expect(config).toContain('location ~ /\\.(?!well-known/)');

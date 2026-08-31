@@ -71,6 +71,7 @@ expected_manifest=$(mktemp)
 source_manifest=$(mktemp)
 actual_manifest=$(mktemp)
 committed_payload_root=$(mktemp -d)
+tool_root=$(mktemp -d)
 stage_root=$(mktemp -d "$releases_dir/.staging-${release_id}.XXXXXX")
 metadata_stage=$(mktemp -d "$metadata_dir/.staging-${release_id}.XXXXXX")
 metadata_published=0
@@ -78,6 +79,7 @@ release_published=0
 cleanup() {
   rm -f "$expected_manifest" "$source_manifest" "$actual_manifest"
   rm -rf "$committed_payload_root"
+  rm -rf "$tool_root"
   [[ -z "$stage_root" ]] || rm -rf "$stage_root"
   [[ -z "$metadata_stage" ]] || rm -rf "$metadata_stage"
   if [[ "$metadata_published" -eq 1 && "$release_published" -eq 0 ]]; then
@@ -88,20 +90,24 @@ trap cleanup EXIT
 
 git -C "$repo_root" show "${release_id}:${manifest_path}" > "$expected_manifest"
 git -C "$repo_root" archive --format=tar "$release_id" -- site | tar -x -C "$committed_payload_root" --strip-components=1
-node "$repo_root/scripts/static-manifest.mjs" "$committed_payload_root" > "$source_manifest" \
+git -C "$repo_root" archive --format=tar "$release_id" -- scripts/static-manifest.mjs scripts/build.mjs | tar -x -C "$tool_root"
+static_manifest_tool="$tool_root/scripts/static-manifest.mjs"
+build_tool="$tool_root/scripts/build.mjs"
+[[ -f "$static_manifest_tool" && -f "$build_tool" ]] || die 'requested commit does not contain release verifier modules'
+node "$static_manifest_tool" "$committed_payload_root" > "$source_manifest" \
   || die 'committed site tree is not a safe regular-file payload'
 cmp --silent "$expected_manifest" "$source_manifest" \
   || die 'committed site tree does not equal its committed payload manifest'
-node "$repo_root/scripts/static-manifest.mjs" "$dist_dir" > "$actual_manifest" \
+node "$static_manifest_tool" "$dist_dir" > "$actual_manifest" \
   || die 'dist tree is not a safe regular-file payload'
 cmp --silent "$expected_manifest" "$actual_manifest" \
   || die 'dist manifest does not equal the committed payload manifest'
 
-THIENUY_BUILD_MODULE="$repo_root/scripts/build.mjs" node -e '
+THIENUY_BUILD_MODULE="$build_tool" node -e '
   import(process.env.THIENUY_BUILD_MODULE).then(({ buildStaticSite }) => buildStaticSite({ sourceDir: process.argv[1], outputDir: process.argv[2] }))
 ' "$dist_dir" "$stage_root/release" \
   || die 'safe payload copy failed'
-node "$repo_root/scripts/static-manifest.mjs" "$stage_root/release" > "$actual_manifest" \
+node "$static_manifest_tool" "$stage_root/release" > "$actual_manifest" \
   || die 'copied release tree is unsafe'
 cmp --silent "$expected_manifest" "$actual_manifest" \
   || die 'copied release tree no longer matches the committed payload manifest'
@@ -116,6 +122,5 @@ mv -T "$metadata_stage" "$metadata_release_dir" || die 'could not publish releas
 metadata_stage=''
 metadata_published=1
 mv -T "$stage_root/release" "$release_dir" || die 'could not publish release'
-stage_root=''
 release_published=1
 printf 'prepared immutable release %s\n' "$release_id"

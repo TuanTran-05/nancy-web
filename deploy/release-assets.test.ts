@@ -1,9 +1,10 @@
-import { execFile } from 'node:child_process';
-import { chmod, link, lstat, mkdir, mkdtemp, readFile, readlink, rm, symlink, writeFile } from 'node:fs/promises';
+import { execFile, spawn } from 'node:child_process';
+import { access, chmod, link, lstat, mkdir, mkdtemp, readFile, readlink, readdir, rm, symlink, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { promisify } from 'node:util';
+import { once } from 'node:events';
 import { describe, expect, it } from 'vitest';
 
 const execFileAsync = promisify(execFile);
@@ -77,6 +78,14 @@ async function prepare(root: string, repo: string, sha: string, dist: string) {
   });
 }
 
+async function waitForFile(path: string) {
+  for (let attempt = 0; attempt < 100; attempt += 1) {
+    if (await access(path).then(() => true).catch(() => false)) return;
+    await new Promise((resolve) => setTimeout(resolve, 10));
+  }
+  throw new Error(`timed out waiting for ${path}`);
+}
+
 describe('immutable release assets', () => {
   it('rejects a non-full release ID before changing the current pointer', async () => {
     await fixture(async (root) => {
@@ -107,6 +116,7 @@ describe('immutable release assets', () => {
       expect(result).toMatchObject({ code: 0 });
       expect(await readlink(join(runtime, 'current'))).toBe(previous);
       expect(await readFile(join(runtime, 'releases', sha, 'index.html'), 'utf8')).toBe('fixture payload\n');
+      expect((await readdir(join(runtime, 'releases'))).filter((name) => name.startsWith('.staging-'))).toEqual([]);
       const marker = await readFile(join(runtime, 'release-metadata', sha, 'source-marker.json'), 'utf8');
       expect(marker).toContain(`"git_sha":"${sha}"`);
       expect(marker).toContain('"manifest_sha256":"');
@@ -129,6 +139,31 @@ describe('immutable release assets', () => {
 
       expect(result.code).not.toBe(0);
       await expect(lstat(join(root, 'runtime', 'releases', sha))).rejects.toMatchObject({ code: 'ENOENT' });
+    });
+  });
+
+  it('uses verifier and copy modules from the requested commit rather than mutable checkout files', async () => {
+    await fixture(async (root) => {
+      const { repo, dist, sha } = await createFixtureRepository(root);
+      const runtime = join(root, 'runtime');
+      const previous = join(runtime, 'releases', 'previous');
+      await mkdir(previous, { recursive: true });
+      await symlink(previous, join(runtime, 'current'));
+      await symlink(join(dist, 'index.html'), join(dist, 'escape.html'));
+      await writeFile(
+        join(repo, 'scripts', 'static-manifest.mjs'),
+        "import { readFile } from 'node:fs/promises';\nprocess.stdout.write(await readFile(new URL('../docs/baselines/2026-08-29-production-payload-manifest.json', import.meta.url), 'utf8'));\n",
+      );
+      await writeFile(
+        join(repo, 'scripts', 'build.mjs'),
+        "import { copyFile, mkdir } from 'node:fs/promises';\nimport { join } from 'node:path';\nexport async function buildStaticSite({ sourceDir, outputDir }) { await mkdir(outputDir); await copyFile(join(sourceDir, 'index.html'), join(outputDir, 'index.html')); }\n",
+      );
+
+      const result = await prepare(root, repo, sha, dist);
+
+      expect(result.code).not.toBe(0);
+      await expect(lstat(join(runtime, 'releases', sha))).rejects.toMatchObject({ code: 'ENOENT' });
+      expect(await readlink(join(runtime, 'current'))).toBe(previous);
     });
   });
 
@@ -155,6 +190,36 @@ describe('immutable release assets', () => {
       const reload = await command(activateScript, [sha], { ...env, MOCK_RELOAD_EXIT: '1' });
       expect(reload.code).not.toBe(0);
       expect(await readlink(join(runtime, 'current'))).toBe(previous);
+    });
+  });
+
+  it('refuses a competing activation while the runtime activation lock is held', async () => {
+    await fixture(async (root) => {
+      const { repo, dist, sha } = await createFixtureRepository(root);
+      const runtime = join(root, 'runtime');
+      const previous = join(runtime, 'releases', 'previous');
+      await mkdir(previous, { recursive: true });
+      await symlink(previous, join(runtime, 'current'));
+      expect((await prepare(root, repo, sha, dist)).code).toBe(0);
+      const { nginx, systemctl } = await writeMockCommands(root);
+      const ready = join(root, 'lock-held');
+      const lock = join(runtime, '.activation.lock');
+      const holder = spawn('flock', ['-n', lock, 'sh', '-c', 'touch "$1"; exec sleep 5', 'sh', ready]);
+      try {
+        await waitForFile(ready);
+        const result = await command(activateScript, [sha], {
+          THIENUY_REPO_ROOT: repo,
+          THIENUY_RELEASE_ROOT: runtime,
+          THIENUY_NGINX_BIN: nginx,
+          THIENUY_SYSTEMCTL_BIN: systemctl,
+        });
+
+        expect(result.code).not.toBe(0);
+        expect(await readlink(join(runtime, 'current'))).toBe(previous);
+      } finally {
+        holder.kill('SIGTERM');
+        await once(holder, 'exit');
+      }
     });
   });
 });

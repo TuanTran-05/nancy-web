@@ -50,6 +50,10 @@ metadata_release_dir="$metadata_dir/$release_id"
 require_real_directory "$release_dir"
 require_real_directory "$metadata_release_dir"
 
+activation_lock="$release_root/.activation.lock"
+exec 9>"$activation_lock"
+flock -n 9 || die 'another activation already holds the runtime lock'
+
 resolved_id=$(git -C "$repo_root" rev-parse --verify "${release_id}^{commit}" 2>/dev/null) \
   || die 'release ID is not an available commit'
 [[ "$resolved_id" == "$release_id" ]] || die 'release ID must name the complete commit SHA exactly'
@@ -64,15 +68,20 @@ source_manifest=$(mktemp)
 actual_manifest=$(mktemp)
 expected_marker=$(mktemp)
 committed_payload_root=$(mktemp -d)
+tool_root=$(mktemp -d)
 cleanup() {
   rm -f "$expected_manifest" "$source_manifest" "$actual_manifest" "$expected_marker"
   rm -rf "$committed_payload_root"
+  rm -rf "$tool_root"
 }
 trap cleanup EXIT
 
 git -C "$repo_root" show "${release_id}:${manifest_path}" > "$expected_manifest"
 git -C "$repo_root" archive --format=tar "$release_id" -- site | tar -x -C "$committed_payload_root" --strip-components=1
-node "$repo_root/scripts/static-manifest.mjs" "$committed_payload_root" > "$source_manifest" \
+git -C "$repo_root" archive --format=tar "$release_id" -- scripts/static-manifest.mjs | tar -x -C "$tool_root"
+static_manifest_tool="$tool_root/scripts/static-manifest.mjs"
+[[ -f "$static_manifest_tool" ]] || die 'requested commit does not contain a static manifest verifier'
+node "$static_manifest_tool" "$committed_payload_root" > "$source_manifest" \
   || die 'committed site tree is not a safe regular-file payload'
 cmp --silent "$expected_manifest" "$source_manifest" \
   || die 'committed site tree does not equal its committed payload manifest'
@@ -83,7 +92,7 @@ cmp --silent "$expected_marker" "$metadata_release_dir/source-marker.json" \
   || die 'release source marker does not match the requested commit'
 cmp --silent "$expected_manifest" "$metadata_release_dir/payload-manifest.json" \
   || die 'release metadata manifest does not match the requested commit'
-node "$repo_root/scripts/static-manifest.mjs" "$release_dir" > "$actual_manifest" \
+node "$static_manifest_tool" "$release_dir" > "$actual_manifest" \
   || die 'release tree is not a safe regular-file payload'
 cmp --silent "$expected_manifest" "$actual_manifest" \
   || die 'release tree does not match the committed payload manifest'
