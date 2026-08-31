@@ -1,5 +1,7 @@
 import { createHash } from 'node:crypto';
-import { readFile } from 'node:fs/promises';
+import { mkdtemp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
@@ -9,6 +11,7 @@ import {
   buildWebsiteDispositionExport,
   sourceIdentitySha256,
   targetIdentitySha256,
+  validateCandidateMetadata,
   validateWebsiteDispositionExport,
 } from './disposition-export.mjs';
 
@@ -57,6 +60,45 @@ describe('canonical website candidate', () => {
       payloadBytes: manifest.entries.reduce((total: number, entry: { bytes: number }) => total + entry.bytes, 0),
     });
     expect(JSON.stringify(candidate)).not.toMatch(/\/srv\/|\/etc\/|\/var\/|secret|password|token|private/i);
+  });
+
+  it('rejects lockfile or manifest drift when validating an older reachable source', async () => {
+    const fixtureRoot = await mkdtemp(join(tmpdir(), 'thienuy-candidate-'));
+    try {
+      await mkdir(`${fixtureRoot}/docs/baselines`, { recursive: true });
+      await writeFile(`${fixtureRoot}/package-lock.json`, await readFile(`${repositoryRoot}/package-lock.json`));
+      await writeFile(
+        `${fixtureRoot}/docs/baselines/2026-08-29-production-payload-manifest.json`,
+        await readFile(manifestPath),
+      );
+      await execFileAsync('git', ['init', '--quiet'], { cwd: fixtureRoot });
+      for (const [key, value] of [
+        ['user.name', 'Website Candidate Test'],
+        ['user.email', 'website-candidate-test@example.invalid'],
+      ]) {
+        await execFileAsync('git', ['config', key, value], { cwd: fixtureRoot });
+      }
+      await execFileAsync('git', ['add', '.'], { cwd: fixtureRoot });
+      await execFileAsync('git', ['commit', '--quiet', '-m', 'candidate fixture'], { cwd: fixtureRoot });
+      const { stdout } = await execFileAsync('git', ['rev-parse', 'HEAD'], { cwd: fixtureRoot });
+      const sourceSha = stdout.trim();
+      const candidate = buildCandidateMetadata({ repositoryRoot: fixtureRoot, sourceGitSha: sourceSha });
+
+      for (const relativePath of [
+        'package-lock.json',
+        'docs/baselines/2026-08-29-production-payload-manifest.json',
+      ]) {
+        const path = `${fixtureRoot}/${relativePath}`;
+        const original = await readFile(path);
+        await writeFile(path, Buffer.concat([original, Buffer.from('\n')]));
+        expect(
+          () => validateCandidateMetadata(candidate, { repositoryRoot: fixtureRoot, headSha: sourceSha }),
+        ).toThrow('WEBSITE_CANDIDATE_WORKTREE_DRIFT');
+        await writeFile(path, original);
+      }
+    } finally {
+      await rm(fixtureRoot, { recursive: true, force: true });
+    }
   });
 
   it('emits the exact sanitized envelope accepted by the Platform importer', async () => {
