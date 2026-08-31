@@ -56,6 +56,8 @@ def secure_manifest_file(site_root, relative):
         raise ValueError(f"symlink rejected: {relative}")
     if not stat.S_ISREG(target_stat.st_mode):
         raise ValueError(f"non-regular file rejected: {relative}")
+    if target_stat.st_nlink != 1:
+        raise ValueError(f"hard link rejected: {relative}")
     return target, target_stat
 
 
@@ -67,6 +69,8 @@ def reapply_mode(target, expected_mode, expected_stat):
         current_stat = os.fstat(descriptor)
         if not stat.S_ISREG(current_stat.st_mode):
             raise RuntimeError(f"non-regular file rejected during reapply: {target}")
+        if current_stat.st_nlink != 1:
+            raise RuntimeError(f"hard link rejected during reapply: {target}")
         if (current_stat.st_dev, current_stat.st_ino) != (
             expected_stat.st_dev,
             expected_stat.st_ino,
