@@ -3,23 +3,23 @@
   "entries": [
     {
       "path": "about.html",
-      "bytes": 31115,
-      "sha256": "b2c20d1e832b779ff64e684ace303ba800599f93ada38b1dc3d9c0bf897316f2"
+      "bytes": 31140,
+      "sha256": "5e94f113bfa15d86db324b8c74c300ca1a331b084b314044c9a3bcbc147b42ca"
     },
     {
       "path": "achievements.html",
-      "bytes": 32604,
-      "sha256": "326f074402b649bbec5521d33b529a8795559b344807b4acf8a0348d78bcebbe"
+      "bytes": 31184,
+      "sha256": "f17f28b1ca6437f81a2295a09585b4045bfbf93513e6941c52ed3c1f65cc697c"
     },
     {
       "path": "activities.html",
-      "bytes": 30513,
-      "sha256": "be22d6053ddf7d281c89b00920d1ec578e41fbcfed34cb53d1bc0e6002c8f725"
+      "bytes": 30557,
+      "sha256": "95be030a0838cb73b4740664d5876dee628e470b9849dab6db905eb5bbad770e"
     },
     {
       "path": "contact.html",
-      "bytes": 30341,
-      "sha256": "4162196992370b1363cce1b76a905de1bcd9e3a4269d6434e61c893acb1ac947"
+      "bytes": 30033,
+      "sha256": "7c8bc7c5ace1375486de906eaf9f705c95ffbf38d8e2d78a63992c87c0fbd436"
     },
     {
       "path": "course-detail.js",
@@ -28,18 +28,18 @@
     },
     {
       "path": "course.html",
-      "bytes": 24359,
-      "sha256": "c91ed198f7791b3708860ab4f6c821292ce93fb113837d8b62a1b5d6db6225bc"
+      "bytes": 24357,
+      "sha256": "c5cb943c73a60ee9c0b663e086d0e36f88dcb766faed2b33639549ff7c53fa86"
     },
     {
       "path": "courses.html",
-      "bytes": 50922,
-      "sha256": "938a5f62381b923504b21634894c040be7596eb439428b396163a0644b64432b"
+      "bytes": 50972,
+      "sha256": "8bef6d7ff1d68b702fac89bbd4f668d62c8a2f738b91d1a7638122d8c78ec9b5"
     },
     {
       "path": "faq.html",
-      "bytes": 22392,
-      "sha256": "ee549c9a143ed8f22c1ffd7b3a12ef8ecb46727af62c65e0b6b43f2fc3e8caa9"
+      "bytes": 22418,
+      "sha256": "74f4098d8168428eb58034c12577892ea0a37f7f97327b8f948ad735ee0ce022"
     },
     {
       "path": "fonts/baloo2-latin.woff2",
@@ -573,18 +573,18 @@
     },
     {
       "path": "knowledge.html",
-      "bytes": 27282,
-      "sha256": "5f55ee21233a9576501600dea512f0fae2c695cab20eef5e665f828b79807746"
+      "bytes": 27280,
+      "sha256": "d1b400b10d6091ce6feb4622ae262a9f16aa6c8e45ba89ccab7ac57babbd5578"
     },
     {
       "path": "learning-path.html",
-      "bytes": 31832,
-      "sha256": "44b655d7fe917c270357ef5c4c8e60e2a5b1c3c11f7fe92dceef4aeba9767d25"
+      "bytes": 27077,
+      "sha256": "aabb2bd599cc41c78fe2d990decdbc2b8eb350df892ce2d4a9182596e493e0af"
     },
     {
       "path": "pages.css",
-      "bytes": 39642,
-      "sha256": "ca534552b55b3a7a7728c6c172fbfef8270e1728a5f06f9ce6b5f09a49609f2a"
+      "bytes": 39566,
+      "sha256": "3f707d01ca625a1ef84a426ac44b675571829e1f4dbccd0d9a167d1a71853c5a"
     },
     {
       "path": "pages.js",
@@ -623,8 +623,8 @@
     },
     {
       "path": "teachers.html",
-      "bytes": 22139,
-      "sha256": "136542a39f07dfbafd4c444a53592e747b0deee745a29d4208f2962d673d96c2"
+      "bytes": 22165,
+      "sha256": "c936d3df23f59cf25c61d89895fdd12ad79a6538615805df2f116ad282a45a79"
     }
   ]
 }
