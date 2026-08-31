@@ -4,3 +4,7 @@
 # thuộc vào cấu hình máy.
 robots.txt text eol=lf
 sitemap.xml text eol=lf
+
+# The immutable production seed preserves CRLF bytes. Keep descendant site
+# payloads out of Git's text/eol conversion machinery as well.
+site/** -text
